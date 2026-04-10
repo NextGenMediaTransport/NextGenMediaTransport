@@ -27,6 +27,16 @@ gh repo create NextGenMediaTransport/ngmt-transport --public --description "NGMT
 
 Clone locally if needed: `gh repo clone NextGenMediaTransport/ngmt-transport`.
 
+## Phase 4 application suite (`ngmt-studio`)
+
+**`ngmt-studio`** is a separate first-party repository (Generator + Monitor). It is **not** nested under `ngmt-transport` so engine CI stays free of GUI dependencies. Create or clone:
+
+```bash
+gh repo clone NextGenMediaTransport/ngmt-studio
+```
+
+Build expects **`ngmt-transport`** as a sibling directory (`ngmt-studio` workspace uses `path = "../ngmt-transport"`). See [ngmt-studio/README.md](../../ngmt-studio/README.md) when present in your tree.
+
 ## Local layout (inside this workspace)
 
 Clone the org repos **into the root of this meta repository** (alongside `docs/`, `.github/`, etc.):
@@ -37,7 +47,8 @@ NextGenMediaTransport/       # meta: docs, CI, roadmap (this tree)
   .github/
   ngmt-core/                 # fork — origin → org, upstream → openmediatransport/libomtnet
   ngmt-codec/                # fork — origin → org, upstream → openmediatransport/libvmx
-  ngmt-transport/            # first-party (may be empty until first commit)
+  ngmt-transport/            # first-party QUIC/WAN
+  ngmt-studio/               # first-party Phase 4 apps (Generator, Monitor) — optional
 ```
 
 Clone from the meta repo root:
@@ -47,6 +58,7 @@ cd /path/to/NextGenMediaTransport
 gh repo clone NextGenMediaTransport/ngmt-core
 gh repo clone NextGenMediaTransport/ngmt-codec
 gh repo clone NextGenMediaTransport/ngmt-transport
+gh repo clone NextGenMediaTransport/ngmt-studio
 ```
 
 Forks created with `gh repo fork … --clone` run from that same directory place the new folder next to `docs/`. `gh repo clone` checks out `origin` (the org fork) and, for forks, configures **`upstream`** to the Open Media Transport repository for pulls.

@@ -12,6 +12,11 @@ where versioning applies.
 
 ## [Unreleased]
 
+### Added
+
+- **Phase 4 — `ngmt-studio`:** new sibling repository (Generator, Monitor, common crate) with **egui** UI, mDNS `_ngmt._udp`, QUIC dial/accept integration via **`ngmt-transport`** Rust API. Documented in [docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md), [README.md](README.md), and [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md). Meta-repo `.gitignore` includes `/ngmt-studio/`.
+- **`ngmt-transport`:** `app_api` module and session helpers (`dial`, `accept_one`, `local_addr`) for Studio tools.
+
 ### Fixed
 
 - **ngmt-core:** `advertiser.hpp` now includes `<cstdint>` so Linux (GCC) CI compiles discovery code.

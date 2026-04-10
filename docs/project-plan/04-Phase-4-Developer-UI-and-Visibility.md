@@ -1,7 +1,7 @@
 ---
 title: "Phase 4 — Developer UI and Visibility"
 phase: 4
-status: planned
+status: in_progress
 ---
 
 ## Overview
@@ -32,16 +32,19 @@ This phase assumes **stable protocol and FFI boundaries** from [Phase 3 — Core
 
 - Optional **connection / transport** stats panels, **log export** for lab captures, and similar tooling that speeds up day-to-day engineering.
 
-## Implementation note
+## Implementation (repository and UI)
 
-The **UI framework and repository layout** (e.g. dedicated `ngmt-*` app package vs. examples under existing crates) are **TBD** until **Phase 3 FFI** and public APIs are sufficiently stable to avoid churn. Document the chosen approach when Phase 4 implementation starts.
+- **Repository:** [`ngmt-studio`](../../ngmt-studio/README.md) is a **dedicated Git repository** (sibling to `ngmt-core`, `ngmt-codec`, `ngmt-transport` in the meta-workspace). It contains a Cargo workspace: **`ngmt-generator`**, **`ngmt-monitor`**, **`ngmt-studio-common`**.
+- **UI:** **egui** / **eframe** (0.29) for immediate-mode overlays and fast iteration. Transport uses the Rust API in [`ngmt-transport`](../../ngmt-transport/README.md) (`TransportRuntime::dial` / `accept_one`, `app_api` stats, datagram send/receive).
+- **Discovery:** **`_ngmt._udp`** via [`mdns-sd`](https://crates.io/crates/mdns-sd) in `ngmt-studio-common` (browse + register).
+- **Linking:** local dev uses `path = "../ngmt-transport"`; pin engines via submodule or versioned crates for releases (documented in `ngmt-studio` README).
 
 ## Definition of Done
 
-- [ ] **Test pattern sender** is available with documented build and run steps.
-- [ ] **Single receiver** and **discovery browser** reach **usable** quality for routine debugging.
-- [ ] **Multiview receiver** and additional inspectors are **planned or delivered** as follow-ons.
-- [ ] Phase 4 docs **cross-link** to Phase 3 **simulation and harness** documentation for impairment testing where relevant.
+- [x] **Test pattern sender** is available with documented build and run steps ([`ngmt-studio/README.md`](../../ngmt-studio/README.md)).
+- [x] **Single receiver** and **discovery browser** reach **usable** quality for routine debugging (Monitor: Discovery page + per-slot receiver).
+- [x] **Multiview receiver** — **2×2** grid with four independent Listen/Dial slots (soak / WLAN scale-out).
+- [x] Phase 4 docs **cross-link** to Phase 3 **simulation and harness** documentation for impairment testing where relevant ([`docs/testing/harness_setup.md`](../testing/harness_setup.md)).
 
 ## Out of scope
 

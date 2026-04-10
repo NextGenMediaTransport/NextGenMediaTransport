@@ -14,7 +14,7 @@ See [docs/project-plan/00-Master-Roadmap.md](docs/project-plan/00-Master-Roadmap
 
 This repo holds **project planning**, **agent rules** under `.cursor/rules/`, and **baseline automation**: MIT `LICENSE`, GitHub Actions CI/docs placeholders, and contributor docs. **Phase 2** introduces unified CMake/Cargo builds for code repositories.
 
-Local checkouts of **`ngmt-core`**, **`ngmt-codec`**, and **`ngmt-transport`** live in **this workspace root** (directories next to `docs/`). They are separate Git repositories; see [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md). `.gitignore` excludes them from the meta-repo tree if you initialize Git here.
+Local checkouts of **`ngmt-core`**, **`ngmt-codec`**, **`ngmt-transport`**, and **`ngmt-studio`** (Phase 4 tools) live in **this workspace root** (directories next to `docs/`). They are separate Git repositories; see [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md). `.gitignore` excludes them from the meta-repo tree if you initialize Git here.
 
 ### Related NGMT repositories
 
@@ -23,6 +23,7 @@ Local checkouts of **`ngmt-core`**, **`ngmt-codec`**, and **`ngmt-transport`** l
 | `ngmt-core` | Fork of [`openmediatransport/libomtnet`](https://github.com/openmediatransport/libomtnet) (OMT protocol reference). |
 | `ngmt-codec` | Fork of [`openmediatransport/libvmx`](https://github.com/openmediatransport/libvmx) (VMX codec). |
 | `ngmt-transport` | **New** first-party repo for QUIC/WAN — not an upstream fork. |
+| `ngmt-studio` | **New** first-party repo for Generator + Monitor (egui); depends on `ngmt-transport` via path/sibling checkout. |
 
 Use **GitHub CLI** (`gh`) for forks and org repo creation; see [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md).
 
@@ -35,6 +36,10 @@ Workflows under [`.github/workflows/`](.github/workflows/) are **placeholders** 
 - [docs/testing/harness_setup.md](docs/testing/harness_setup.md) — `tc` / netem (Fedora), Clumsy (Windows), macOS notes.
 - [docs/testing/wlan-simulation.md](docs/testing/wlan-simulation.md) — WLAN baseline vs impaired methodology.
 - [docs/protocol/ngmt-wire-format.md](docs/protocol/ngmt-wire-format.md) — NGMT object header and QUIC mapping.
+
+### Phase 4 developer tools (`ngmt-studio`)
+
+Clone [NextGenMediaTransport/ngmt-studio](https://github.com/NextGenMediaTransport/ngmt-studio) beside the engine repos. Build/run: [ngmt-studio/README.md](ngmt-studio/README.md) (also see [Phase 4 plan](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md)).
 
 ## License
 
