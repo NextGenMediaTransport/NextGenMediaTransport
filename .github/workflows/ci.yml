@@ -6,16 +6,48 @@ on:
   pull_request:
     branches: [main]
 
+# Smoke-checks the workspace layout described in README.md: meta docs + sibling clones of
+# ngmt-transport, ngmt-studio, ngmt-core. Per-repository CI remains authoritative.
+
 jobs:
-  build:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+  stack-smoke:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout meta repository
         uses: actions/checkout@v4
 
-      - name: Build placeholder
-        run: echo "Build placeholder"
+      - name: Clone NGMT code repositories
+        run: |
+          git clone --depth 1 https://github.com/NextGenMediaTransport/ngmt-transport.git ngmt-transport
+          git clone --depth 1 https://github.com/NextGenMediaTransport/ngmt-studio.git ngmt-studio
+          git clone --depth 1 https://github.com/NextGenMediaTransport/ngmt-core.git ngmt-core
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: ngmt-transport — build and test
+        working-directory: ngmt-transport
+        run: |
+          cargo build --release
+
+          cargo test --verbose
+
+      - name: ngmt-studio — install Linux GUI deps and check
+        working-directory: ngmt-studio
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libxcb-shape0-dev libxcb-xfixes0-dev
+          cargo check --workspace
+
+      - name: ngmt-core — CMake build
+        working-directory: ngmt-core
+        run: |
+          cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
+
+      - name: ngmt-core — optional FFI smoke (cdylib + C++ link)
+        working-directory: ngmt-core
+        run: |
+          cmake -B build-ffi -S . -DCMAKE_BUILD_TYPE=Release -DNGMT_ENABLE_TRANSPORT_FFI_SMOKE=ON
+          cmake --build build-ffi --config Release
+          ./build-ffi/ngmt_transport_ffi_smoke

@@ -8,13 +8,13 @@ NextGenMediaTransport is a modernized fork of [Open Media Transport (OMT)](https
 - **AV1 / VMX codec support** — Aligned with `ngmt-codec` (forked from upstream `libvmx`).
 - **Zero-configuration LAN discovery** — mDNS / Zeroconf-style discovery, building on OMT’s DNS-SD story where applicable.
 
-See [docs/project-plan/00-Master-Roadmap.md](docs/project-plan/00-Master-Roadmap.md) for the six-phase roadmap (foundation → build → core transport and simulation → developer UI → integrations → hardware) and [docs/project-plan/01-Phase-1-Foundation-and-Forking.md](docs/project-plan/01-Phase-1-Foundation-and-Forking.md) for Phase 1 (organization, forks, CI, licensing, docs automation).
+See [docs/project-plan/00-Master-Roadmap.md](docs/project-plan/00-Master-Roadmap.md) for the six-phase roadmap; [**phase and Version 1 gap status**](docs/project-plan/version-1-release-status.md) summarizes shipped vs missing work. (foundation → build → core transport and simulation → developer UI → integrations → hardware) and [docs/project-plan/01-Phase-1-Foundation-and-Forking.md](docs/project-plan/01-Phase-1-Foundation-and-Forking.md) for Phase 1 (organization, forks, CI, licensing, docs automation).
 
-## Phase 1 (this repository)
+## This meta-repository
 
-This repo holds **project planning**, **agent rules** under `.cursor/rules/`, and **baseline automation**: MIT `LICENSE`, GitHub Actions CI/docs placeholders, and contributor docs. **Phase 2** introduces unified CMake/Cargo builds for code repositories.
+This repo holds **project planning**, **cross-cutting documentation** (testing methodology, wire format, phase plans), **agent rules** under `.cursor/rules/`, and **coordination** (MIT `LICENSE`, contributor docs). **Implementation** lives in sibling repositories (`ngmt-core`, `ngmt-codec`, `ngmt-transport`, `ngmt-studio`), each with its own build and CI.
 
-Local checkouts of **`ngmt-core`**, **`ngmt-codec`**, **`ngmt-transport`**, and **`ngmt-studio`** (Phase 4 tools) live in **this workspace root** (directories next to `docs/`). They are separate Git repositories; see [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md). `.gitignore` excludes them from the meta-repo tree if you initialize Git here.
+Local checkouts of **`ngmt-core`**, **`ngmt-codec`**, **`ngmt-transport`**, and **`ngmt-studio`** live in **this workspace root** (directories next to `docs/`). They are separate Git repositories; see [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md). `.gitignore` excludes them from the meta-repo tree if you initialize Git here.
 
 ### Related NGMT repositories
 
@@ -27,9 +27,10 @@ Local checkouts of **`ngmt-core`**, **`ngmt-codec`**, **`ngmt-transport`**, and 
 
 Use **GitHub CLI** (`gh`) for forks and org repo creation; see [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md).
 
-### CI status
+### Continuous integration
 
-Workflows under [`.github/workflows/`](.github/workflows/) are **placeholders** until build tooling lands in Phase 2 (matrix runs a no-op `echo` step).
+- **Per-repository CI** (authoritative for builds): each code repo runs its own GitHub Actions — e.g. `cargo build` / `cargo test` in [`ngmt-transport`](https://github.com/NextGenMediaTransport/ngmt-transport), `cargo check` for [`ngmt-studio`](https://github.com/NextGenMediaTransport/ngmt-studio), CMake in [`ngmt-core`](https://github.com/NextGenMediaTransport/ngmt-core). See each repo’s `.github/workflows/`.
+- **Meta-repo workflow** ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)): when this documentation tree is pushed, CI **clones** public `ngmt-transport`, `ngmt-studio`, and `ngmt-core` next to the checkout and runs **release builds** so a docs-only clone still validates the stack layout. It does **not** replace per-repo CI; it is a **smoke check** for contributors using the full workspace.
 
 ### Phase 3 testing docs
 

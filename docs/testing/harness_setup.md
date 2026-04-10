@@ -50,4 +50,5 @@ Apple’s dummynet (`dnctl`) + `pfctl` can shape traffic on a specific interface
 ## Related
 
 - [`wlan-simulation.md`](wlan-simulation.md) — baseline vs impaired methodology on WLAN.
+- [`impairment-results.md`](impairment-results.md) — append-only log of lab runs (metrics, SHAs, tools).
 - [`../../tools/simulate_impairment.sh`](../../tools/simulate_impairment.sh) — Linux helper script (repo root `tools/`).

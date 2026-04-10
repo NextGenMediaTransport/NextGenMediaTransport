@@ -16,6 +16,10 @@ NextGenMediaTransport (NGMT) is a high-performance, open-source media transport 
 
 Competing with an entrenched standard requires more than cleaner code: NGMT must remove adoption friction (buildability, docs, integrations) and deliver **WAN credibility** alongside **LAN simplicity**.
 
+## Release status (v1)
+
+For **where we are per phase** and **what is still missing for Version 1.0**, see [**version-1-release-status.md**](./version-1-release-status.md) (living document).
+
 ## Phase index
 
 Structured plans for each phase live in this directory:
