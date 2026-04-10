@@ -16,7 +16,7 @@ where versioning applies.
 
 - **ngmt-core:** `advertiser.hpp` now includes `<cstdint>` so Linux (GCC) CI compiles discovery code.
 - **ngmt-codec:** portable `VMX_DECLSPEC_ALIGN` replaces MSVC-only `__declspec(align)` in VMX sources so Linux (g++) CI builds; CMake `-fdeclspec` workaround removed.
-- **ngmt-codec:** CMake adds `-msse4.2` for GCC/Clang x86_64 VMX sources so Ubuntu CI compiles SSE4.1 intrinsics (default `-march` is too old).
+- **ngmt-codec:** CMake adds `-msse4.2` and `-mbmi` for GCC/Clang x86_64 VMX sources so Ubuntu CI compiles SSE4.1 and BMI intrinsics (default `-march` is too old).
 
 ### Added
 
