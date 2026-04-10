@@ -10,17 +10,15 @@ Phase 4 delivers **first-party developer and operator tools** with **Studio Moni
 
 This phase assumes **stable protocol and FFI boundaries** from [Phase 3 — Core Features: Discovery and WAN](./03-Phase-3-Core-Features-Discovery-and-WAN.md). It does not replace Phase 3 validation; it **visualizes** and **operationalizes** it.
 
-### Important: not “real world” yet
+### Important: lab tooling vs product
 
-Be **transparent with stakeholders**: **Generator + Monitor today are lab / developer tooling**, not a stand-in for a finished NGMT production path.
+Be **transparent with stakeholders**: **Generator + Monitor** are **developer / lab** tools, not a substitute for a full **production** stack (OBS plugin, TLS policy, capture devices).
 
-- **No real encode → transport → decode video chain:** QUIC datagrams use a **minimal stub payload** (e.g. `frame=N` text plus headers), **not** encoded frames, camera pixels, or shipping-grade NGMT media objects.
-- **Monitor “preview”** draws **locally reconstructed** test patterns (e.g. SMPTE-style bars) so operators can *see* that packets arrived; it does **not** decode a transported image.
-- **Stats and UX** target **debugging, demos, and soak tests** — not certification, SLA, or “this is how NGMT ships to end users.”
+- **Primary path (Studio):** **VMX** (`ngmt-codec`) **encode → QUIC (`ngmt-transport`) → decode** with **real** compressed bitstreams and **OWD** timestamps on the wire — see [media payload v1](../protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path). **Pixels** are still **synthetic** test patterns (no camera), which is enough to exercise the codec and transport.
+- **Monitor preview** shows **decoded** video from the VMX bitstream (with an optional **mock** mode that draws local SMPTE bars for UI layout testing).
+- **Stats and UX** target **debugging, demos, and soak tests** — not certification or SLA until **v1.0** pillars close.
 
-Later phases (codec stack, capture, integrations) are where **real-world** behavior is defined. Until then, treat Studio as **instrumentation on the transport layer**, not a productized video pipeline.
-
-**v1.0:** The **Real Media Path** pillar requires **ngmt-codec** (VMX) on the **primary** path — **stub** and **synthetic** transport payloads here must be **replaced** by that pipeline for any v1.0 product claims; see [version-1-release-status.md](./version-1-release-status.md) and [Phase 5](./05-Phase-5-Integrations-and-Ecosystem.md).
+**v1.0** still requires the **Four Pillars** (including OBS, TLS, impairment audit) — see [version-1-release-status.md](./version-1-release-status.md) and [Phase 5](./05-Phase-5-Integrations-and-Ecosystem.md).
 
 ## Goals
 

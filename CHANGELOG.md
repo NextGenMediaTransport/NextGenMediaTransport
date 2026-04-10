@@ -12,6 +12,11 @@ where versioning applies.
 
 ## [Unreleased]
 
+### Added
+
+- **Documentation:** [Media payload v1 (VMX)](docs/protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path) — per-fragment timestamps, width/height, reassembly under loss.
+- **Studio path:** [`ngmt-studio`](ngmt-studio/README.md) documents **VMX encode → QUIC → decode** on the Generator/Monitor primary path (`ngmt-vmx-sys` + `ngmt-codec`).
+
 ### Changed
 
 - **Roadmap / v1.0:** [version-1-release-status.md](docs/project-plan/version-1-release-status.md) now defines **v1.0** as the **Four Pillars** (real media path, OBS P0, TLS policy, impairment audit at 2/5/10% loss); [00-Master-Roadmap.md](docs/project-plan/00-Master-Roadmap.md) adds a **v1.0 baseline** diagram; [Phase 3](docs/project-plan/03-Phase-3-Core-Features-Discovery-and-WAN.md) and [Phase 5](docs/project-plan/05-Phase-5-Integrations-and-Ecosystem.md) label **v1.0 blockers** and **Phase 5b** (post-v1.0 SDKs). **Stub/synthetic** lab payloads must be replaced by **ngmt-codec** on the primary path for v1.0; **README** and Phase 4 plan cross-link the audit doc.

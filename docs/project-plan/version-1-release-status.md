@@ -24,7 +24,7 @@ NGMT is moving from **lab / research** posture to a **production-oriented** v1.0
 | **1** — Foundation | Org, forks, licensing, CI baseline, contributor rules | **Done** (per [plan](./01-Phase-1-Foundation-and-Forking.md)) | Meta-repo, `ngmt-core` / `ngmt-codec` / `ngmt-transport` / `ngmt-studio` on GitHub; MIT licensing; CI in child repos + [meta smoke](../../.github/workflows/ci.yml). |
 | **2** — Build standardization | One-command builds, CMake/Cargo hygiene, linting | **Largely done; DoD not fully closed in doc** | Each major repo builds in CI; [Phase 2 plan](./02-Phase-2-Refactor-and-Build-Standardization.md) still lists some DoD boxes unchecked (unified *meta* build script, devcontainer, full dependency audit). |
 | **3** — Discovery & WAN | mDNS, QUIC, harness, WAN honesty | **In progress** (per [plan](./03-Phase-3-Core-Features-Discovery-and-WAN.md)) | **Rust:** `ngmt-transport` (QUIC, BBR, FFI, ALPN `ngmt`), `ngmt-studio` mDNS `_ngmt._udp`. **C++:** `ngmt-core` discovery is **facade + manual** until v1.0 parity ([discovery status](../../ngmt-core/docs/discovery-status.md)). **v1.0 blockers:** production TLS policy, C++ mDNS parity (or documented Rust→FFI path), documented impairment at 2/5/10% loss. **Not in v1 transport yet:** STUN/TURN/ICE. |
-| **4** — Developer UI | Generator, Monitor, multiview, discovery browser | **Completed** (per [plan](./04-Phase-4-Developer-UI-and-Visibility.md)) | [`ngmt-studio`](../../ngmt-studio/README.md): lab tooling; **stub / synthetic payloads** — must be replaced on the **primary product path** by the **ngmt-codec** pipeline for v1.0 (see [Documentation touchpoints — stubs and synthetic payloads](#documentation-touchpoints--stubs-and-synthetic-payloads)). |
+| **4** — Developer UI | Generator, Monitor, multiview, discovery browser | **Completed** (per [plan](./04-Phase-4-Developer-UI-and-Visibility.md)) | [`ngmt-studio`](../../ngmt-studio/README.md): **primary path** is **VMX → QUIC → decode** (synthetic **pixels**, real **codec**). **v1.0** still needs the rest of the [Four Pillars](#the-v10-production-bar--four-pillars) (e.g. OBS, TLS, impairment audit). |
 | **5** — Integrations | OBS, virtual camera/audio, SDKs | **Not started** (planned) | **v1.0:** [OBS Studio plugin (P0)](./05-Phase-5-Integrations-and-Ecosystem.md), virtual camera (and virtual audio as scoped). **Post-v1.0 / Phase 5b:** Python and other SDK wrappers — not gating v1.0. |
 | **6** — Hardware & commercial | Reference HW, PTZ/tally, outreach | **Not started** (planned) | [Phase 6 DoD](./06-Phase-6-Hardware-and-Commercial-Adoption.md) unchecked. **Not** required for v1.0 software release. |
 
@@ -36,7 +36,7 @@ NGMT is moving from **lab / research** posture to a **production-oriented** v1.0
 
 | Pillar | What “done” means |
 | ------ | ----------------- |
-| **Real Media Path** | End-to-end **VMX / ngmt-codec** encoding → **QUIC** (`ngmt-transport`) → **decoding** — **no** primary-path **stubs** or synthetic transport payloads. Lab Generator/Monitor behavior does not satisfy this pillar. |
+| **Real Media Path** | End-to-end **VMX / ngmt-codec** encoding → **QUIC** (`ngmt-transport`) → **decoding** — **no** primary-path **stub transport** (e.g. ASCII `frame=N` bodies). The **Studio** Generator ↔ Monitor path meets this for **lab** tooling; **v1.0** still requires the **full vertical slice** (e.g. **OBS**) and honest validation per the other pillars. |
 | **The Killer App (P0)** | A **functional OBS Studio source plugin** (first-party integration) so real productions can adopt NGMT without ad hoc glue. |
 | **Security Baseline** | **Production-ready TLS / identity policy** moving beyond hardcoded lab certs. v1.0 does **not** require building a full **Certificate Authority**; a documented policy for **self-signed with pinning** and/or **user-provided PEM** files is a production-grade v1.0 win (see [v1.0 realities](#v10-realities)). |
 | **Audit of Honesty** | **Documented** impairment results at **2%, 5%, and 10%** packet loss in [`impairment-results.md`](../testing/impairment-results.md) (methodology: [`harness_setup.md`](../testing/harness_setup.md)). Results will **vary by platform** (e.g. **Apple Silicon vs x86 Linux**) because **NICs differ in jitter behavior** — **document both** (hardware/OS named); that transparency matches broadcast engineering expectations. |
@@ -84,13 +84,14 @@ Cross-check against [The v1.0 production bar — Four Pillars](#the-v10-producti
 
 ---
 
-## Documentation touchpoints — stubs and synthetic payloads
+## Documentation touchpoints — Studio vs v1.0 product path
 
-The following docs describe **stub** or **synthetic** behavior today. For **v1.0**, the **primary demo and product path** must use the **ngmt-codec** real media pipeline, not stubs:
+**Studio** (`ngmt-generator` / `ngmt-monitor`) documents the **VMX → QUIC** primary path; **v1.0** still requires integrations (e.g. **OBS**) and other pillars. Historical notes on **stub** payloads may appear in older changelog entries:
 
-- [README.md](../../README.md) (Phase 4 scope disclaimer)
+- [README.md](../../README.md) (Studio scope + Four Pillars)
 - [Phase 4 plan](./04-Phase-4-Developer-UI-and-Visibility.md) (Generator / Monitor)
-- Meta [CHANGELOG.md](../../CHANGELOG.md) (historical notes on lab tooling)
+- [ngmt-wire-format.md](../protocol/ngmt-wire-format.md) (media payload v1)
+- Meta [CHANGELOG.md](../../CHANGELOG.md)
 
 ---
 
@@ -98,7 +99,7 @@ The following docs describe **stub** or **synthetic** behavior today. For **v1.0
 
 Priority is the **vertical slice**: **codec (VMX/ngmt-codec) → transport (QUIC) → OBS plugin**, with Phase 3 work in parallel.
 
-1. **Real Media Path:** Wire **ngmt-codec** end-to-end on the primary path (replace stubs for that path).
+1. **Real Media Path:** **Studio** path is **VMX → QUIC → decode**; complete the **vertical slice** (e.g. **OBS**) and remaining pillar work for v1.0.
 2. **Parallel — Phase 3 blockers:** **TLS policy** (good-enough: pinning / user PEM); **C++ mDNS** or **Rust discovery → FFI**; append **2% / 5% / 10%** impairment rows (multi-platform where feasible).
 3. **Killer App:** **OBS Studio** plugin (P0) on a stated OS set; **virtual camera** as scoped for v1.0.
 4. **Tag 1.0.0** only when [Missing for Version 1.0](#missing-for-version-10-gap-list) rows required for the agreed release are closed; **Phase 5b** SDKs follow.
