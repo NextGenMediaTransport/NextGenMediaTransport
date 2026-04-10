@@ -39,7 +39,7 @@ NGMT is moving from **lab / research** posture to a **production-oriented** v1.0
 | **Real Media Path** | End-to-end **VMX / ngmt-codec** encoding → **QUIC** (`ngmt-transport`) → **decoding** — **no** primary-path **stub transport** (e.g. ASCII `frame=N` bodies). The **Studio** Generator ↔ Monitor path meets this for **lab** tooling; **v1.0** still requires the **full vertical slice** (e.g. **OBS**) and honest validation per the other pillars. |
 | **The Killer App (P0)** | A **functional OBS Studio source plugin** (first-party integration) so real productions can adopt NGMT without ad hoc glue. |
 | **Security Baseline** | **Production-ready TLS / identity policy** moving beyond hardcoded lab certs. v1.0 does **not** require building a full **Certificate Authority**; a documented policy for **self-signed with pinning** and/or **user-provided PEM** files is a production-grade v1.0 win (see [v1.0 realities](#v10-realities)). |
-| **Audit of Honesty** | **Documented** impairment results at **2%, 5%, and 10%** packet loss in [`impairment-results.md`](../testing/impairment-results.md) (methodology: [`harness_setup.md`](../testing/harness_setup.md)). Results will **vary by platform** (e.g. **Apple Silicon vs x86 Linux**) because **NICs differ in jitter behavior** — **document both** (hardware/OS named); that transparency matches broadcast engineering expectations. |
+| **Audit of Honesty** | **Documented** impairment results at **2%, 5%, and 10%** packet loss in [`impairment-results.md`](../testing/impairment-results.md) (methodology: [`harness_setup.md`](../testing/harness_setup.md)). Use **`NGMT_LOG_FILE`** on Studio apps to preserve per-role trace lines during runs. Results will **vary by platform** (e.g. **Apple Silicon vs x86 Linux**) because **NICs differ in jitter behavior** — **document both** (hardware/OS named); that transparency matches broadcast engineering expectations. |
 
 ### Also required for a shippable v1.0
 
@@ -81,6 +81,16 @@ Cross-check against [The v1.0 production bar — Four Pillars](#the-v10-producti
 | — | *(non-pillar)* | **Reference hardware / PTZ / tally** | 6 | **Not** required for v1.0 **software**. |
 
 **Post-v1.0 (Phase 5b):** **Python SDK**, additional **C++/Rust** SDK wrappers, and other stretch integrations — explicitly **not** gating v1.0.
+
+---
+
+## Studio lab verification (before tagging a Studio-inclusive release)
+
+Use this quick checklist when validating **Generator ↔ Monitor** behavior for a release candidate:
+
+- **Broadcast, multiple receivers:** start **Generator → Broadcast** on a fixed port; connect **two** Monitors (or two slots to the same `host:port`); both should show live decoded preview and non-zero datagram counts.
+- **OWD / FPS:** on a quiet LAN, **OWD EMA** (first-fragment sample) should stay plausible; **FPS dec** / **send FPS** should align with the Generator **target FPS** when CPU keeps up (decode runs off the QUIC recv thread).
+- **Peer disconnect:** stop the Generator only; the Monitor slot should return to **IDLE** without pressing **Stop** on the Monitor.
 
 ---
 

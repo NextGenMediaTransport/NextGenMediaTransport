@@ -12,6 +12,28 @@ This document describes **reproducible** WAN/WLAN simulation for NextGenMediaTra
 
 Adjust interface names (`wlan0`, `en0`, etc.) to match `ip link` / System Settings.
 
+## Studio apps — capture trace to a file (audit / “where it died”)
+
+**`ngmt-generator`** and **`ngmt-monitor`** emit the same lines to **stderr** and, when set, append each line to **`NGMT_LOG_FILE`** (create/append, flushed). Format: **`YYYY-MM-DDTHH:MM:SS.mmmZ [app] component | detail`** (UTC wall clock, millisecond precision — sortable and readable; not raw Unix epoch ms). Use this for **2% / 5% / 10%** loss runs so logs survive terminal scrollback and you can attach them to [`impairment-results.md`](impairment-results.md).
+
+**Same machine, both apps:** use **two different paths** — one for Generator, one for Monitor. Each process reads **`NGMT_LOG_FILE` only at startup**; reusing the **same path for both processes** interleaves lines from two writers and makes post-mortems painful. Typical names: `…/ngmt-generator-<scenario>.log` and `…/ngmt-monitor-<scenario>.log`.
+
+**Same machine — two terminals (recommended):**
+
+```bash
+# Terminal A — generator only
+export NGMT_LOG_FILE=/tmp/ngmt-generator-loss5.log
+cargo run --release --bin ngmt-generator
+```
+
+```bash
+# Terminal B — monitor only
+export NGMT_LOG_FILE=/tmp/ngmt-monitor-loss5.log
+cargo run --release --bin ngmt-monitor
+```
+
+Set the variable **in that shell** before launching the binary. On a second platform class (e.g. x86 Linux vs Apple ARM), repeat with the same profile and note **all four** log paths in the results row when you compare platforms (two paths per machine × two machines).
+
 ## Fedora 43 — `tc` / `netem`
 
 Requires root. Replace `$IFACE` (e.g. `wlan0`).

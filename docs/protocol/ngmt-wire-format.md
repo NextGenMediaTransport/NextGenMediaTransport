@@ -58,7 +58,11 @@ Pass that buffer to **`VMX_LoadFrom`** (the first four bytes are **not** part of
 
 ### One-way delay (OWD)
 
-Receivers read **`origination_timestamp_us`** from the full datagram at **byte offsets 32–39** (immediately after the NGMT header). Compare to the receiver’s local time in microseconds for OWD metrics.
+`origination_timestamp_us` is stamped **once per logical object** (video frame) and **replicated on every fragment** of that object. Receivers must **not** treat `recv_time − origination_timestamp` on arbitrary fragments as path one-way delay: inter-arrival spread across many datagrams dominates.
+
+**Recommended (Studio):** Compare the sender timestamp to the receiver’s wall time when the **first** fragment of that `object_id` is seen. `FragmentReassembler` records `first_recv_unix_us` per partial object and returns it with the completed assembly — use `first_recv_unix_us − origination_timestamp_us` for lab OWD. Using only the **last** fragment’s receive time inflates the metric when the recv task is delayed (e.g. by decode backlog on a single-threaded path).
+
+For a coarser signal, you may still sample when reassembly completes, but prefer **first-fragment** receive time for path delay.
 
 ### Reassembly under loss
 
