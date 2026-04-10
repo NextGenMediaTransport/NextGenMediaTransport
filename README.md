@@ -41,6 +41,8 @@ Workflows under [`.github/workflows/`](.github/workflows/) are **placeholders** 
 
 Clone [NextGenMediaTransport/ngmt-studio](https://github.com/NextGenMediaTransport/ngmt-studio) beside the engine repos. Build/run: [ngmt-studio/README.md](ngmt-studio/README.md) (also see [Phase 4 plan](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md)).
 
+**Scope (read this):** Generator and Monitor are **lab tools** for QUIC, discovery, and soak testing. They are **not** a **real-world** end-to-end video product yet: payloads are **stubs** (e.g. `frame=N` text), and the Monitor **reconstructs** test patterns locally — **no** transported pixels or production encode/decode. See the Phase 4 plan for the full disclaimer.
+
 ## License
 
 This meta-repository is licensed under the MIT License — see [LICENSE](LICENSE).

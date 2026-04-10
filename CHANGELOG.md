@@ -12,8 +12,15 @@ where versioning applies.
 
 ## [Unreleased]
 
+### Changed
+
+- **Documentation:** Phase 4 plan and meta README now **explicitly state** that Generator + Monitor are **lab / debug tooling**, not a **real-world** encode→transport→decode pipeline (stub payloads; Monitor preview is **locally drawn**, not decoded video).
+- **`ngmt-monitor`:** Receiver stays on the **2×2 grid** when connecting (no auto-solo). Slot **preview** renders **SMPTE bars** when datagrams arrive (mirrors Generator; wire payload is still `frame=N` text).
+
 ### Added
 
+- **`ngmt-generator` / `ngmt-monitor`:** stderr debug tracing (`[ngmt-generator]` / `[ngmt-monitor]` prefixes) for UI interactions, QUIC worker phases, and **before/after `JoinHandle::join()`** on stream stop — run from a terminal to diagnose UI freezes and connection issues.
+- **Studio:** `TransportRuntime::close_endpoint()` is invoked from the UI thread before joining stream workers so **Stop** does not hang while the worker is still in `accept` / `connect` (Quinn `block_on`).
 - **Phase 4 — `ngmt-studio`:** new sibling repository (Generator, Monitor, common crate) with **egui** UI, mDNS `_ngmt._udp`, QUIC dial/accept integration via **`ngmt-transport`** Rust API. Documented in [docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md), [README.md](README.md), and [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md). Meta-repo `.gitignore` includes `/ngmt-studio/`.
 - **`ngmt-transport`:** `app_api` module and session helpers (`dial`, `accept_one`, `local_addr`) for Studio tools.
 

@@ -10,6 +10,16 @@ Phase 4 delivers **first-party developer and operator tools** with **Studio Moni
 
 This phase assumes **stable protocol and FFI boundaries** from [Phase 3 — Core Features: Discovery and WAN](./03-Phase-3-Core-Features-Discovery-and-WAN.md). It does not replace Phase 3 validation; it **visualizes** and **operationalizes** it.
 
+### Important: not “real world” yet
+
+Be **transparent with stakeholders**: **Generator + Monitor today are lab / developer tooling**, not a stand-in for a finished NGMT production path.
+
+- **No real encode → transport → decode video chain:** QUIC datagrams use a **minimal stub payload** (e.g. `frame=N` text plus headers), **not** encoded frames, camera pixels, or shipping-grade NGMT media objects.
+- **Monitor “preview”** draws **locally reconstructed** test patterns (e.g. SMPTE-style bars) so operators can *see* that packets arrived; it does **not** decode a transported image.
+- **Stats and UX** target **debugging, demos, and soak tests** — not certification, SLA, or “this is how NGMT ships to end users.”
+
+Later phases (codec stack, capture, integrations) are where **real-world** behavior is defined. Until then, treat Studio as **instrumentation on the transport layer**, not a productized video pipeline.
+
 ## Goals
 
 ### Test pattern sender
@@ -37,6 +47,7 @@ This phase assumes **stable protocol and FFI boundaries** from [Phase 3 — Core
 - **Repository:** [`ngmt-studio`](../../ngmt-studio/README.md) is a **dedicated Git repository** (sibling to `ngmt-core`, `ngmt-codec`, `ngmt-transport` in the meta-workspace). It contains a Cargo workspace: **`ngmt-generator`**, **`ngmt-monitor`**, **`ngmt-studio-common`**.
 - **UI:** **egui** / **eframe** (0.29) for immediate-mode overlays and fast iteration. Transport uses the Rust API in [`ngmt-transport`](../../ngmt-transport/README.md) (`TransportRuntime::dial` / `accept_one`, `app_api` stats, datagram send/receive).
 - **Discovery:** **`_ngmt._udp`** via [`mdns-sd`](https://crates.io/crates/mdns-sd) in `ngmt-studio-common` (browse + register).
+- **Monitor preview:** QUIC datagrams carry a minimal `frame=N` text body (not raw pixels); the Monitor draws a **SMPTE-style bar pattern** locally to match the Generator preview once frames arrive. Solo/maximize is **manual** (⛶), not automatic on connect.
 - **Linking:** local dev uses `path = "../ngmt-transport"`; pin engines via submodule or versioned crates for releases (documented in `ngmt-studio` README).
 
 ## Definition of Done
