@@ -1,0 +1,4 @@
+# Nested Git checkouts of NGMT code repos (clone into this workspace; do not commit fork trees in the meta repo)
+/ngmt-core/
+/ngmt-codec/
+/ngmt-transport/

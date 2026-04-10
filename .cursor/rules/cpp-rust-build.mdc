@@ -1,0 +1,13 @@
+---
+description: CMake/Cargo, formatting, and dependency hygiene for NGMT
+globs: "**/*.c,**/*.h,**/*.cpp,**/*.hpp,**/*.cc,**/*.cxx,**/*.rs,**/CMakeLists.txt,**/Cargo.toml,**/*.cmake"
+alwaysApply: false
+---
+
+# C++, Rust, and build
+
+- Prefer **CMake** for C++ and **Cargo** workspaces for Rust; keep a single clear top-level build story. Mind **cross-platform** differences (paths, sockets, threading).
+- Use **clang-format** / **rustfmt** when config is present in-repo; adopt **Clippy** and strong compiler warnings as the project enables them.
+- **Dependencies:** record purpose, pinned version, and license when adding or keeping libraries; prefer modern **QUIC**-aligned stacks for transport code.
+- **Transport / discovery:** document NAT traversal and any **ICE/STUN/TURN** (or chosen) design, including failure modes.
+- **WAN validation:** document simulation or lab setup when testing loss recovery and congestion control (e.g. Clumsy on Windows, `tc`/netem on Linux), per `docs/project-plan/03-Phase-3-Core-Features-Discovery-and-WAN.md`.

@@ -1,0 +1,41 @@
+# NextGenMediaTransport (NGMT)
+
+NextGenMediaTransport is a modernized fork of [Open Media Transport (OMT)](https://www.openmediatransport.org/), aimed at competing with NDI. The focus is **developer and operator experience**, **modern networks**, and **permissive licensing** so vendors can adopt the stack without friction.
+
+## Strategic pillars
+
+- **QUIC-based transport (WAN)** — NAT traversal and lossy links as first-class. **QUIC/WAN is implemented in NGMT** (`ngmt-transport`); upstream OMT today uses TCP on the LAN and has no QUIC repository to fork.
+- **AV1 / VMX codec support** — Aligned with `ngmt-codec` (forked from upstream `libvmx`).
+- **Zero-configuration LAN discovery** — mDNS / Zeroconf-style discovery, building on OMT’s DNS-SD story where applicable.
+
+See [docs/project-plan/00-Master-Roadmap.md](docs/project-plan/00-Master-Roadmap.md) for the six-phase roadmap (foundation → build → core transport and simulation → developer UI → integrations → hardware) and [docs/project-plan/01-Phase-1-Foundation-and-Forking.md](docs/project-plan/01-Phase-1-Foundation-and-Forking.md) for Phase 1 (organization, forks, CI, licensing, docs automation).
+
+## Phase 1 (this repository)
+
+This repo holds **project planning**, **agent rules** under `.cursor/rules/`, and **baseline automation**: MIT `LICENSE`, GitHub Actions CI/docs placeholders, and contributor docs. **Phase 2** introduces unified CMake/Cargo builds for code repositories.
+
+Local checkouts of **`ngmt-core`**, **`ngmt-codec`**, and **`ngmt-transport`** live in **this workspace root** (directories next to `docs/`). They are separate Git repositories; see [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md). `.gitignore` excludes them from the meta-repo tree if you initialize Git here.
+
+### Related NGMT repositories
+
+| NGMT repo | Origin |
+| --- | --- |
+| `ngmt-core` | Fork of [`openmediatransport/libomtnet`](https://github.com/openmediatransport/libomtnet) (OMT protocol reference). |
+| `ngmt-codec` | Fork of [`openmediatransport/libvmx`](https://github.com/openmediatransport/libvmx) (VMX codec). |
+| `ngmt-transport` | **New** first-party repo for QUIC/WAN — not an upstream fork. |
+
+Use **GitHub CLI** (`gh`) for forks and org repo creation; see [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md).
+
+### CI status
+
+Workflows under [`.github/workflows/`](.github/workflows/) are **placeholders** until build tooling lands in Phase 2 (matrix runs a no-op `echo` step).
+
+### Phase 3 testing docs
+
+- [docs/testing/harness_setup.md](docs/testing/harness_setup.md) — `tc` / netem (Fedora), Clumsy (Windows), macOS notes.
+- [docs/testing/wlan-simulation.md](docs/testing/wlan-simulation.md) — WLAN baseline vs impaired methodology.
+- [docs/protocol/ngmt-wire-format.md](docs/protocol/ngmt-wire-format.md) — NGMT object header and QUIC mapping.
+
+## License
+
+This meta-repository is licensed under the MIT License — see [LICENSE](LICENSE).
