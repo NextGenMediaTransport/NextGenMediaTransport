@@ -15,7 +15,7 @@ where versioning applies.
 ### Fixed
 
 - **ngmt-core:** `advertiser.hpp` now includes `<cstdint>` so Linux (GCC) CI compiles discovery code.
-- **ngmt-codec:** CMake applies `-fdeclspec` only for Clang-family compilers, not GCC (fixes Ubuntu CI).
+- **ngmt-codec:** portable `VMX_DECLSPEC_ALIGN` replaces MSVC-only `__declspec(align)` in VMX sources so Linux (g++) CI builds; CMake `-fdeclspec` workaround removed.
 
 ### Added
 
