@@ -20,6 +20,8 @@ Be **transparent with stakeholders**: **Generator + Monitor today are lab / deve
 
 Later phases (codec stack, capture, integrations) are where **real-world** behavior is defined. Until then, treat Studio as **instrumentation on the transport layer**, not a productized video pipeline.
 
+**v1.0:** The **Real Media Path** pillar requires **ngmt-codec** (VMX) on the **primary** path — **stub** and **synthetic** transport payloads here must be **replaced** by that pipeline for any v1.0 product claims; see [version-1-release-status.md](./version-1-release-status.md) and [Phase 5](./05-Phase-5-Integrations-and-Ecosystem.md).
+
 ## Goals
 
 ### Test pattern sender
@@ -59,4 +61,4 @@ Later phases (codec stack, capture, integrations) are where **real-world** behav
 
 ## Out of scope
 
-Production **OBS Studio** plugin, **virtual camera/audio**, and **SDK packaging** are [Phase 5 — Integrations and Ecosystem](./05-Phase-5-Integrations-and-Ecosystem.md).
+Production **OBS Studio** plugin and **virtual camera/audio** are [Phase 5 — Integrations and Ecosystem](./05-Phase-5-Integrations-and-Ecosystem.md) (**v1.0**). **SDK packaging** (Python, C++, Rust) is **Phase 5b (post-v1.0)** per the same plan.

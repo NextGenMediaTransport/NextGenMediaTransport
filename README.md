@@ -42,7 +42,7 @@ Use **GitHub CLI** (`gh`) for forks and org repo creation; see [docs/contributin
 
 Clone [NextGenMediaTransport/ngmt-studio](https://github.com/NextGenMediaTransport/ngmt-studio) beside the engine repos. Build/run: [ngmt-studio/README.md](ngmt-studio/README.md) (also see [Phase 4 plan](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md)).
 
-**Scope (read this):** Generator and Monitor are **lab tools** for QUIC, discovery, and soak testing. They are **not** a **real-world** end-to-end video product yet: payloads are **stubs** (e.g. `frame=N` text), and the Monitor **reconstructs** test patterns locally — **no** transported pixels or production encode/decode. See the Phase 4 plan for the full disclaimer.
+**Scope (read this):** Generator and Monitor are **lab tools** for QUIC, discovery, and soak testing. They are **not** a **real-world** end-to-end video product yet: payloads are **stubs** (e.g. `frame=N` text), and the Monitor **reconstructs** test patterns locally — **no** transported pixels or production encode/decode. See the Phase 4 plan for the full disclaimer. For **v1.0**, the **primary product path** must use the **ngmt-codec** pipeline end-to-end (VMX encode → QUIC → decode); stubs are not acceptable for that bar — see [version-1-release-status.md](docs/project-plan/version-1-release-status.md) (**Four Pillars**).
 
 ## License
 

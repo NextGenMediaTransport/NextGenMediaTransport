@@ -8,6 +8,18 @@ status: in_progress
 
 Phase 3 delivers NGMT’s core differentiators versus local-only tools: **zero-configuration LAN discovery**, **QUIC transport tuned for real-world WANs** (including NAT), and **resilience** (packet-loss recovery and congestion control) suitable for the public internet. Validation includes a **network simulation test harness** so behavior under impairment is **reproducible and documented**.
 
+The **[v1.0 production bar](./version-1-release-status.md#the-v10-production-bar--four-pillars)** (Four Pillars) includes **Security Baseline**, **Audit of Honesty**, and a consistent **LAN discovery** story. Several Phase 3 items are explicit **[v1.0 BLOCKER]**s below.
+
+## v1.0 blockers (Phase 3 scope)
+
+These must be satisfied (or explicitly superseded by a **documented** product decision in release notes) before a **1.0.0** production-oriented release. Full program status: [version-1-release-status.md](./version-1-release-status.md).
+
+- **[v1.0 BLOCKER] C++ mDNS parity** — **`ngmt-core`** must offer **real mDNS** aligned with Studio’s **`_ngmt._udp`** story, or a **shipped** migration plan with timeline. Today the C++ [`Advertiser`](../../ngmt-core/include/ngmt/discovery/advertiser.hpp) is a **facade + manual** fallback; see [discovery-status.md](../../ngmt-core/docs/discovery-status.md). **Escape hatch:** if a native C++ mDNS library integration **stalls**, **Rust-side discovery** (e.g. `ngmt-studio` / transport) may **resolve peers and feed addresses into `ngmt-core` via FFI** — document that path; it is a valid, often faster-to-ship v1.0 approach.
+
+- **[v1.0 BLOCKER] Production TLS / PKI policy** — Shipped, production-oriented binaries must not rely on **lab-only** certificate generation (e.g. rcgen defaults) without an **operator-facing** policy. v1.0 does **not** require building a **Certificate Authority**; a documented approach (**self-signed with pinning**, **user-provided PEM**, rotation notes) satisfies the **Security Baseline**. See [v1.0 realities](./version-1-release-status.md#v10-realities) in the audit doc.
+
+- **[v1.0 BLOCKER] Audit of Honesty** — [impairment-results.md](../testing/impairment-results.md) must contain **documented** runs at **2%, 5%, and 10%** packet loss (plus methodology). **Expect different results** on different **OS + NIC** combinations (e.g. **Fedora x86** vs **Apple M2**); **log both** where practical — NIC jitter behavior differs, and broadcast engineers expect that transparency.
+
 ## Zero-configuration local discovery (mDNS / Zeroconf)
 
 ### Goals
@@ -62,6 +74,12 @@ Because WAN quality is NGMT’s main competitive angle versus NDI on bad network
 - [x] Packet-loss recovery and congestion control are implemented to project standards; defaults documented. — **QUIC loss recovery** via the stack; **BBR** in Quinn; [`WlanOptimization`](../../ngmt-transport/README.md) for WLAN hints; application-level media recovery is **ongoing** as the wire format evolves.
 - [x] **Network simulation test harness** exists with **documented** scenarios (loss/latency/jitter) using tools such as **Clumsy** (Windows) and **`tc`/netem** (Linux), plus macOS notes. — [`docs/testing/harness_setup.md`](../testing/harness_setup.md), [`docs/testing/wlan-simulation.md`](../testing/wlan-simulation.md), scripts under `tools/`.
 - [x] Published **documentation** of simulation runs, metrics, and environment so WAN behavior is auditable and repeatable. — Template and append-only log in [`docs/testing/impairment-results.md`](../testing/impairment-results.md); refresh as teams add lab runs.
+
+### v1.0 remaining (blockers)
+
+Phase 3 **harness and QUIC documentation** above remain **done** for phase engineering history. For **v1.0**, the **[v1.0 blockers](#v10-blockers-phase-3-scope)** section must still be closed: **C++ mDNS / FFI discovery**, **production TLS policy**, and **2/5/10% impairment** rows in the results log. Cross-pillar work (**ngmt-codec** real path, **OBS** plugin) lives in other phases; see [version-1-release-status.md](./version-1-release-status.md).
+
+**Stub / synthetic payloads:** Lab tools may use minimal payloads for transport testing; the **v1.0 Real Media Path** requires the **ngmt-codec** pipeline on the **primary** product path — see the audit doc [documentation touchpoints](./version-1-release-status.md#documentation-touchpoints--stubs-and-synthetic-payloads).
 
 ## Implementation notes (Phase 3 progress)
 
