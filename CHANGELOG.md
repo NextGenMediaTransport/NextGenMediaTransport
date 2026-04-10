@@ -12,6 +12,11 @@ where versioning applies.
 
 ## [Unreleased]
 
+### Fixed
+
+- **ngmt-core:** `advertiser.hpp` now includes `<cstdint>` so Linux (GCC) CI compiles discovery code.
+- **ngmt-codec:** CMake applies `-fdeclspec` only for Clang-family compilers, not GCC (fixes Ubuntu CI).
+
 ### Added
 
 - **Roadmap:** new [Phase 4 — Developer UI and Visibility](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md); former integrations and hardware phases renumbered to **Phase 5** and **Phase 6** ([00-Master-Roadmap.md](docs/project-plan/00-Master-Roadmap.md)).
