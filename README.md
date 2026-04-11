@@ -39,6 +39,7 @@ Use **GitHub CLI** (`gh`) for forks and org repo creation; see [docs/contributin
 ### Phase 3 testing docs
 
 - [docs/testing/harness_setup.md](docs/testing/harness_setup.md) — `tc` / netem (Fedora), Clumsy (Windows), macOS notes.
+- [docs/testing/lab-log-capture.md](docs/testing/lab-log-capture.md) — **`NGMT_LOG_FILE`**, `target/<profile>/logs/`, Mac + Fedora command templates.
 - [docs/testing/wlan-simulation.md](docs/testing/wlan-simulation.md) — WLAN baseline vs impaired methodology.
 - [docs/protocol/ngmt-wire-format.md](docs/protocol/ngmt-wire-format.md) — NGMT object header and QUIC mapping.
 

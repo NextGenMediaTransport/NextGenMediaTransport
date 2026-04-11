@@ -64,6 +64,10 @@ Pass that buffer to **`VMX_LoadFrom`** (the first four bytes are **not** part of
 
 For a coarser signal, you may still sample when reassembly completes, but prefer **first-fragment** receive time for path delay.
 
+**Cross-host clocks (no PTP):** Both values are **Unix epoch microseconds** from each host’s `SystemTime`. If the receiver’s clock is **behind** the sender’s by more than the true one-way delay, the raw difference goes **negative**; Studio clamps to **0 ms**, so OWD can look “missing” or stuck at zero even when the path is fine. **NTP / chrony** (or PTP in a broadcast plant) improves raw `recv − send` without extra logic. A future option is **in-app skew calibration** (estimate a constant offset from warm-up samples); until then, treat asymmetric **Mac ↔ Linux** OWD as a **clock sanity** check, not a substitute for synchronized time.
+
+**Fair FPS / load comparisons:** run Generator and Monitor with the **same** build profile (**`--release`** on both); mixing **Debug** on one host and **Release** on the other invalidates decode-rate comparisons (VMX + native code are much slower in Debug).
+
 ### Reassembly under loss
 
 If a fragment is missing, the receiver **must not** retain partial state **indefinitely**. Implementations should **evict** incomplete objects after a timeout (e.g. **100 ms** without any new fragment for that `object_id`) and surface **incomplete frame** counters for observability.

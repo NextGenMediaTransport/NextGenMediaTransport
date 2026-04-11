@@ -4,6 +4,8 @@ This document describes **reproducible** WAN/WLAN simulation for NextGenMediaTra
 
 To **build** Generator/Monitor on Fedora first (Rust, GTK, XCB, ALSA, CMake), see [**Linux (Fedora) build guide**](../build/linux-fedora.md).
 
+For **copy-paste log capture** (paths under `target/<profile>/logs/`, Mac + Fedora), see [**Lab log capture**](lab-log-capture.md).
+
 ## Lab roles (reference)
 
 | Machine | Typical role |
@@ -16,9 +18,11 @@ Adjust interface names (`wlan0`, `en0`, etc.) to match `ip link` / System Settin
 
 ## Studio apps — capture trace to a file (audit / “where it died”)
 
-**`ngmt-generator`** and **`ngmt-monitor`** emit the same lines to **stderr** and, when set, append each line to **`NGMT_LOG_FILE`** (create/append, flushed). Format: **`YYYY-MM-DDTHH:MM:SS.mmmZ [app] component | detail`** (UTC wall clock, millisecond precision — sortable and readable; not raw Unix epoch ms). Use this for **2% / 5% / 10%** loss runs so logs survive terminal scrollback and you can attach them to [`impairment-results.md`](impairment-results.md).
+**`ngmt-generator`** and **`ngmt-monitor`** emit the same lines to **stderr** and, when a file sink is active, append each line (create/append, flushed). Format: **`YYYY-MM-DDTHH:MM:SS.mmmZ [app] component | detail`** (UTC wall clock, millisecond precision — sortable and readable; not raw Unix epoch ms). Use this for **2% / 5% / 10%** loss runs so logs survive terminal scrollback and you can attach them to [`impairment-results.md`](impairment-results.md).
 
-**Same machine, both apps:** use **two different paths** — one for Generator, one for Monitor. Each process reads **`NGMT_LOG_FILE` only at startup**; reusing the **same path for both processes** interleaves lines from two writers and makes post-mortems painful. Typical names: `…/ngmt-generator-<scenario>.log` and `…/ngmt-monitor-<scenario>.log`.
+**Enable file mirroring:** set **`NGMT_LOG_FILE`** before launch **or** use the in-app **File trace** / **Mirror trace to disk** panel (**Apply** picks a path at runtime; **`NGMT_LOG_FILE`** is still read once at startup if the UI has not opened a file yet). See [Lab log capture](lab-log-capture.md).
+
+**Same machine, both apps:** use **two different paths** — one for Generator, one for Monitor. Reusing the **same path for both processes** interleaves lines from two writers and makes post-mortems painful. Typical names: `…/ngmt-generator-<scenario>.log` and `…/ngmt-monitor-<scenario>.log`.
 
 **Same machine — two terminals (recommended):**
 

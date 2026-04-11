@@ -14,12 +14,15 @@ where versioning applies.
 
 ### Added
 
+- **Studio (`ngmt-studio` repo):** in-app **File trace** UI + runtime **`set_studio_trace_file`** (see that repo’s CHANGELOG). Meta docs: [harness_setup.md](docs/testing/harness_setup.md), [lab-log-capture.md](docs/testing/lab-log-capture.md).
+- **Testing:** [docs/testing/lab-log-capture.md](docs/testing/lab-log-capture.md) — per-host commands, **`target/<profile>/logs/`**, cross-host notes; linked from [harness_setup.md](docs/testing/harness_setup.md) and [README](README.md).
 - **Build:** [docs/build/linux-fedora.md](docs/build/linux-fedora.md) — Fedora **`dnf`** prerequisites for **`ngmt-transport`**, **`ngmt-studio`** (GTK/XCB/GL/ALSA), optional **`ngmt-core`**; **`git clone` / `gh repo clone`** from [NextGenMediaTransport org repos](https://github.com/orgs/NextGenMediaTransport/repositories); linked from [README](README.md) and [ngmt-studio README](ngmt-studio/README.md).
 - **Documentation:** [Media payload v1 (VMX)](docs/protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path) — per-fragment timestamps, width/height, reassembly under loss.
 - **Studio path:** [`ngmt-studio`](ngmt-studio/README.md) documents **VMX encode → QUIC → decode** on the Generator/Monitor primary path (`ngmt-vmx-sys` + `ngmt-codec`).
 
 ### Changed
 
+- **Wire format:** [docs/protocol/ngmt-wire-format.md](docs/protocol/ngmt-wire-format.md) §OWD — cross-host **clock skew** vs clamped **0 ms**; **NTP** improves raw OWD; future **in-app skew calibration** noted; **Release vs Debug** parity for FPS comparisons.
 - **Roadmap / v1.0:** [version-1-release-status.md](docs/project-plan/version-1-release-status.md) now defines **v1.0** as the **Four Pillars** (real media path, OBS P0, TLS policy, impairment audit at 2/5/10% loss); [00-Master-Roadmap.md](docs/project-plan/00-Master-Roadmap.md) adds a **v1.0 baseline** diagram; [Phase 3](docs/project-plan/03-Phase-3-Core-Features-Discovery-and-WAN.md) and [Phase 5](docs/project-plan/05-Phase-5-Integrations-and-Ecosystem.md) label **v1.0 blockers** and **Phase 5b** (post-v1.0 SDKs). **Stub/synthetic** lab payloads must be replaced by **ngmt-codec** on the primary path for v1.0; **README** and Phase 4 plan cross-link the audit doc.
 - **README:** Reframed as the **meta-repository** (planning + cross-cutting docs); **Continuous integration** section now distinguishes **per-repository CI** from the **meta smoke workflow** ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
 - **Phase 3 / Phase 4 docs:** [Phase 4 plan](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md) marked **completed**; [Phase 3 plan](docs/project-plan/03-Phase-3-Core-Features-Discovery-and-WAN.md) DoD reconciled with shipped Rust/C++ scope (including **STUN/TURN** not implemented yet); [impairment results log](docs/testing/impairment-results.md) added for auditable lab runs.

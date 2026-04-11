@@ -5,7 +5,7 @@ This file is the **in-repo appendix** for [Phase 3 — WAN validation](../projec
 ## How to add an entry
 
 1. Run a scenario from the harness docs (note exact `tc` line, Clumsy settings, or macOS tool).
-2. Prefer **`NGMT_LOG_FILE`** on each Studio process (see [`harness_setup.md`](harness_setup.md)) so trace lines are **append-only to disk** for post-mortems. **Same machine, both apps:** **two paths** (e.g. `/tmp/ngmt-generator-….log` and `/tmp/ngmt-monitor-….log`) — not one shared file.
+2. Prefer **`NGMT_LOG_FILE`** on each Studio process (see [`harness_setup.md`](harness_setup.md); command templates in [`lab-log-capture.md`](lab-log-capture.md)) so trace lines are **append-only to disk** for post-mortems. **Same machine, both apps:** **two paths** (e.g. under `target/release/logs/` or `/tmp/…`) — not one shared file.
 3. Record **date**, **NGMT revision** (git SHA of `ngmt-transport` / meta-repo), **OS**, **roles** (Generator, Monitor, or other).
 4. Note **metrics** you care about (RTT, drops, throughput, subjective stability) and **where logs live** (paths or artifact links).
 5. Append a new row or subsection below — **do not rewrite history**; add follow-up rows if you re-run the same profile after a stack change.
