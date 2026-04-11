@@ -32,6 +32,10 @@ Use **GitHub CLI** (`gh`) for forks and org repo creation; see [docs/contributin
 - **Per-repository CI** (authoritative for builds): each code repo runs its own GitHub Actions — e.g. `cargo build` / `cargo test` in [`ngmt-transport`](https://github.com/NextGenMediaTransport/ngmt-transport), `cargo check` for [`ngmt-studio`](https://github.com/NextGenMediaTransport/ngmt-studio), CMake in [`ngmt-core`](https://github.com/NextGenMediaTransport/ngmt-core). See each repo’s `.github/workflows/`.
 - **Meta-repo workflow** ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)): when this documentation tree is pushed, CI **clones** public `ngmt-transport`, `ngmt-studio`, and `ngmt-core` next to the checkout and runs **release builds** so a docs-only clone still validates the stack layout. It does **not** replace per-repo CI; it is a **smoke check** for contributors using the full workspace.
 
+### Build on Linux (Fedora)
+
+- [docs/build/linux-fedora.md](docs/build/linux-fedora.md) — **`dnf`** packages, **rustup**, **`ngmt-transport`** / **`ngmt-studio`** / optional **`ngmt-core`**, and troubleshooting (maps Ubuntu CI deps to Fedora).
+
 ### Phase 3 testing docs
 
 - [docs/testing/harness_setup.md](docs/testing/harness_setup.md) — `tc` / netem (Fedora), Clumsy (Windows), macOS notes.

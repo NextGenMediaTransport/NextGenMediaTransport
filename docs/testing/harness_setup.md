@@ -2,6 +2,8 @@
 
 This document describes **reproducible** WAN/WLAN simulation for NextGenMediaTransport (NGMT) validation across **Fedora 43**, **macOS (M2)**, and **Windows 11**.
 
+To **build** Generator/Monitor on Fedora first (Rust, GTK, XCB, ALSA, CMake), see [**Linux (Fedora) build guide**](../build/linux-fedora.md).
+
 ## Lab roles (reference)
 
 | Machine | Typical role |
