@@ -14,7 +14,7 @@ where versioning applies.
 
 ### Added
 
-- **Build:** [docs/build/linux-fedora.md](docs/build/linux-fedora.md) — Fedora **`dnf`** prerequisites for **`ngmt-transport`**, **`ngmt-studio`** (GTK/XCB/GL/ALSA), optional **`ngmt-core`**; linked from [README](README.md) and [ngmt-studio README](ngmt-studio/README.md).
+- **Build:** [docs/build/linux-fedora.md](docs/build/linux-fedora.md) — Fedora **`dnf`** prerequisites for **`ngmt-transport`**, **`ngmt-studio`** (GTK/XCB/GL/ALSA), optional **`ngmt-core`**; **`git clone` / `gh repo clone`** from [NextGenMediaTransport org repos](https://github.com/orgs/NextGenMediaTransport/repositories); linked from [README](README.md) and [ngmt-studio README](ngmt-studio/README.md).
 - **Documentation:** [Media payload v1 (VMX)](docs/protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path) — per-fragment timestamps, width/height, reassembly under loss.
 - **Studio path:** [`ngmt-studio`](ngmt-studio/README.md) documents **VMX encode → QUIC → decode** on the Generator/Monitor primary path (`ngmt-vmx-sys` + `ngmt-codec`).
 

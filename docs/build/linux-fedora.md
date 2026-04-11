@@ -1,6 +1,6 @@
 # Building NGMT on Fedora (Workstation)
 
-This guide targets **Fedora Workstation** (x86_64 or AArch64), **Fedora 40+** (including **43** used in the impairment lab). It covers **Rust** siblings: **`ngmt-transport`**, **`ngmt-studio`** (Generator + Monitor), and optional **`ngmt-core`**. It does **not** replace per-repo READMEs; it maps **Fedora packages** to what CI installs on **Ubuntu** for Linux GUI builds.
+This guide targets **Fedora Workstation** (x86_64 or AArch64), **Fedora 40+** (including **43** used in the impairment lab). It covers **Rust** siblings: **`ngmt-transport`**, **`ngmt-studio`** (Generator + Monitor), and optional **`ngmt-core`**. It does **not** replace per-repo READMEs; it maps **Fedora packages** to what CI installs on **Ubuntu** for Linux GUI builds, then **[clones the GitHub org repos](#3-clone-the-git-repositories)** listed under [NextGenMediaTransport on GitHub](https://github.com/orgs/NextGenMediaTransport/repositories).
 
 ## 1. Base tooling
 
@@ -40,21 +40,54 @@ If **`cargo check`** in **`ngmt-studio`** still complains about a missing **`pkg
 
 **Wayland vs X11:** Fedora defaults to Wayland; these packages cover both paths for **`winit`** / **`eframe`**. For a minimal X11-only session, the same set usually suffices.
 
-## 3. Repository layout
+## 3. Clone the Git repositories
 
-Use the same **sibling directory** layout as the [meta README](../../README.md) and [**`ngmt-vmx-sys`**](https://github.com/NextGenMediaTransport/ngmt-studio/tree/main/crates/ngmt-vmx-sys):
+Official NGMT repositories live under the **[NextGenMediaTransport](https://github.com/NextGenMediaTransport)** GitHub organization. Browse them at **[github.com/orgs/NextGenMediaTransport/repositories](https://github.com/orgs/NextGenMediaTransport/repositories)** (meta docs, **`ngmt-transport`**, **`ngmt-codec`**, **`ngmt-core`**, **`ngmt-studio`**, etc.).
+
+### Recommended layout (meta repo as parent folder)
+
+Clone the **meta** repository first, then clone each **code** repo **into** that directory so **`ngmt-studio`**, **`ngmt-transport`**, and **`ngmt-codec`** are **siblings** (required by **`ngmt-vmx-sys`** and the Studio workspace). Nested folders are typically **gitignored** inside the meta checkout but remain on disk for local builds — same pattern as [Fork upstream repos](../contributing/fork-upstream-repos.md).
+
+```bash
+git clone https://github.com/NextGenMediaTransport/NextGenMediaTransport.git
+cd NextGenMediaTransport
+
+git clone https://github.com/NextGenMediaTransport/ngmt-transport.git
+git clone https://github.com/NextGenMediaTransport/ngmt-codec.git
+git clone https://github.com/NextGenMediaTransport/ngmt-studio.git
+# optional — C++ core / CMake
+git clone https://github.com/NextGenMediaTransport/ngmt-core.git
+```
+
+**With [GitHub CLI](https://cli.github.com/)** (`gh auth login`):
+
+```bash
+gh repo clone NextGenMediaTransport/NextGenMediaTransport
+cd NextGenMediaTransport
+gh repo clone NextGenMediaTransport/ngmt-transport
+gh repo clone NextGenMediaTransport/ngmt-codec
+gh repo clone NextGenMediaTransport/ngmt-studio
+# optional — C++ core / CMake
+gh repo clone NextGenMediaTransport/ngmt-core
+```
+
+Forks, **`upstream`** remotes, and org policies are described in [Fork upstream repos](../contributing/fork-upstream-repos.md).
+
+### Directory layout after clone
 
 ```text
-~/work/NextGenMediaTransport/    # or any parent folder
+NextGenMediaTransport/          # meta — docs/, docs/build/linux-fedora.md, .github/, …
   ngmt-transport/
   ngmt-codec/
   ngmt-studio/
-  docs/                          # optional: meta-repo clone for planning + this guide
+  ngmt-core/                    # optional
 ```
 
-Clone or fork as needed; see [Fork upstream repos](../contributing/fork-upstream-repos.md).
+From here, **`cargo`** commands for Studio use **`ngmt-studio/`** as the working directory; **`../ngmt-codec`** and **`../ngmt-transport`** resolve relative to that crate workspace.
 
 ## 4. Build and run
+
+Use a shell whose **current directory** is the **meta** checkout root — the folder that **contains** `ngmt-transport/`, `ngmt-codec/`, `ngmt-studio/` (and optionally `ngmt-core/`) as in [§3](#3-clone-the-git-repositories).
 
 ### `ngmt-transport`
 
@@ -62,6 +95,7 @@ Clone or fork as needed; see [Fork upstream repos](../contributing/fork-upstream
 cd ngmt-transport
 cargo build --release
 cargo test
+cd ..
 ```
 
 ### `ngmt-studio` (requires **`../ngmt-codec`** and **`../ngmt-transport`**)
@@ -72,6 +106,7 @@ cargo build --release
 cargo run --release --bin ngmt-generator
 # other terminal:
 cargo run --release --bin ngmt-monitor
+cd ..
 ```
 
 The first **`ngmt-codec`** build can take several minutes (CMake **Release** VMX library).
@@ -80,10 +115,13 @@ The first **`ngmt-codec`** build can take several minutes (CMake **Release** VMX
 
 ### `ngmt-core` (optional CMake)
 
+Skip this block if you did not clone **`ngmt-core`**.
+
 ```bash
 cd ngmt-core
 cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
+cd ..
 ```
 
 ## 5. Troubleshooting
