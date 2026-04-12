@@ -15,6 +15,7 @@ where versioning applies.
 ### Changed
 
 - **Meta:** [README.md](README.md) **Continuous integration** bullet now matches [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (transport release + tests, Studio/capture `cargo check`, core CMake + FFI smoke, OBS plugin info scaffold).
+- **Planning docs:** **`ngmt-capture`** milestone wording **`v0.2` → `0.2.0`** (crate SemVer) in [version-1-release-status.md](docs/project-plan/version-1-release-status.md), [studio-next-steps.md](docs/project-plan/studio-next-steps.md), [ngmt-capture-spec.md](docs/project-plan/ngmt-capture-spec.md), and [studio-ecosystem-matrix.md](docs/project-plan/studio-ecosystem-matrix.md).
 
 ### Added
 
@@ -59,7 +60,7 @@ where versioning applies.
 - **Meta CI:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) clones and CMake-builds [`ngmt-obs-plugin`](https://github.com/NextGenMediaTransport/ngmt-obs-plugin) (scaffold **info** target) alongside transport, studio, and core.
 - **`ngmt-obs-plugin`:** Split OBS integration into **`obs-ngmt-input`** and **`obs-ngmt-output`** (stub); adds [`scripts/build.sh`](ngmt-obs-plugin/scripts/build.sh) (`cargo` + CMake from repo root). Supersedes the single **`obs-ngmt`** binary name for installs — see [ngmt-obs-plugin/CHANGELOG.md](ngmt-obs-plugin/CHANGELOG.md).
 - **Meta:** [`.gitignore`](.gitignore) lists **`/ngmt-capture/`** (sibling clone, like **`ngmt-studio`**); stack smoke clones **`ngmt-codec`** and **`ngmt-capture`** before `cargo check` on capture.
-- **Planning handoff:** [studio-next-steps.md](docs/project-plan/studio-next-steps.md), [version-1-release-status.md](docs/project-plan/version-1-release-status.md), [studio-ecosystem-matrix.md](docs/project-plan/studio-ecosystem-matrix.md), [04-Phase-4-Developer-UI-and-Visibility.md](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md), [ngmt-capture-spec.md](docs/project-plan/ngmt-capture-spec.md) — align **what shipped** (**`ngmt-capture` v0.2**: display picker, multi-session, Studio-style UI) vs **still missing** (outgoing dial, window/region, cross-platform, audio Phase B) and **where v1.0 work continues** (Four Pillars in parallel).
+- **Planning handoff:** [studio-next-steps.md](docs/project-plan/studio-next-steps.md), [version-1-release-status.md](docs/project-plan/version-1-release-status.md), [studio-ecosystem-matrix.md](docs/project-plan/studio-ecosystem-matrix.md), [04-Phase-4-Developer-UI-and-Visibility.md](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md), [ngmt-capture-spec.md](docs/project-plan/ngmt-capture-spec.md) — align **what shipped** (**`ngmt-capture` 0.2.0**: display picker, multi-session, Studio-style UI) vs **still missing** (outgoing dial, window/region, cross-platform, audio Phase B) and **where v1.0 work continues** (Four Pillars in parallel).
 
 ### Added
 

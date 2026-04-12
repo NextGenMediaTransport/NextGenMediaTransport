@@ -10,7 +10,7 @@ This document specifies a **first-party screen and window capture** application 
 
 **Relationship to `ngmt-studio`:** [`ngmt-generator`](../../ngmt-studio/README.md) remains the **synthetic pattern / lab** sender. **`ngmt-capture`** is the **operator** tool for production-style sources (permissions, HDR/SDR, multi-monitor). Shared Rust helpers ship from **`ngmt-studio`** as **`ngmt-common`**; **`ngmt-capture`** is its **own repository** ([`NextGenMediaTransport/ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture)) with the same sibling-checkout pattern as `ngmt-studio`.
 
-**Program status (2026-04):** **`ngmt-capture`** on macOS has **shipped** incoming QUIC + VMX + mDNS through **v0.2** (display picker, multi-session, Studio-style UI — see the **MVP** section below). **Still missing vs goals:** per-**window/region** capture, **outgoing dial** parity with Generator, non-macOS backends, HDR/cursor, and **audio** (Phase B — wire format first). **Monitor “mirror the canvas to a second physical display”** stays **deferred** until multi-display hardware validation ([studio-next-steps](./studio-next-steps.md)).
+**Program status (2026-04):** **`ngmt-capture`** on macOS has **shipped** incoming QUIC + VMX + mDNS through **0.2.0** (display picker, multi-session, Studio-style UI — see the **MVP** section below). **Still missing vs goals:** per-**window/region** capture, **outgoing dial** parity with Generator, non-macOS backends, HDR/cursor, and **audio** (Phase B — wire format first). **Monitor “mirror the canvas to a second physical display”** stays **deferred** until multi-display hardware validation ([studio-next-steps](./studio-next-steps.md)).
 
 ---
 
@@ -83,8 +83,8 @@ Mirror **Generator** (see [ngmt-studio README](../../ngmt-studio/README.md)):
 Implemented in the [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture) repository:
 
 - **macOS only (functional):** **ScreenCaptureKit** → **BGRA** sample buffers → CPU copy to tight **BGRX** (`ngmt_common::bgra_rows_to_bgrx`) → **VMX** → QUIC datagrams (**incoming** / broadcast listener; multi-subscriber fan-out like Generator).
-- **Display selection (v0.2+):** After **Check permission**, the app lists **`SCShareableContent`** displays (CGDirectDisplay ID + pixel size); each **session** picks a display before **Start**. (Previously: first display only.)
-- **Multi-session (v0.2+):** Up to **four** parallel sessions in one process — each has its own **listen port**, **mDNS instance name** (must stay unique on the LAN), **display**, encode knobs, **Start/Stop**, and **privacy pause**. Mirrors **multiple Generator instances** without inventing multi-track QUIC yet.
+- **Display selection (0.2.0+):** After **Check permission**, the app lists **`SCShareableContent`** displays (CGDirectDisplay ID + pixel size); each **session** picks a display before **Start**. (Previously: first display only.)
+- **Multi-session (0.2.0+):** Up to **four** parallel sessions in one process — each has its own **listen port**, **mDNS instance name** (must stay unique on the LAN), **display**, encode knobs, **Start/Stop**, and **privacy pause**. Mirrors **multiple Generator instances** without inventing multi-track QUIC yet.
 - **Operator UI:** **Generator-aligned** egui layout — themed top bar (**ON AIR** / **IDLE**), left settings scroll, **central wire preview** (BGRX → downsampled RGBA texture), resizable bottom **log**; **encode presets** (720p / 1080p / 1440p / Native from selected display).
 - **mDNS:** `_ngmt._udp` with TXT **`role=capture`**, **`proto`**, **`ver`**, optional **`vw`/`vh`/`vfps`** from encode resolution + target FPS; instance name via **`validate_mdns_instance_label`** (default `ngmt-capture`, `ngmt-capture-2`, … per session row).
 - **Privacy:** “Privacy pause” substitutes **SMPTE** BGRX bars while keeping QUIC + capture session alive (operator slate), per session.

@@ -14,7 +14,7 @@ This file is the **handoff queue** for engineering agents: **ordered hints**, ac
 
 ### What's next (engineering ordering)
 
-- **Active phase — capture:** **Item 7 — shipped through v0.2 (macOS):** org repo [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture): per-display picker, up to **four** parallel sessions (port + mDNS instance each), **Generator-style** UI (wire preview, log), encode presets, privacy slate, incoming QUIC + mDNS **`role=capture`**, Linux/Win stub **`cargo check`**. **Next:** [ngmt-capture-spec](./ngmt-capture-spec.md) — **outgoing dial** UI, **window/region** capture, perf (zero-copy), HDR/cursor/open questions, then **Windows/Linux** backends.
+- **Active phase — capture:** **Item 7 — shipped through 0.2.0 (macOS):** org repo [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture): per-display picker, up to **four** parallel sessions (port + mDNS instance each), **Generator-style** UI (wire preview, log), encode presets, privacy slate, incoming QUIC + mDNS **`role=capture`**, Linux/Win stub **`cargo check`**. **Next:** [ngmt-capture-spec](./ngmt-capture-spec.md) — **outgoing dial** UI, **window/region** capture, perf (zero-copy), HDR/cursor/open questions, then **Windows/Linux** backends.
 - **Deferred — physical multiview mirror:** Item **5** (fullscreen / second window on a **chosen monitor** mirroring the canvas) remains **valid design** but is **deferred**: the current lab **cannot reliably validate multi-display / physical monitor output**, so implementation and QA for that path wait until hardware is available. Item **6** (send multiview as NGMT) stays **future** as before.
 
 ---
@@ -41,7 +41,7 @@ This file is the **handoff queue** for engineering agents: **ordered hints**, ac
 6. **Monitor — send multiview as NGMT (heavy / future)**  
    - Composite wall → BGRX → VMX → QUIC as a source; separate mode or binary TBD. Depends on performance and product call.
 
-7. ~~**`ngmt-capture` MVP (macOS)**~~ **Done through v0.2**  
+7. ~~**`ngmt-capture` MVP (macOS)**~~ **Done through 0.2.0**  
    - Repo [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture): SCK **display selection**, **multi-session** (≤4), Studio-aligned **UI + wire preview**, QUIC **incoming** + mDNS **`role=capture`**. Follow [ngmt-capture-spec.md](./ngmt-capture-spec.md) for **outgoing dial**, window/region, cross-platform, and **Phase B audio** (spec only until wire format agrees).
 
 8. **Blender addon**  
