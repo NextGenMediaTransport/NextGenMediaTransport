@@ -26,6 +26,15 @@ After designs are approved, run **`docs/branding/scripts/export-rasters.sh`** fr
 
 See comments at the top of the script for install hints (`brew install resvg imagemagick`, etc.).
 
+## Shipped rasters in leaf repositories (policy)
+
+- **Meta-repo** (`NextGenMediaTransport`): keep **`docs/branding/assets/export/`** gitignored for local bulk export and design review.
+- **Application / library repos** (`ngmt-studio`, `ngmt-capture`, `ngmt-obs-plugin`, etc.): commit a **small, curated** set under each repo’s **`branding/export/`** so clones build without running `resvg` first:
+  - **eframe window icon:** one **256×256** PNG per shipped binary (from the assigned mark SVG), consumed via `include_bytes!` + decode at startup.
+  - **egui UI glyphs (Studio):** **32×32** PNGs under `branding/export/ui/` derived from `docs/branding/assets/svg/ui/*.svg` in the meta-repo.
+- **Windows `.ico` / macOS `.icns`:** add under **`branding/export/`** (or `packaging/`) when installers or `.app` bundles exist; generate **`.icns`** with **`iconutil`** from a `iconset` folder of PNGs (see Apple’s iconset format), or integrate into CI/release only.
+- **Regenerating:** from a full workspace checkout, run `resvg` (or `export-rasters.sh` in meta) and copy the needed sizes into each code repo’s `branding/export/`, then commit.
+
 ## Studio UI glyphs (future egui)
 
 Monochrome **control** SVGs for Generator / Monitor live under **`docs/branding/assets/svg/ui/`** (play, stop, close, drag handle, live/idle dots, solo, maximize, restore). They are **not** wired into egui yet; the apps still use Unicode / emoji in places. When embedding, rasterize to PNG or load via a small `resvg` path in `ngmt-studio`.
@@ -34,16 +43,16 @@ Monochrome **control** SVGs for Generator / Monitor live under **`docs/branding/
 
 | Deliverable | Repo / location | Icon intent | Master (SVG path) | Shipped rasters |
 |-------------|-----------------|-------------|-------------------|-----------------|
-| Meta / docs | This meta-repo | NGMT umbrella / docs site | [assets/svg/marks/ngmt-meta.svg](assets/svg/marks/ngmt-meta.svg) | Favicon PNG/SVG for any static site |
-| `ngmt-core` | Protocol / C++ reference | Engine / network core | [assets/svg/marks/ngmt-core.svg](assets/svg/marks/ngmt-core.svg) | CMake / package branding if needed |
-| `ngmt-codec` | VMX / compression | Codec / waveform motif | [assets/svg/marks/ngmt-codec.svg](assets/svg/marks/ngmt-codec.svg) | Optional crate badge |
-| `ngmt-transport` | QUIC / WAN | Transport / path motif | [assets/svg/marks/ngmt-transport.svg](assets/svg/marks/ngmt-transport.svg) | Optional |
-| **`ngmt-generator`** | `ngmt-studio` binary | **Send** / pattern / “lab source” | [assets/svg/marks/ngmt-generator.svg](assets/svg/marks/ngmt-generator.svg) | `.icns` / `.ico` / `.png` in packaging |
-| **`ngmt-monitor`** | `ngmt-studio` binary | **Receive** / multiview / “wall” | [assets/svg/marks/ngmt-monitor.svg](assets/svg/marks/ngmt-monitor.svg) | Same as above |
-| `ngmt-studio` (workspace) | Optional umbrella | Suite / “NGMT Tools” | [assets/svg/marks/ngmt-studio.svg](assets/svg/marks/ngmt-studio.svg) | README / installer banner |
-| `ngmt-obs-plugin` | OBS modules | OBS + NGMT bridge (abstract mark; **no** OBS trademark artwork) | [assets/svg/marks/ngmt-obs-plugin.svg](assets/svg/marks/ngmt-obs-plugin.svg) | OBS plugin asset conventions |
-| `ngmt-capture` | [`NextGenMediaTransport/ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture) | Screen / window / permissions | [assets/svg/marks/ngmt-capture.svg](assets/svg/marks/ngmt-capture.svg) | PKG/MSI/deb artwork |
-| `ngmt-bindings` | SDK | Developer kit | [assets/svg/marks/ngmt-bindings.svg](assets/svg/marks/ngmt-bindings.svg) | Docs + package managers |
+| Meta / docs | This meta-repo | NGMT umbrella / docs site | [assets/svg/marks/ngmt-meta.svg](assets/svg/marks/ngmt-meta.svg) | Favicon PNG/SVG for any static site; README uses SVG |
+| `ngmt-core` | Protocol / C++ reference | Engine / network core | [assets/svg/marks/ngmt-core.svg](assets/svg/marks/ngmt-core.svg) | Vendored SVG under `ngmt-core/branding/`; CMake/package TBD |
+| `ngmt-codec` | VMX / compression | Codec / waveform motif | [assets/svg/marks/ngmt-codec.svg](assets/svg/marks/ngmt-codec.svg) | Vendored SVG under `ngmt-codec/branding/` |
+| `ngmt-transport` | QUIC / WAN | Transport / path motif | [assets/svg/marks/ngmt-transport.svg](assets/svg/marks/ngmt-transport.svg) | Vendored SVG under `ngmt-transport/branding/` |
+| **`ngmt-generator`** | `ngmt-studio` binary | **Send** / pattern / “lab source” | [assets/svg/marks/ngmt-generator.svg](assets/svg/marks/ngmt-generator.svg) | `ngmt-studio/branding/export/window/` **256×256** PNG + UI PNGs; **`.icns` / `.ico`** at packaging |
+| **`ngmt-monitor`** | `ngmt-studio` binary | **Receive** / multiview / “wall” | [assets/svg/marks/ngmt-monitor.svg](assets/svg/marks/ngmt-monitor.svg) | Same pattern as Generator (separate window PNG) |
+| `ngmt-studio` (workspace) | Optional umbrella | Suite / “NGMT Tools” | [assets/svg/marks/ngmt-studio.svg](assets/svg/marks/ngmt-studio.svg) | `branding/svg/marks/` + README |
+| `ngmt-obs-plugin` | OBS modules | OBS + NGMT bridge (abstract mark; **no** OBS trademark artwork) | [assets/svg/marks/ngmt-obs-plugin.svg](assets/svg/marks/ngmt-obs-plugin.svg) | `branding/` + **`data/icons/`** multi-size PNGs for CMake staging |
+| `ngmt-capture` | [`NextGenMediaTransport/ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture) | Screen / window / permissions | [assets/svg/marks/ngmt-capture.svg](assets/svg/marks/ngmt-capture.svg) | `ngmt-capture/branding/export/window/` **256×256** PNG; PKG/MSI **`.icns` / `.ico`** TBD |
+| `ngmt-bindings` | SDK | Developer kit | [assets/svg/marks/ngmt-bindings.svg](assets/svg/marks/ngmt-bindings.svg) | Docs + package managers *(no dedicated repo yet — see follow-up issues)* |
 | Unreal / Unity / Blender | Stretch plugins | Engine-specific co-branding (placeholder) | [assets/svg/marks/ngmt-ecosystem-stretch.svg](assets/svg/marks/ngmt-ecosystem-stretch.svg) | Per marketplace guidelines |
 
 **Shape / color discipline (guidance):** one **primary accent** consistent with `ngmt-common::theme` broadcast palette where possible; **silhouette** readable at 16×16; avoid fine text inside small marks.
@@ -54,6 +63,7 @@ Until each code repo owns its `resources/` directory, **SVG masters** live under
 
 ## Related documents
 
+- [GitHub gap follow-ups](./github-gap-followups.md) — filed issues for packaging, future glyphs, OBS grid icons, ecosystem marks, **`ngmt-bindings`**.
 - [Branding TRACKING](./TRACKING.md) — GitHub issue checklist for review and raster export ([meta #7](https://github.com/NextGenMediaTransport/NextGenMediaTransport/issues/7)).
 - [Studio next steps](../project-plan/studio-next-steps.md) — backlog item **(9)** for branding pipeline work.
 - [Studio ecosystem matrix](../project-plan/studio-ecosystem-matrix.md) — product surface list.

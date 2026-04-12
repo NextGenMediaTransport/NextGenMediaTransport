@@ -1,5 +1,7 @@
 # NextGenMediaTransport (NGMT)
 
+<p align="center"><img src="docs/branding/assets/svg/marks/ngmt-meta.svg" width="100" height="100" alt="NGMT meta mark"/></p>
+
 NextGenMediaTransport is a modernized fork of [Open Media Transport (OMT)](https://www.openmediatransport.org/), aimed at competing with NDI. The focus is **developer and operator experience**, **modern networks**, and **permissive licensing** so vendors can adopt the stack without friction.
 
 ## Strategic pillars
