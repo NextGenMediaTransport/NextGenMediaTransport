@@ -31,7 +31,7 @@ The project is moving from **lab / research** to a **production-oriented** **v1.
 
 ## Release status (v1)
 
-For **where we are per phase** and **what is still missing for Version 1.0**, see [**version-1-release-status.md**](./version-1-release-status.md) (living document).
+For **where we are per phase** and **what is still missing for Version 1.0**, see [**version-1-release-status.md**](./version-1-release-status.md) (living document). **Parallel scheduling** (capture vs blockers): [program-parallel-tracks.md](./program-parallel-tracks.md). **`ngmt-core` discovery escape hatch:** [ngmt-core-discovery-escape-hatch.md](./ngmt-core-discovery-escape-hatch.md).
 
 ## Phase index
 

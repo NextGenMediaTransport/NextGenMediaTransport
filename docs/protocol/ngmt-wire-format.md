@@ -1,5 +1,12 @@
 # NGMT wire format (Phase 3)
 
+## Versioning
+
+- **`NgmtObjectHeader.version` (first byte):** **`1`** denotes the **VMX media payload v1** layout documented in [Media payload v1](#media-payload-v1-vmx-video--studio-primary-path). Consumers must reject unknown versions unless a negotiated extension exists.
+- **DNS-SD TXT keys:** Optional keys are documented in [DNS-SD](#dns-sd); new keys are **document-first** before use in shipped binaries.
+- **Semantic versioning:** Repositories that ship codecs or plugins use **SemVer** for their own APIs and artifacts; **on-wire** compatibility is governed by this document plus per-repo **CHANGELOG** entries when header or payload semantics change.
+- **Release gate:** A **1.0.0** product tag still requires the [Four Pillars](../project-plan/version-1-release-status.md#the-v10-production-bar--four-pillars) checklist — wire docs alone are not sufficient.
+
 ## Endianness
 
 All multi-byte integers are **little-endian** on the wire. Use explicit encode/decode (C++ `NgmtObjectHeader::write_le` / Rust `ngmt_object_header_*_le`) — do not cast structs blindly across FFI.
