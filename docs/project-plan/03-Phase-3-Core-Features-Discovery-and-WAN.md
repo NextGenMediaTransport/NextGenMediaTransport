@@ -79,7 +79,7 @@ Because WAN quality is NGMT’s main competitive angle versus NDI on bad network
 
 Phase 3 **harness and QUIC documentation** above remain **done** for phase engineering history. For **v1.0**, the **[v1.0 blockers](#v10-blockers-phase-3-scope)** section must still be closed: **C++ mDNS / FFI discovery**, **production TLS policy**, and **2/5/10% impairment** rows in the results log. Cross-pillar work (**ngmt-codec** real path, **OBS** plugin) lives in other phases; see [version-1-release-status.md](./version-1-release-status.md).
 
-**Stub / synthetic payloads:** Lab tools may use minimal payloads for transport testing; the **v1.0 Real Media Path** requires the **ngmt-codec** pipeline on the **primary** product path — see the audit doc [documentation touchpoints](./version-1-release-status.md#documentation-touchpoints--stubs-and-synthetic-payloads).
+**Stub / synthetic payloads:** Lab tools may use minimal payloads for transport testing; the **v1.0 Real Media Path** requires the **ngmt-codec** pipeline on the **primary** product path — see the audit doc [documentation touchpoints](./version-1-release-status.md#documentation-touchpoints--studio-vs-v10-product-path).
 
 ## Implementation notes (Phase 3 progress)
 

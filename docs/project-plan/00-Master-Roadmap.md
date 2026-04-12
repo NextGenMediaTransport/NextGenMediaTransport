@@ -1,7 +1,7 @@
 ---
 title: "NextGenMediaTransport — Master Roadmap"
 phase: 0
-status: planned
+status: living
 ---
 
 ## Overview

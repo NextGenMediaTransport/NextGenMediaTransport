@@ -16,6 +16,7 @@ where versioning applies.
 
 - **Meta:** [README.md](README.md) **Continuous integration** bullet now matches [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (transport release + tests, Studio/capture `cargo check`, core CMake + FFI smoke, OBS plugin info scaffold).
 - **Planning docs:** **`ngmt-capture`** milestone wording **`v0.2` → `0.2.0`** (crate SemVer) in [version-1-release-status.md](docs/project-plan/version-1-release-status.md), [studio-next-steps.md](docs/project-plan/studio-next-steps.md), [ngmt-capture-spec.md](docs/project-plan/ngmt-capture-spec.md), and [studio-ecosystem-matrix.md](docs/project-plan/studio-ecosystem-matrix.md).
+- **Planning docs (cleanup):** Fixed broken `#documentation-touchpoints--…` links in [03-Phase-3](docs/project-plan/03-Phase-3-Core-Features-Discovery-and-WAN.md) and [05-Phase-5](docs/project-plan/05-Phase-5-Integrations-and-Ecosystem.md); [version-1-release-status.md](docs/project-plan/version-1-release-status.md) Phase 5 snapshot + gap **#1** aligned with **`ngmt-obs-plugin`** VMX v1 / cross-OS reality; [04-Phase-4](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md) multiview DoD; **Next agent pickup** in [studio-next-steps.md](docs/project-plan/studio-next-steps.md); [00-Master-Roadmap.md](docs/project-plan/00-Master-Roadmap.md) frontmatter `status: living`.
 
 ### Added
 

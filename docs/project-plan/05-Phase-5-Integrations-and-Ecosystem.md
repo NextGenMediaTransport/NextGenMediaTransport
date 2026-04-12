@@ -15,7 +15,7 @@ A protocol succeeds when applications use it. Phase 5 delivers **first-party int
 
 **Phase 5b (post-v1.0)** — **SDK wrappers** (**Python**, **C++**, **Rust**) and additional ecosystem work are **not** gating v1.0; they ship after the **vertical slice** (codec → transport → OBS) is complete. See [version-1-release-status.md](./version-1-release-status.md).
 
-**Stub / synthetic payloads:** Integrations must consume the **ngmt-codec** real media pipeline for the **primary** product path; lab **stub** payloads in Generator/Monitor are **not** sufficient for v1.0 claims — see [documentation touchpoints](./version-1-release-status.md#documentation-touchpoints--stubs-and-synthetic-payloads).
+**Stub / synthetic payloads:** Integrations must consume the **ngmt-codec** real media pipeline for the **primary** product path; lab **stub** payloads in Generator/Monitor are **not** sufficient for v1.0 claims — see [documentation touchpoints](./version-1-release-status.md#documentation-touchpoints--studio-vs-v10-product-path).
 
 ### First-party capture vs integrations
 

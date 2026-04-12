@@ -56,7 +56,7 @@ Be **transparent with stakeholders**: **Generator + Monitor** are **developer / 
 
 - [x] **Test pattern sender** is available with documented build and run steps ([`ngmt-studio/README.md`](../../ngmt-studio/README.md)).
 - [x] **Single receiver** and **discovery browser** reach **usable** quality for routine debugging (Monitor: Discovery page + per-slot receiver).
-- [x] **Multiview receiver** — **2×2** grid with four independent Listen/Dial slots (soak / WLAN scale-out).
+- [x] **Multiview receiver** — **Templates** (e.g. **1×1**, **2×2**, **3×3**, **1+5**) with **dynamic slots**, **idle ghost** placeholders, and **multiple** Listen/Dial connections for soak / WLAN scale-out (see [`ngmt-studio/README.md`](../../ngmt-studio/README.md)).
 - [x] Phase 4 docs **cross-link** to Phase 3 **simulation and harness** documentation for impairment testing where relevant ([`docs/testing/harness_setup.md`](../testing/harness_setup.md)).
 
 ## Out of scope
