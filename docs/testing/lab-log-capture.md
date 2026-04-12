@@ -22,6 +22,29 @@ export NGMT_ROOT="/path/to/ngmt-studio"   # e.g. ~/src/NextGenMediaTransport/ngm
 export PROFILE=release                   # recommended for lab parity; use `debug` only when needed
 ```
 
+Optional (see [harness_setup.md](harness_setup.md) for the full table):
+
+```bash
+# Per-process identity on every detail line (helps when merging two hosts’ logs)
+export NGMT_LOG_ID=1
+# Periodic compact metrics (seconds); omit or 0 to leave default heartbeats only
+export NGMT_LOG_METRICS_INTERVAL_SECS=5
+```
+
+## Example: merged timeline (two hosts)
+
+After a cross-host run, each file begins with a **`session`** line, then continues with UTC-sorted lines if you **`sort`** the combined file:
+
+```text
+2026-04-10T12:00:01.234Z [ngmt-generator] session | host=mac-studio pid=9012 profile=release
+2026-04-10T12:00:01.240Z [ngmt-monitor] session | host=fedora-lab pid=4400 profile=release
+2026-04-10T12:00:06.100Z [ngmt-generator] worker | dial ok (4123 ms)
+2026-04-10T12:00:06.105Z [ngmt-monitor] slot_worker | slot 1 connect_to ok (4100 ms)
+2026-04-10T12:00:11.000Z [ngmt-monitor] metrics | slot=1 rtt_ms=2.10 owd_ema_ms=35.0 …
+```
+
+Use **hostname or role in the filename** (e.g. `ngmt-monitor-fedora-….log`) even when `session` is present, so operators find the right attachment before opening it.
+
 ## One-time: create `logs/`
 
 ```bash

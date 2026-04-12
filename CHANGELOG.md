@@ -14,6 +14,7 @@ where versioning applies.
 
 ### Added
 
+- **Studio lab traces:** optional **`NGMT_LOG_ID`**, **`NGMT_LOG_METRICS_INTERVAL_SECS`**, per-process **`session`** line, QUIC recv **error hints**, connect timing and transport endpoints (see `ngmt-studio` CHANGELOG and [harness_setup.md](docs/testing/harness_setup.md)).
 - **Studio (`ngmt-studio` repo):** in-app **File trace** UI + runtime **`set_studio_trace_file`** (see that repo’s CHANGELOG). Meta docs: [harness_setup.md](docs/testing/harness_setup.md), [lab-log-capture.md](docs/testing/lab-log-capture.md).
 - **Testing:** [docs/testing/lab-log-capture.md](docs/testing/lab-log-capture.md) — per-host commands, **`target/<profile>/logs/`**, cross-host notes; linked from [harness_setup.md](docs/testing/harness_setup.md) and [README](README.md).
 - **Build:** [docs/build/linux-fedora.md](docs/build/linux-fedora.md) — Fedora **`dnf`** prerequisites for **`ngmt-transport`**, **`ngmt-studio`** (GTK/XCB/GL/ALSA), optional **`ngmt-core`**; **`git clone` / `gh repo clone`** from [NextGenMediaTransport org repos](https://github.com/orgs/NextGenMediaTransport/repositories); linked from [README](README.md) and [ngmt-studio README](ngmt-studio/README.md).
