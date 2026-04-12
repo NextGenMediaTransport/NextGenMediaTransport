@@ -9,7 +9,7 @@ Use this checklist to capture **Studio trace** lines for impairment runs, cross-
 **Ways to enable file mirroring**
 
 1. **Shell — `NGMT_LOG_FILE`** (works with `cargo run` and direct binaries). Set **before** starting the process.
-2. **In-app:** **Generator** — expand **File trace** in the left panel. **Monitor** — **Sources** page or top of **Receiver** — expand **Mirror trace to disk**. Use **Default path…**, edit the path if needed, then **Apply**; **Stop file trace** closes the file (stderr only). See [ngmt-studio README](../../ngmt-studio/README.md) when using the meta-repo workspace layout.
+2. **In-app:** **Generator** — expand **File trace** in the left panel. **Monitor** — **Sources** page or top of **Receiver** — expand **Mirror trace to disk**. Use **Save log as…** / **Open log…** for the built-in file browser, or **Default path…** / manual path, then **Apply**; **Stop file trace** closes the file (stderr only). See [ngmt-studio README](../../ngmt-studio/README.md) when using the meta-repo workspace layout. If you used the UI **before** **Apply**, the one-time `session` line may have gone to stderr only; when **Apply** opens the file, a matching `session` line is **written at the top of the file** so the log stays self-describing.
 
 Use **two different paths** when Generator and Monitor run on the **same** host.
 

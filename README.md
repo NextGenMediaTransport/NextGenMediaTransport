@@ -24,6 +24,7 @@ Local checkouts of **`ngmt-core`**, **`ngmt-codec`**, **`ngmt-transport`**, and 
 | `ngmt-codec` | Fork of [`openmediatransport/libvmx`](https://github.com/openmediatransport/libvmx) (VMX codec). |
 | `ngmt-transport` | **New** first-party repo for QUIC/WAN — not an upstream fork. |
 | `ngmt-studio` | **New** first-party repo for Generator + Monitor (egui); depends on `ngmt-transport` via path/sibling checkout. |
+| `ngmt-obs-plugin` | **Scaffold** in this meta-workspace for OBS **input** (v1.0 P0) and **output** (P1); see [ngmt-obs-plugin/README.md](ngmt-obs-plugin/README.md) and [studio ecosystem matrix](docs/project-plan/studio-ecosystem-matrix.md). |
 
 Use **GitHub CLI** (`gh`) for forks and org repo creation; see [docs/contributing/fork-upstream-repos.md](docs/contributing/fork-upstream-repos.md).
 

@@ -37,7 +37,7 @@ NGMT is moving from **lab / research** posture to a **production-oriented** v1.0
 | Pillar | What “done” means |
 | ------ | ----------------- |
 | **Real Media Path** | End-to-end **VMX / ngmt-codec** encoding → **QUIC** (`ngmt-transport`) → **decoding** — **no** primary-path **stub transport** (e.g. ASCII `frame=N` bodies). The **Studio** Generator ↔ Monitor path meets this for **lab** tooling; **v1.0** still requires the **full vertical slice** (e.g. **OBS**) and honest validation per the other pillars. |
-| **The Killer App (P0)** | A **functional OBS Studio source plugin** (first-party integration) so real productions can adopt NGMT without ad hoc glue. |
+| **The Killer App (P0)** | A **functional OBS Studio input plugin** (video **source** that receives/decodes NGMT into OBS). **OBS output** (send program/scene out as NGMT) is **P1** — tracked for Phase 5 but **not** required to tag **1.0.0** unless the release team explicitly promotes it; see [OBS input vs output](./05-Phase-5-Integrations-and-Ecosystem.md#obs-input-source-vs-output-program). |
 | **Security Baseline** | **Production-ready TLS / identity policy** moving beyond hardcoded lab certs. v1.0 does **not** require building a full **Certificate Authority**; a documented policy for **self-signed with pinning** and/or **user-provided PEM** files is a production-grade v1.0 win (see [v1.0 realities](#v10-realities)). |
 | **Audit of Honesty** | **Documented** impairment results at **2%, 5%, and 10%** packet loss in [`impairment-results.md`](../testing/impairment-results.md) (methodology: [`harness_setup.md`](../testing/harness_setup.md)). Use **`NGMT_LOG_FILE`** on Studio apps to preserve per-role trace lines during runs. Results will **vary by platform** (e.g. **Apple Silicon vs x86 Linux**) because **NICs differ in jitter behavior** — **document both** (hardware/OS named); that transparency matches broadcast engineering expectations. |
 
@@ -70,7 +70,7 @@ Cross-check against [The v1.0 production bar — Four Pillars](#the-v10-producti
 | # | Pillar / theme | Gap | Phase | Notes |
 | - | -------------- | --- | ----- | ----- |
 | 1 | **Real Media Path** | **ngmt-codec** pipeline on the **primary** path: encode → QUIC → decode (e.g. to OBS or receiver); replace stub `frame=N` / synthetic payloads for that path | 2–5 | Studio lab tools remain valid for debug; v1.0 **product** path is codec-driven. |
-| 2 | **Killer App (P0)** | **OBS Studio** source plugin shipped or in **public beta** with build/install docs and issue tracker | 5 | See [Phase 5](./05-Phase-5-Integrations-and-Ecosystem.md). |
+| 2 | **Killer App (P0)** | **OBS Studio** **input** plugin (**source**: NGMT → OBS) shipped or in **public beta** with build/install docs and issue tracker | 5 | **Output** plugin (OBS → NGMT) is **not** a v1.0 gate; see [Phase 5 — OBS input vs output](./05-Phase-5-Integrations-and-Ecosystem.md#obs-input-source-vs-output-program). |
 | 2b | *(integration)* | **Virtual camera** (and **virtual audio** if in v1.0 scope) documented for target OSes | 5 | Primary v1.0 integration story alongside OBS; exact OS matrix in release notes. |
 | 3 | **Security Baseline** | **TLS / PKI policy** for production (pinning / user PEM / upgrade path); replace **lab-only** rcgen defaults for shipped production-oriented binaries | 3 / release | Not “build a CA”; see [v1.0 realities](#v10-realities). |
 | 4 | **Audit of Honesty** | [impairment-results.md](../testing/impairment-results.md) populated for **2%, 5%, and 10%** loss (document tool, revision, **OS + hardware**, metrics). Prefer **at least two** platform classes when practical (e.g. **x86 Linux + Apple ARM**) | 3 | NIC jitter differs; compare [Fedora/M2](#v10-realities). |
@@ -111,7 +111,7 @@ Priority is the **vertical slice**: **codec (VMX/ngmt-codec) → transport (QUIC
 
 1. **Real Media Path:** **Studio** path is **VMX → QUIC → decode**; complete the **vertical slice** (e.g. **OBS**) and remaining pillar work for v1.0.
 2. **Parallel — Phase 3 blockers:** **TLS policy** (good-enough: pinning / user PEM); **C++ mDNS** or **Rust discovery → FFI**; append **2% / 5% / 10%** impairment rows (multi-platform where feasible).
-3. **Killer App:** **OBS Studio** plugin (P0) on a stated OS set; **virtual camera** as scoped for v1.0.
+3. **Killer App:** **OBS Studio** **input/source** plugin (P0) on a stated OS set; **OBS output** as P1 unless promoted before tag; **virtual camera** as scoped for v1.0.
 4. **Tag 1.0.0** only when [Missing for Version 1.0](#missing-for-version-10-gap-list) rows required for the agreed release are closed; **Phase 5b** SDKs follow.
 
 ---
@@ -122,4 +122,5 @@ Priority is the **vertical slice**: **codec (VMX/ngmt-codec) → transport (QUIC
 - [Phase 3 — Discovery and WAN](./03-Phase-3-Core-Features-Discovery-and-WAN.md)
 - [Phase 4 — Developer UI](./04-Phase-4-Developer-UI-and-Visibility.md)
 - [Phase 5 — Integrations](./05-Phase-5-Integrations-and-Ecosystem.md)
+- [Studio ecosystem matrix](./studio-ecosystem-matrix.md) (apps, phases, NDI-style parity)
 - [ngmt-wire-format](../protocol/ngmt-wire-format.md)

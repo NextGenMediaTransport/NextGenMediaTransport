@@ -29,6 +29,8 @@ Adjust interface names (`wlan0`, `en0`, etc.) to match `ip link` / System Settin
 | **`NGMT_LOG_ID=1`** (or `true` / `yes`) | Prepends `[host=… pid=…]` to every trace **detail** (after the first `session` line) so merged logs stay attributable per process. |
 | **`NGMT_LOG_METRICS_INTERVAL_SECS=N`** | If `N > 0`, Monitor recv loop and Generator send loop emit periodic **`metrics`** lines (RTT, OWD EMA, FPS, cwnd, loss, … / encoded bytes, subscribers, …). Default is **off** (unset or `0`) to keep stderr quiet. |
 
+In **Generator** / **Monitor**, **Save log as…** and **Open log…** under **File trace** use an **in-app file browser** (still set **`NGMT_LOG_FILE`** if you prefer env-only capture).
+
 On the **first** `emit_studio_trace` call in each process, a single **`session`** line is always written (`host`, `pid`, `profile=debug|release`) before the app’s normal traces.
 
 **Same machine, both apps:** use **two different paths** — one for Generator, one for Monitor. Reusing the **same path for both processes** interleaves lines from two writers and makes post-mortems painful. Typical names: `…/ngmt-generator-<scenario>.log` and `…/ngmt-monitor-<scenario>.log`.
