@@ -10,7 +10,7 @@ This file is the **handoff queue** for engineering agents: **ordered hints**, ac
 
 **Repos:** [`ngmt-studio`](../../ngmt-studio/README.md) (Generator, Monitor, `ngmt-common`) lives beside the meta-repo; protocol and roadmap docs live under **`docs/`** here.
 
-**GitHub tracking:** [v1.0 / Four Pillars program board (meta #3)](https://github.com/NextGenMediaTransport/NextGenMediaTransport/issues/3); **`ngmt-capture`** [forward epic #2](https://github.com/NextGenMediaTransport/ngmt-capture/issues/2) and [Native preset bug #1](https://github.com/NextGenMediaTransport/ngmt-capture/issues/1); **`ngmt-studio`** [multiview mirror #1](https://github.com/NextGenMediaTransport/ngmt-studio/issues/1), [wire snapshot HUD #2](https://github.com/NextGenMediaTransport/ngmt-studio/issues/2), [persisted mDNS instance #3](https://github.com/NextGenMediaTransport/ngmt-studio/issues/3).
+**GitHub tracking:** [v1.0 / Four Pillars program board (meta #3)](https://github.com/NextGenMediaTransport/NextGenMediaTransport/issues/3); **branding / SVG masters** [meta #7](https://github.com/NextGenMediaTransport/NextGenMediaTransport/issues/7) + [TRACKING checklist](../branding/TRACKING.md); **`ngmt-capture`** [forward epic #2](https://github.com/NextGenMediaTransport/ngmt-capture/issues/2) and [Native preset bug #1](https://github.com/NextGenMediaTransport/ngmt-capture/issues/1); **`ngmt-studio`** [multiview mirror #1](https://github.com/NextGenMediaTransport/ngmt-studio/issues/1), [wire snapshot HUD #2](https://github.com/NextGenMediaTransport/ngmt-studio/issues/2), [persisted mDNS instance #3](https://github.com/NextGenMediaTransport/ngmt-studio/issues/3).
 
 ### What's next (engineering ordering)
 
@@ -48,7 +48,7 @@ This file is the **handoff queue** for engineering agents: **ordered hints**, ac
    - Remains **stretch** ([Phase 5 — Blender](./05-Phase-5-Integrations-and-Ecosystem.md#blender-addon-stretch)); track in [studio-ecosystem-matrix.md](./studio-ecosystem-matrix.md).
 
 9. **Branding — app/repo icons**  
-   - [app-icons.md](../branding/app-icons.md): **SVG masters** in-repo; export **`.icns` / `.ico` / `.png`** for OS bundles and egui textures.
+   - [app-icons.md](../branding/app-icons.md): **SVG masters** under `docs/branding/assets/svg/`; **`export-rasters.sh`** for PNG/JPG/ICO after sign-off; [TRACKING checklist](../branding/TRACKING.md) + meta-repo GitHub issue for review. Export **`.icns`** via macOS **`iconutil`** or packaging when apps ship bundles; egui still needs a separate embed step.
 
 ---
 

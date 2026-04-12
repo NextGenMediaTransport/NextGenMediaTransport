@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-label="Restore grid">
+  <path d="M5 9h9v9H5z" stroke="#ffffff" stroke-width="2" fill="none"/>
+  <path d="M10 5h9v9h-9" stroke="#ffffff" stroke-width="2" fill="none"/>
+</svg>

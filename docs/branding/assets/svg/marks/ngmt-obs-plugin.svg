@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-label="NGMT plugin bridge mark (no third-party logos)">
+  <rect x="4" y="10" width="10" height="12" rx="1.5" stroke="#0a84ff" stroke-width="1.8"/>
+  <rect x="18" y="10" width="10" height="12" rx="1.5" stroke="#48484a" stroke-width="1.6"/>
+  <path d="M14 16h4" stroke="#0a84ff" stroke-width="2" stroke-linecap="round"/>
+  <path d="M16 13v6" stroke="#0a84ff" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

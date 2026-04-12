@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-label="Drag handle">
+  <circle cx="8" cy="7" r="1.8" fill="#ffffff"/>
+  <circle cx="8" cy="12" r="1.8" fill="#ffffff"/>
+  <circle cx="8" cy="17" r="1.8" fill="#ffffff"/>
+  <circle cx="14" cy="7" r="1.8" fill="#ffffff"/>
+  <circle cx="14" cy="12" r="1.8" fill="#ffffff"/>
+  <circle cx="14" cy="17" r="1.8" fill="#ffffff"/>
+</svg>

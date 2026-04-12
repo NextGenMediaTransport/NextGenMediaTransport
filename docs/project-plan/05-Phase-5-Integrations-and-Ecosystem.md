@@ -35,6 +35,8 @@ A protocol succeeds when applications use it. Phase 5 delivers **first-party int
 
 **Tracking:** Implementation milestones for input vs output live in [`ngmt-obs-plugin`](https://github.com/NextGenMediaTransport/ngmt-obs-plugin) ([`TRACKING.md`](https://github.com/NextGenMediaTransport/ngmt-obs-plugin/blob/main/TRACKING.md)); mirror bullets as GitHub Issues as work starts.
 
+**Build status (2026-04):** With **`-DNGMT_WITH_OBS=ON`**, the repo produces the **`obs-ngmt`** input module linked to sibling **`ngmt-transport`** (Quinn + rustls, same stack as Studio). Issue [#4](https://github.com/NextGenMediaTransport/ngmt-obs-plugin/issues/4) foundation ships **source registration**, **properties** (manual vs discovery UX, default **127.0.0.1:4433**), **`blog()`** tracing forwarder hook, and **stub video** — QUIC dial + VMX decode follow in [#5](https://github.com/NextGenMediaTransport/ngmt-obs-plugin/issues/5) / [#6](https://github.com/NextGenMediaTransport/ngmt-obs-plugin/issues/6). See that repository’s **README** for libobs prefixes and install notes.
+
 ### Goals
 
 - Ship an **official, high-performance** OBS **input** plugin (**v1.0 P0**) and an **output** plugin on a **P1** cadence unless the release checklist promotes output to v1.0.

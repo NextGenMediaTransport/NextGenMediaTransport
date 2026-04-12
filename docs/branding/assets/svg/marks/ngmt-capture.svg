@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-label="NGMT capture screen mark">
+  <rect x="6" y="8" width="20" height="14" rx="2" stroke="#0a84ff" stroke-width="2"/>
+  <path d="M9 8V6h6M23 8V6h-6M9 22v2h6M23 22v2h-6" stroke="#48484a" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="16" cy="15" r="3" stroke="#0a84ff" stroke-width="1.4" fill="none"/>
+</svg>
