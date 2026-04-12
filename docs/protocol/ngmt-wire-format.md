@@ -58,7 +58,7 @@ Pass that buffer to **`VMX_LoadFrom`** (the first four bytes are **not** part of
 
 ### Pixel format and alpha channel (additional feature)
 
-**Today (media payload v1):** The Studio and documentation **primary path** treats frames as **opaque**: encode with **`VMX_EncodeBGRX`** and decode with **`VMX_DecodeBGRX`** (32 bpp, **X** unused / fully opaque). Receivers should assume **no** alpha unless a future capability says otherwise.
+**Today (media payload v1):** The Studio and documentation **primary path** treats frames as **opaque**: encode with **`VMX_EncodeBGRX`** and decode with **`VMX_DecodeBGRX`** (32 bpp, **X** unused). In practice the decoded **X** byte is often **0** (D3D-style **X8R8G8B8**). Receivers that swizzle to **RGBA** for GPU upload with **alpha blending** (e.g. OBS **`GS_BLEND_SRCALPHA`**) must **not** treat **X** as per-pixel alpha — use **A = 255** for this path unless a future capability negotiates real alpha (**`ngmt-common::bgrx_to_rgba`** and **`obs-ngmt-input`** do this).
 
 **Codec library capability:** `ngmt-codec` (VMX) already supports **alpha** at the API level — **`VMX_EncodeBGRA`** / **`VMX_DecodeBGRA`** (and related preview paths); see [`ngmt-codec` `vmxcodec.h`](../../ngmt-codec/src/vmxcodec.h) (`VMX_IMAGE_BGRA` / `VMX_IMAGE_BGRX`). **Transporting** alpha end-to-end is **not** specified in v1 above: the VMX bitstream may carry alpha only when the encoder was fed **BGRA**, but peers must **agree** on interpretation (compositors, OBS, and engines care about **premultiplied vs straight** alpha).
 
@@ -86,6 +86,8 @@ For a coarser signal, you may still sample when reassembly completes, but prefer
 
 If a fragment is missing, the receiver **must not** retain partial state **indefinitely**. Implementations should **evict** incomplete objects after a timeout (e.g. **100 ms** without any new fragment for that `object_id`) and surface **incomplete frame** counters for observability.
 
+**Reference receivers:** **`ngmt-monitor`** (Rust `FragmentReassembler` + VMX) and **`obs-ngmt-input`** (C++ reassembly aligned with the same rules + **`VMX_LoadFrom`** / **`VMX_DecodeBGRX`** from **`ngmt-codec`**).
+
 ## DNS-SD
 
 Service type: **`_ngmt._udp`** (subject to final registry naming). Peers browse/register this type to discover **QUIC** listeners advertising NGMT media.
@@ -94,6 +96,7 @@ Service type: **`_ngmt._udp`** (subject to final registry naming). Peers browse/
 
 - DNS-SD **`instance_name`** is the human-visible label in browse UIs (e.g. Monitor’s source rack). It must obey **DNS-SD instance name** rules (length, UTF-8 subset, no misleading collisions on the same subnet — follow [`mdns-sd`](https://crates.io/crates/mdns-sd) / Bonjour conventions).
 - **Studio (`ngmt-common`):** registration passes an **`instance_name`** string and builds `ServiceInfo` for **`_ngmt._udp.local.`** with TXT keys **`proto=ngmt`**, **`ver=1`**, and optional **`role`** (`generator`, `capture`, … — document-first for new values). **`ngmt-generator`** exposes a **validated, user-editable** instance name (default `ngmt-generator`): enforced as a **single DNS label** (≤63 UTF-8 bytes, no ASCII controls, no `.` in the label). On stream stop, the app **unregisters** the service so stale advertisements clear. **`validate_mdns_instance_label`** in `ngmt-common` is the shared gate for **`ngmt-capture`** naming.
+- **OBS (`ngmt-transport` C ABI):** **`ngmt_transport_discover_refresh`** / **`ngmt_transport_discover_get`** / **`ngmt_transport_discover_lookup`** browse the same **`_ngmt._udp.local.`** type (separate **`mdns-sd`** stack in the transport crate so hosts do not link **`ngmt-common`**). Resolved **SRV host**, **port**, lowercased **fullname**, instance **label**, and optional **`role`** match the Studio browse row semantics for dialing QUIC.
 
 ### TXT records (today and future)
 
