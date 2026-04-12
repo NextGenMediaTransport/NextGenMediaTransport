@@ -111,6 +111,7 @@ Receivers **must** treat unknown TXT keys as **optional** and tolerate missing `
 
 - **User-facing display name** may duplicate `instance_name` or move to a dedicated TXT key (e.g. `display=…`) if we need **DNS-safe** instance names distinct from marketing labels — **version** any new keys in this doc and in sender/receiver code.
 - **Capabilities** (e.g. alpha-capable sender, audio track present) may appear as additional TXT pairs or on a **reliable control stream** once the session layer is defined; receivers must treat unknown keys as **optional**.
+- **Outbound desktop audio** from **`ngmt-capture`**: needs agreed **`track_id`** / payload layout (or a **second** `_ngmt._udp` source); see [ngmt-capture-spec — Audio roadmap (Phase B)](../project-plan/ngmt-capture-spec.md#audio-roadmap-phase-b-outbound-system-audio) before adding TXT or stream flags.
 
 ### Collision and migration
 

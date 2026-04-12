@@ -48,6 +48,10 @@ A protocol succeeds when applications use it. Phase 5 delivers **first-party int
 - Provide **system-level** virtual camera and virtual microphone devices so feeds appear in **browsers**, **Zoom**, **Teams**, and other apps that only enumerate standard devices—without requiring each app to link NGMT directly (**v1.0** scope alongside OBS).
 - Document OS-specific installation, permissions, and limitations (e.g. driver signing, sandboxing).
 
+### `ngmt-capture` and outbound desktop audio (future)
+
+**Virtual audio** above is the **inbound-to-apps** story (NGMT → device). **[`ngmt-capture`](./ngmt-capture-spec.md)** will eventually offer **optional system / loopback audio** bundled with or alongside the **VMX video** path. That requires agreed **media payload** and **track** semantics (see [ngmt-wire-format](../protocol/ngmt-wire-format.md)); until then the capture spec’s **[Audio roadmap (Phase B)](./ngmt-capture-spec.md#audio-roadmap-phase-b-outbound-system-audio)** tracks spikes and doc work without implying a ship date.
+
 ## SDK wrappers (Phase 5b — post-v1.0)
 
 ### Goals

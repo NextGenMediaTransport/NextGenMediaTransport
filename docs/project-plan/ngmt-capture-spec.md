@@ -82,12 +82,17 @@ Mirror **Generator** (see [ngmt-studio README](../../ngmt-studio/README.md)):
 
 Implemented in the [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture) repository:
 
-- **macOS only (functional):** **ScreenCaptureKit** primary display → **BGRA** sample buffers → CPU copy to tight **BGRX** (`ngmt_common::bgra_rows_to_bgrx`) → **VMX** → QUIC datagrams (**incoming** / broadcast listener; multi-subscriber fan-out like Generator).
-- **mDNS:** `_ngmt._udp` with TXT **`role=capture`**, **`proto`**, **`ver`**, optional **`vw`/`vh`/`vfps`** from encode resolution + target FPS; instance name via **`validate_mdns_instance_label`** (default `ngmt-capture`).
-- **Privacy:** “Privacy pause” substitutes **SMPTE** BGRX bars while keeping QUIC + capture session alive (operator slate).
+- **macOS only (functional):** **ScreenCaptureKit** → **BGRA** sample buffers → CPU copy to tight **BGRX** (`ngmt_common::bgra_rows_to_bgrx`) → **VMX** → QUIC datagrams (**incoming** / broadcast listener; multi-subscriber fan-out like Generator).
+- **Display selection (v0.2+):** After **Check permission**, the app lists **`SCShareableContent`** displays (CGDirectDisplay ID + pixel size); each **session** picks a display before **Start**. (Previously: first display only.)
+- **Multi-session (v0.2+):** Up to **four** parallel sessions in one process — each has its own **listen port**, **mDNS instance name** (must stay unique on the LAN), **display**, encode knobs, **Start/Stop**, and **privacy pause**. Mirrors **multiple Generator instances** without inventing multi-track QUIC yet.
+- **Operator UI:** **Generator-aligned** egui layout — themed top bar (**ON AIR** / **IDLE**), left settings scroll, **central wire preview** (BGRX → downsampled RGBA texture), resizable bottom **log**; **encode presets** (720p / 1080p / 1440p / Native from selected display).
+- **mDNS:** `_ngmt._udp` with TXT **`role=capture`**, **`proto`**, **`ver`**, optional **`vw`/`vh`/`vfps`** from encode resolution + target FPS; instance name via **`validate_mdns_instance_label`** (default `ngmt-capture`, `ngmt-capture-2`, … per session row).
+- **Privacy:** “Privacy pause” substitutes **SMPTE** BGRX bars while keeping QUIC + capture session alive (operator slate), per session.
 - **Permissions UX:** in-app **Check permission** (`SCShareableContent::get`) and **Open Screen Recording settings** (`x-apple.systempreferences:…`).
-- **Output scale:** operator sets encode **width × height** in the UI before starting (maps to SCK output size and VMX instance dimensions).
+- **Output scale:** operator sets encode **width × height** (presets or drag values) before starting (maps to SCK output size and VMX instance dimensions).
 - **Linux / Windows:** stub **`eframe`** binary so **`cargo check`** passes in CI (no capture APIs).
+
+**Display picker acceptance:** **Start** is disabled until permission is **OK**, the display list is non-empty, and no **running** peer session already uses the same **listen port** (refresh permissions after hot-plugging monitors).
 
 **Deferred from v0.1:** HDR / cursor metadata / per-window picker / outgoing dial UI / WAN presets — see open questions below.
 
@@ -97,9 +102,21 @@ Implemented in the [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngm
 
 1. **HDR** capture and tone mapping when peers expect SDR VMX profile.
 2. **Cursor** inclusion toggle and metadata for receivers.
-3. **Per-monitor** vs **virtual combined desktop** on Windows/macOS.
+3. **Per-monitor** vs **virtual combined desktop** on Windows/macOS (macOS: per-display SCK sessions are implemented; combined-desktop semantics remain a product choice for other platforms).
 4. **Installer** strategy (signed PKG/MSI) vs zip — out of scope for first technical milestone but affects permissions docs.
 5. **Alpha** — transparent windows / layered UI: capture APIs often deliver **BGRA**; VMX supports **`VMX_EncodeBGRA`**, but NGMT **media payload v1** assumes opaque **BGRX** on the wire unless extended (see [pixel format and alpha](../protocol/ngmt-wire-format.md#pixel-format-and-alpha-channel-additional-feature)).
+
+---
+
+## Audio roadmap (Phase B: outbound system audio)
+
+**Non-goal for initial capture releases** (see **Non-goals (initial release)** above): **audio loopback** ships only after **wire-format** and **receiver** work.
+
+**Directions (macOS research first):** **ScreenCaptureKit** audio sample path (if exposed for the chosen content filter) vs **CoreAudio** / virtual loopback device vs a **second** `_ngmt._udp` instance carrying a future **audio payload** (simpler than muxing if v1 stays one primary video track per sender). **TCC** (screen recording vs microphone) and **DRM / mute** behavior must be documented before shipping a toggle.
+
+**Coordination:** Extend [ngmt-wire-format](../protocol/ngmt-wire-format.md) for **track IDs**, codec (PCM vs compressed), sample rate, and **Monitor** decode/mix rules in lockstep with [Phase 5 — virtual audio](./05-Phase-5-Integrations-and-Ecosystem.md#virtual-camera-and-virtual-audio) (system devices). **Do not** invent ad hoc side channels.
+
+**UX (when protocol exists):** Settings **Audio**: Off / System (or device); optional meter; **privacy pause** policy for audio (mute vs continue) is a product decision.
 
 ---
 
