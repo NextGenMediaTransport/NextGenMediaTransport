@@ -90,10 +90,10 @@ If a fragment is missing, the receiver **must not** retain partial state **indef
 
 Service type: **`_ngmt._udp`** (subject to final registry naming). Peers browse/register this type to discover **QUIC** listeners advertising NGMT media.
 
-### Instance name (today)
+### Instance name (Studio)
 
 - DNS-SD **`instance_name`** is the human-visible label in browse UIs (e.g. Monitor’s source rack). It must obey **DNS-SD instance name** rules (length, UTF-8 subset, no misleading collisions on the same subnet — follow [`mdns-sd`](https://crates.io/crates/mdns-sd) / Bonjour conventions).
-- **Studio today (`ngmt-studio-common`):** registration passes an **`instance_name`** string and builds `ServiceInfo` for **`_ngmt._udp.local.`** with TXT keys **`proto=ngmt`**, **`ver=1`**. **`ngmt-generator`** currently uses a **fixed** instance name (`ngmt-generator`); operators cannot rename the advertised source without a code change.
+- **Studio (`ngmt-studio-common`):** registration passes an **`instance_name`** string and builds `ServiceInfo` for **`_ngmt._udp.local.`** with TXT keys **`proto=ngmt`**, **`ver=1`**. **`ngmt-generator`** exposes a **validated, user-editable** instance name (default `ngmt-generator`): enforced as a **single DNS label** (≤63 UTF-8 bytes, no ASCII controls, no `.` in the label). On stream stop, the app **unregisters** the service so stale advertisements clear. **`validate_mdns_instance_label`** in `ngmt-studio-common` is the shared gate for future **`ngmt-capture`** naming.
 
 ### TXT records (today and future)
 
@@ -101,6 +101,11 @@ Service type: **`_ngmt._udp`** (subject to final registry naming). Peers browse/
 |-------------|---------|
 | `proto` | Literal `ngmt` — intent on the wire. |
 | `ver` | Version hint for discovery consumers (e.g. `1`). |
+| `vw` | **Optional.** Sender-reported video width in pixels (decimal string). **Studio:** Generator sets this at mDNS **register** time from the VMX output preset; browse UIs may show it before QUIC connects. **Hints only** — not a substitute for dimensions on the compressed stream. |
+| `vh` | **Optional.** Sender-reported video height in pixels (decimal string). Same semantics as `vw`. |
+| `vfps` | **Optional.** Sender-reported **target** frame rate (decimal string, integer fps). Same semantics as `vw`. |
+
+Receivers **must** treat unknown TXT keys as **optional** and tolerate missing `vw` / `vh` / `vfps`.
 
 **Future (document before implementing):**
 

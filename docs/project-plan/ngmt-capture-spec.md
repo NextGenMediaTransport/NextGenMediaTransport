@@ -47,7 +47,7 @@ This document specifies a **first-party screen and window capture** application 
 ## Discovery and naming
 
 - **DNS-SD:** Register **`_ngmt._udp`** consistent with Generator (see `ngmt-studio-common` and [wire format](../protocol/ngmt-wire-format.md) — especially [DNS-SD: instance name and TXT](../protocol/ngmt-wire-format.md#dns-sd)).
-- **Instance name:** Human-readable default (hostname + “Display 1” or window title); **user override in UI** (today **`ngmt-generator`** uses a fixed instance name until [studio-next-steps](./studio-next-steps.md) naming work lands). **`ngmt-monitor`** and **OBS** browse lists should treat **Generator**, **Capture**, and any future senders with the **same** naming and TXT rules once standardized.
+- **Instance name:** Human-readable default (hostname + “Display 1” or window title); **user override in UI**, validated with the same **`validate_mdns_instance_label`** rules as **Generator** (single DNS label, ≤63 UTF-8 bytes, no dots — see [DNS-SD](../protocol/ngmt-wire-format.md#dns-sd)). **`ngmt-monitor`** and **OBS** browse lists should treat **Generator**, **Capture**, and any future senders with the **same** naming and TXT rules once standardized.
 - **TXT records / metadata:** Follow whatever keys Studio standardizes for version and intent (align with transport registration helpers); document new keys in the wire format doc before relying on them in the field.
 
 ---

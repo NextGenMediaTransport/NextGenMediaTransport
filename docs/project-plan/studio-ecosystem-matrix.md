@@ -40,7 +40,7 @@ Future enhancements (not v1.0 gates unless promoted):
 - **Timecode / metadata** overlays when the wire format exposes them.
 - **Multiview → dedicated display:** fullscreen or second window on a **user-selected monitor** showing the **same** composited wall as the main canvas (mirror-only; NDI Studio Monitor–class operator output).
 - **Multiview as NGMT source:** encode the **composited** wall (BGRX → VMX → QUIC) and advertise like other senders — heavier than mirror-only; product/perf TBD.
-- **Layout preset ghosts:** when a **template** (1×1, 2×2, 1+5, …) is active, **empty** slot cells show **muted gray / hatched** placeholders (optional slot index) until a source is bound so wall geometry is obvious before connect.
+- **Layout preset ghosts:** **Shipped in `ngmt-studio`:** templates materialize idle slots; empty cells show **hatched** placeholders with a **slot index** until a source is bound.
 
 **Implementation order (default):** mirror multiview to external display **before** publishing multiview as a network source — see [studio-next-steps.md](./studio-next-steps.md).
 
