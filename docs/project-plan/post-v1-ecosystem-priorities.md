@@ -19,6 +19,10 @@ status: living
 - **Priority:** **After** the above unless a **hardware partner** or **house-of-worship** pilot explicitly needs **tally-first** (see [Phase 6](./06-Phase-6-Hardware-and-Commercial-Adoption.md)).
 - **Rationale:** Tally and rich metadata need a **stable control-plane story** and often **PTZ** schemas; shipping tally without **bridge + security** risks wrong-footing enterprise buyers.
 
+## Engine integrations (Unreal / Unity)
+
+**Out of scope for this ordering doc** until **`ngmt-bindings`** (or equivalent) stabilizes. **Unreal** and **Unity** **input + output** plugins are tracked in [Phase 5 — stretch](./05-Phase-5-Integrations-and-Ecosystem.md#game-engines--unreal-and-unity-input--output) and the [studio ecosystem matrix](./studio-ecosystem-matrix.md); they typically land **after** SDKs and **OBS** prove the stack in production.
+
 ## How to use this doc
 
 - Treat ordering as **program guidance**, not a contract.

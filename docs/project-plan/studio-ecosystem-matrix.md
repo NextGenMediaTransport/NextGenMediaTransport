@@ -21,7 +21,12 @@ This matrix maps **NGMT first-party apps and integrations** to **roadmap phases*
 | **Recorder / ISO** | TBD | post-v1 priority | (various ISO tools) | File format choice, mux, clocking |
 | **Access / groups manager** | TBD | post-v1 + security pillar | Access Manager | TLS identity, policy UI |
 | **PTZ / tally** | `ngmt-core` / hardware | 6 | tally adjacent | Control plane, schemas ([Phase 6](./06-Phase-6-Hardware-and-Commercial-Adoption.md)) |
+| **VMX alpha (BGRA)** | `ngmt-codec` + wire/session | **future** | NDI-style alpha | `VMX_EncodeBGRA` / `DecodeBGRA` exist; need [wire flags / payload v2](../protocol/ngmt-wire-format.md#pixel-format-and-alpha-channel-additional-feature), discovery, premult rules |
 | **SDK wrappers** | `ngmt-bindings` etc. | **5b** | developer kits | Stable C ABI / docs |
+| **Unreal input + output** | TBD (e.g. `ngmt-unreal-plugin`) | **post–5b stretch** | NDI for Unreal–class | VMX, QUIC, TLS, UE RHI / plugin ABI |
+| **Unity input + output** | TBD (e.g. `ngmt-unity-package`) | **post–5b stretch** | NDI for Unity–class | VMX, QUIC, TLS, RP capture, IL2CPP |
+
+**Engine plugins** mirror **OBS**: **input** = NGMT → engine texture; **output** = render target / game view → NGMT. See [Phase 5 — Future and stretch](./05-Phase-5-Integrations-and-Ecosystem.md#game-engines--unreal-and-unity-input--output).
 
 ---
 

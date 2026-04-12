@@ -56,6 +56,20 @@ Concatenate VMX data in **fragment order** into a single buffer:
 
 Pass that buffer to **`VMX_LoadFrom`** (the first four bytes are **not** part of the VMX bitstream; they are metadata consumed before the codec buffer).
 
+### Pixel format and alpha channel (additional feature)
+
+**Today (media payload v1):** The Studio and documentation **primary path** treats frames as **opaque**: encode with **`VMX_EncodeBGRX`** and decode with **`VMX_DecodeBGRX`** (32 bpp, **X** unused / fully opaque). Receivers should assume **no** alpha unless a future capability says otherwise.
+
+**Codec library capability:** `ngmt-codec` (VMX) already supports **alpha** at the API level — **`VMX_EncodeBGRA`** / **`VMX_DecodeBGRA`** (and related preview paths); see [`ngmt-codec` `vmxcodec.h`](../../ngmt-codec/src/vmxcodec.h) (`VMX_IMAGE_BGRA` / `VMX_IMAGE_BGRX`). **Transporting** alpha end-to-end is **not** specified in v1 above: the VMX bitstream may carry alpha only when the encoder was fed **BGRA**, but peers must **agree** on interpretation (compositors, OBS, and engines care about **premultiplied vs straight** alpha).
+
+**Future NGMT work (when promoted):**
+
+1. **Signal** on the wire that a stream/object uses **alpha** (e.g. a bit in [`flags`](#ngmt-object-header-32-bytes), a **`pixel_format`** byte in fragment 0 after width/height, or a **media payload v2** section) so receivers select **`VMX_DecodeBGRA`** and upload textures with correct blending.
+2. **Discovery / session:** advertise **alpha-capable** senders in **`_ngmt._udp`** TXT or a small control stream so receivers do not assume BGRX-only.
+3. **Documentation:** define **default alpha convention** (e.g. straight alpha in BGRA unless flagged) and **HDR + alpha** interaction for capture and game-engine plugins.
+
+Until those pieces exist, treat **alpha** as an **optional product extension** layered on the same VMX object layout, not part of the v1 interoperability baseline.
+
 ### One-way delay (OWD)
 
 `origination_timestamp_us` is stamped **once per logical object** (video frame) and **replicated on every fragment** of that object. Receivers must **not** treat `recv_time − origination_timestamp` on arbitrary fragments as path one-way delay: inter-arrival spread across many datagrams dominates.

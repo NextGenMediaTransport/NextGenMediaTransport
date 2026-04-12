@@ -1,6 +1,6 @@
 # Lab log capture (Generator + Monitor)
 
-Use this checklist to capture **Studio trace** lines for impairment runs, cross-host Mac ↔ Fedora sessions, and post-mortems. Trace format and **`NGMT_LOG_FILE`** behavior are documented in [harness_setup.md](harness_setup.md).
+Use this checklist to capture **Studio trace** lines for impairment runs, cross-host Mac ↔ Fedora sessions, and post-mortems. Trace format and **`NGMT_LOG_FILE`** behavior are documented in [harness_setup.md](harness_setup.md). For **Monitor decode / FPS / hardware-decode** context, see [monitor-preview-decode.md](monitor-preview-decode.md).
 
 ## Where logs go
 

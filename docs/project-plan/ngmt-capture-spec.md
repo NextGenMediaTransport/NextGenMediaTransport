@@ -82,6 +82,7 @@ Mirror **Generator** (see [ngmt-studio README](../../ngmt-studio/README.md)):
 2. **Cursor** inclusion toggle and metadata for receivers.
 3. **Per-monitor** vs **virtual combined desktop** on Windows/macOS.
 4. **Installer** strategy (signed PKG/MSI) vs zip — out of scope for first technical milestone but affects permissions docs.
+5. **Alpha** — transparent windows / layered UI: capture APIs often deliver **BGRA**; VMX supports **`VMX_EncodeBGRA`**, but NGMT **media payload v1** assumes opaque **BGRX** on the wire unless extended (see [pixel format and alpha](../protocol/ngmt-wire-format.md#pixel-format-and-alpha-channel-additional-feature)).
 
 ---
 

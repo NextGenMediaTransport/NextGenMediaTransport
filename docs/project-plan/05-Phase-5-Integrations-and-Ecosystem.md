@@ -52,7 +52,22 @@ A protocol succeeds when applications use it. Phase 5 delivers **first-party int
 
 ## Future and stretch integrations
 
-- **Unreal Engine** (and similar engines) may be pursued as community or follow-on work once OBS and virtual devices prove the end-to-end story; track explicitly if promoted to a numbered phase later.
+### Game engines — Unreal and Unity (input + output)
+
+**Not v1.0.** After **OBS**, **virtual camera/audio**, and a stable **C/C++ surface** (e.g. **`ngmt-bindings`** or documented FFI from `ngmt-transport` + `ngmt-codec`), first-party or partner plugins can bring NGMT into real-time 3D pipelines.
+
+| Surface | User story | Typical integration shape |
+| ------- | ---------- | ------------------------- |
+| **Input** | Use an **NGMT stream** as a **texture / media source** inside the engine (in‑world screen, compositing, LED wall preview). | Decode **VMX** → GPU texture (RHI / graphics API); optional audio for sync. |
+| **Output** | Send a **render target** or **game view** **out** as NGMT (VMX over QUIC) for Monitors, OBS, or external production. | Capture back buffer / render target, encode **VMX**, send; discovery advertise optional. |
+
+**Unreal Engine** — Plugin module(s) (Editor + runtime where applicable): align with **Unreal** versioning (major lockstep), **shipping / non-shipping** configs, and console / PC first; target repo name e.g. **`ngmt-unreal-plugin`** when promoted.
+
+**Unity** — Package or native plugin (**Burst/IL2CPP** vs Editor constraints): align with **Unity LTS** tiers and **Render Pipeline** (Built-in / URP / HDRP) capture paths; target repo e.g. **`ngmt-unity-package`** or **`ngmt-unity-plugin`** when promoted.
+
+**Dependencies:** Shared logic should mirror **`ngmt-obs-plugin`** (QUIC session, TLS, VMX encode/decode) — ideally **one** portable **core** library consumed by OBS, Unreal, and Unity to avoid protocol drift.
+
+**Phase placement:** Treat as **post–Phase 5b** stretch (or a future **Phase 5c / ecosystem** line item) until explicitly added to [version-1-release-status](./version-1-release-status.md); see [studio ecosystem matrix](./studio-ecosystem-matrix.md).
 
 ## Ecosystem index
 

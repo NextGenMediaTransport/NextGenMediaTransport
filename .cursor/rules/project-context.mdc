@@ -8,7 +8,7 @@ alwaysApply: true
 - **NGMT** is a modernized fork of Open Media Transport (OMT), aimed at competing with NDI. Focus: developer and operator experience, modern networks, permissive licensing for vendors.
 - **Pillars:** QUIC-based transport for **WAN** (NAT, lossy links); **AV1/VMX** codec stack (`ngmt-codec`); **zero-configuration LAN discovery** (mDNS / Zeroconf).
 - **Stack:** C++, Rust, CMake, Cargo, QUIC networking.
-- **Expected repo names:** `ngmt-core`, `ngmt-transport`, `ngmt-codec`, `ngmt-bindings`; later e.g. `ngmt-obs-plugin` (see `docs/project-plan/`).
+- **Expected repo names:** `ngmt-core`, `ngmt-transport`, `ngmt-codec`, `ngmt-bindings`; integrations e.g. `ngmt-obs-plugin`; future stretch e.g. `ngmt-unreal-plugin`, `ngmt-unity-package` (see `docs/project-plan/`).
 - **Phase order:** foundation → build standardization → core transport and simulation (Phase 3) → **developer UI / visibility** (Phase 4) → integrations (Phase 5) → hardware (Phase 6); see `docs/project-plan/00-Master-Roadmap.md`.
 - **WAN work:** align validation with documented network simulation / impairment methodology when exercising loss, latency, and congestion control (see Phase 3 in `docs/project-plan/`).
 - **Code changes:** Match existing style, build system, and abstractions; keep scope focused unless the task explicitly asks for broad refactors (see always-applied rules under `.cursor/rules/`).
