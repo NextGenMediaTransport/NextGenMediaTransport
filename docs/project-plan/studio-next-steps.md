@@ -8,11 +8,11 @@ status: living
 
 This file is the **handoff queue** for engineering agents: **ordered hints**, acceptance-style notes, and links. When an item **ships**, update this document and the meta-repo [CHANGELOG](../../CHANGELOG.md) (and the relevant app README) so the “top of queue” stays accurate.
 
-**Repos:** [`ngmt-studio`](../../ngmt-studio/README.md) (Generator, Monitor, `ngmt-studio-common`) lives beside the meta-repo; protocol and roadmap docs live under **`docs/`** here.
+**Repos:** [`ngmt-studio`](../../ngmt-studio/README.md) (Generator, Monitor, `ngmt-common`) lives beside the meta-repo; protocol and roadmap docs live under **`docs/`** here.
 
 ### What's next (engineering ordering)
 
-- **Active phase — capture:** Close the [`ngmt-capture`](./ngmt-capture-spec.md) spec (APIs, permissions, wire parity with Generator) and stand up **`ngmt-capture` MVP** (item **7**). This is the **next product/engineering focus** after the shipped Studio polish above: a first-party **real-pixel** operator source on the same QUIC + VMX + mDNS path as Generator so Monitor and future OBS input stay uniform.
+- **Active phase — capture:** **Item 7 (MVP) — initial delivery:** org repo [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture) (macOS SCK → VMX → QUIC, mDNS **`role=capture`**, privacy slate, Linux/Win stub `cargo check`). **Next:** window/region selection, outgoing dial parity with Generator, perf tuning (zero-copy), Windows/Linux capture backends — see [ngmt-capture-spec](./ngmt-capture-spec.md) open questions.
 - **Deferred — physical multiview mirror:** Item **5** (fullscreen / second window on a **chosen monitor** mirroring the canvas) remains **valid design** but is **deferred**: the current lab **cannot reliably validate multi-display / physical monitor output**, so implementation and QA for that path wait until hardware is available. Item **6** (send multiview as NGMT) stays **future** as before.
 
 ---
@@ -31,7 +31,7 @@ This file is the **handoff queue** for engineering agents: **ordered hints**, ac
    - Templates materialize **idle** slots (`SlotTarget::None`) to the grid size; hatched placeholder + slot index until a source is bound; **drag source onto ghost** fills that slot (`bind_slot_from_payload`) — [studio-ecosystem-matrix.md](./studio-ecosystem-matrix.md).
 
 4. ~~**Discovery — user-controlled source / instance name**~~ **Done**  
-   - Generator: **editable** mDNS instance (`validate_mdns_instance_label` in `ngmt-studio-common`), default `ngmt-generator`, unregister on stream end. **TXT hints** `vw` / `vh` / `vfps` (encode W×H + target FPS) are registered with browse and documented in [ngmt-wire-format.md](../protocol/ngmt-wire-format.md#dns-sd). Further TXT keys remain **document-first** before use. **Capture** naming aligned in [ngmt-capture-spec.md](./ngmt-capture-spec.md).
+   - Generator: **editable** mDNS instance (`validate_mdns_instance_label` in `ngmt-common`), default `ngmt-generator`, unregister on stream end. **TXT hints** `vw` / `vh` / `vfps` (encode W×H + target FPS) are registered with browse and documented in [ngmt-wire-format.md](../protocol/ngmt-wire-format.md#dns-sd). Further TXT keys remain **document-first** before use. **Capture** naming aligned in [ngmt-capture-spec.md](./ngmt-capture-spec.md).
 
 5. **Monitor — multiview fullscreen to selected display (mirror)** — **Deferred**  
    - Second window or borderless fullscreen on a **chosen monitor**; same pixels as the canvas (no new encode path). **Blocked on lab:** multi-monitor / physical output is **not** testable in the current environment; resume when displays are available. When unblocked, default order remains **before** “send MV as NGMT.”
@@ -39,8 +39,8 @@ This file is the **handoff queue** for engineering agents: **ordered hints**, ac
 6. **Monitor — send multiview as NGMT (heavy / future)**  
    - Composite wall → BGRX → VMX → QUIC as a source; separate mode or binary TBD. Depends on performance and product call.
 
-7. **`ngmt-capture` MVP** — **Near-term priority**  
-   - Follow [ngmt-capture-spec.md](./ngmt-capture-spec.md); same QUIC modes as Generator so Monitor/OBS consume without special cases.
+7. **`ngmt-capture` MVP** — **In progress → v0.1 landed (macOS)**  
+   - First-party repo [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture): SCK → VMX → QUIC **incoming** + mDNS **`role=capture`**; follow [ngmt-capture-spec.md](./ngmt-capture-spec.md) for **outgoing dial**, window/region capture, and cross-platform backends.
 
 8. **Blender addon**  
    - Remains **stretch** ([Phase 5 — Blender](./05-Phase-5-Integrations-and-Ecosystem.md#blender-addon-stretch)); track in [studio-ecosystem-matrix.md](./studio-ecosystem-matrix.md).

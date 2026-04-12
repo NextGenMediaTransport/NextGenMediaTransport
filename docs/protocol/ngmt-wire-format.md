@@ -93,7 +93,7 @@ Service type: **`_ngmt._udp`** (subject to final registry naming). Peers browse/
 ### Instance name (Studio)
 
 - DNS-SD **`instance_name`** is the human-visible label in browse UIs (e.g. Monitor’s source rack). It must obey **DNS-SD instance name** rules (length, UTF-8 subset, no misleading collisions on the same subnet — follow [`mdns-sd`](https://crates.io/crates/mdns-sd) / Bonjour conventions).
-- **Studio (`ngmt-studio-common`):** registration passes an **`instance_name`** string and builds `ServiceInfo` for **`_ngmt._udp.local.`** with TXT keys **`proto=ngmt`**, **`ver=1`**. **`ngmt-generator`** exposes a **validated, user-editable** instance name (default `ngmt-generator`): enforced as a **single DNS label** (≤63 UTF-8 bytes, no ASCII controls, no `.` in the label). On stream stop, the app **unregisters** the service so stale advertisements clear. **`validate_mdns_instance_label`** in `ngmt-studio-common` is the shared gate for future **`ngmt-capture`** naming.
+- **Studio (`ngmt-common`):** registration passes an **`instance_name`** string and builds `ServiceInfo` for **`_ngmt._udp.local.`** with TXT keys **`proto=ngmt`**, **`ver=1`**, and optional **`role`** (`generator`, `capture`, … — document-first for new values). **`ngmt-generator`** exposes a **validated, user-editable** instance name (default `ngmt-generator`): enforced as a **single DNS label** (≤63 UTF-8 bytes, no ASCII controls, no `.` in the label). On stream stop, the app **unregisters** the service so stale advertisements clear. **`validate_mdns_instance_label`** in `ngmt-common` is the shared gate for **`ngmt-capture`** naming.
 
 ### TXT records (today and future)
 

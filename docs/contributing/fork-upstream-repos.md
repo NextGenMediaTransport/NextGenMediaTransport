@@ -47,6 +47,16 @@ gh repo clone NextGenMediaTransport/ngmt-obs-plugin
 
 Build and design notes: [`ngmt-obs-plugin` README](https://github.com/NextGenMediaTransport/ngmt-obs-plugin/blob/main/README.md). Depends on **`ngmt-transport`** (and **`ngmt-codec`** for VMX) as siblings, same as `ngmt-studio`.
 
+## Desktop capture (`ngmt-capture`)
+
+**`ngmt-capture`** is a **separate first-party repository** (macOS ScreenCaptureKit → VMX → QUIC). Clone it beside the engines:
+
+```bash
+gh repo clone NextGenMediaTransport/ngmt-capture
+```
+
+The workspace expects **`ngmt-transport`**, **`ngmt-codec`**, and **`ngmt-studio`** (for **`crates/ngmt-common`**) as **siblings of the `ngmt-capture` checkout** — same parent directory pattern as `ngmt-studio` + Generator. **`ngmt-vmx-sys`** is **vendored inside `ngmt-capture`** (`crates/ngmt-vmx-sys`); **`ngmt-codec`** remains a sibling for CMake. See [ngmt-capture README](https://github.com/NextGenMediaTransport/ngmt-capture/blob/main/README.md).
+
 ## Local layout (inside this workspace)
 
 Clone the org repos **into the root of this meta repository** (alongside `docs/`, `.github/`, etc.):
@@ -55,6 +65,7 @@ Clone the org repos **into the root of this meta repository** (alongside `docs/`
 NextGenMediaTransport/       # meta: docs, CI, roadmap (this tree)
   docs/
   .github/
+  ngmt-capture/              # desktop capture app (clone; .gitignore in meta)
   ngmt-core/                 # fork — origin → org, upstream → openmediatransport/libomtnet
   ngmt-codec/                # fork — origin → org, upstream → openmediatransport/libvmx
   ngmt-transport/            # first-party QUIC/WAN
@@ -70,6 +81,7 @@ gh repo clone NextGenMediaTransport/ngmt-core
 gh repo clone NextGenMediaTransport/ngmt-codec
 gh repo clone NextGenMediaTransport/ngmt-transport
 gh repo clone NextGenMediaTransport/ngmt-studio
+gh repo clone NextGenMediaTransport/ngmt-capture
 gh repo clone NextGenMediaTransport/ngmt-obs-plugin
 ```
 

@@ -28,11 +28,11 @@ Distinct **icons** help operators and contributors recognize binaries, repos, an
 | **`ngmt-monitor`** | `ngmt-studio` binary | **Receive** / multiview / “wall” | TBD — **sub-mark** of Studio or standalone | Same as above |
 | `ngmt-studio` (workspace) | Optional umbrella | Suite / “NGMT Tools” | TBD | README / installer banner |
 | `ngmt-obs-plugin` | OBS modules | OBS + NGMT bridge | TBD in `ngmt-obs-plugin` | OBS plugin asset conventions |
-| `ngmt-capture` (future) | First-party capture | Screen / window / permissions | TBD when repo exists | PKG/MSI/deb artwork |
+| `ngmt-capture` | [`NextGenMediaTransport/ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture) | Screen / window / permissions | TBD in capture repo `resources/` | PKG/MSI/deb artwork |
 | `ngmt-bindings` | SDK | Developer kit | TBD | Docs + package managers |
 | Unreal / Unity / Blender | Stretch plugins | Engine-specific co-branding | TBD per [Phase 5 — stretch](../project-plan/05-Phase-5-Integrations-and-Ecosystem.md) | Per marketplace guidelines |
 
-**Shape / color discipline (guidance):** one **primary accent** consistent with `ngmt-studio-common::theme` broadcast palette where possible; **silhouette** readable at 16×16; avoid fine text inside small marks.
+**Shape / color discipline (guidance):** one **primary accent** consistent with `ngmt-common::theme` broadcast palette where possible; **silhouette** readable at 16×16; avoid fine text inside small marks.
 
 ## Repo of record
 

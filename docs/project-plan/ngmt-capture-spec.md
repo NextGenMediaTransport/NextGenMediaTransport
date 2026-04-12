@@ -8,7 +8,7 @@ status: draft
 
 This document specifies a **first-party screen and window capture** application analogous to **NDI Screen Capture**: real pixels → **VMX** (`ngmt-codec`) → **QUIC** (`ngmt-transport`) with **mDNS** discovery (`_ngmt._udp`), aligned with [media payload v1](../protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path).
 
-**Relationship to `ngmt-studio`:** [`ngmt-generator`](../../ngmt-studio/README.md) remains the **synthetic pattern / lab** sender. **`ngmt-capture`** is the **operator** tool for production-style sources (permissions, HDR/SDR, multi-monitor). Shared Rust crates may live in `ngmt-studio` workspace or a new workspace; **repo name target: `ngmt-capture`** (sibling checkout, same org pattern as `ngmt-studio`).
+**Relationship to `ngmt-studio`:** [`ngmt-generator`](../../ngmt-studio/README.md) remains the **synthetic pattern / lab** sender. **`ngmt-capture`** is the **operator** tool for production-style sources (permissions, HDR/SDR, multi-monitor). Shared Rust helpers ship from **`ngmt-studio`** as **`ngmt-common`**; **`ngmt-capture`** is its **own repository** ([`NextGenMediaTransport/ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture)) with the same sibling-checkout pattern as `ngmt-studio`.
 
 **Program status (2026-04):** After Generator/Monitor lab polish (wire preview, discovery TXT, template ghosts, etc.), **capture is the next phase to figure out**: tighten this spec, choose per-OS capture APIs, and ship MVP publish semantics aligned with [media payload v1](../protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path). **Monitor “mirror the canvas to a second physical display”** is intentionally **later** — the meta planning docs defer it until **physical multi-monitor output can be tested** in-lab ([studio-next-steps](./studio-next-steps.md)).
 
@@ -48,7 +48,7 @@ This document specifies a **first-party screen and window capture** application 
 
 ## Discovery and naming
 
-- **DNS-SD:** Register **`_ngmt._udp`** consistent with Generator (see `ngmt-studio-common` and [wire format](../protocol/ngmt-wire-format.md) — especially [DNS-SD: instance name and TXT](../protocol/ngmt-wire-format.md#dns-sd)).
+- **DNS-SD:** Register **`_ngmt._udp`** consistent with Generator (see `ngmt-common` and [wire format](../protocol/ngmt-wire-format.md) — especially [DNS-SD: instance name and TXT](../protocol/ngmt-wire-format.md#dns-sd)).
 - **Instance name:** Human-readable default (hostname + “Display 1” or window title); **user override in UI**, validated with the same **`validate_mdns_instance_label`** rules as **Generator** (single DNS label, ≤63 UTF-8 bytes, no dots — see [DNS-SD](../protocol/ngmt-wire-format.md#dns-sd)). **`ngmt-monitor`** and **OBS** browse lists should treat **Generator**, **Capture**, and any future senders with the **same** naming and TXT rules once standardized.
 - **TXT records / metadata:** Follow whatever keys Studio standardizes for version and intent (align with transport registration helpers); document new keys in the wire format doc before relying on them in the field.
 
@@ -75,6 +75,21 @@ Mirror **Generator** (see [ngmt-studio README](../../ngmt-studio/README.md)):
 
 - **Incoming:** listen for Monitors / OBS; advertise on mDNS when enabled.
 - **Outgoing:** dial a fixed host:port (e.g. Monitor waiting in incoming mode).
+
+---
+
+## MVP (v0.1) — shipped scope (2026-04)
+
+Implemented in the [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture) repository:
+
+- **macOS only (functional):** **ScreenCaptureKit** primary display → **BGRA** sample buffers → CPU copy to tight **BGRX** (`ngmt_common::bgra_rows_to_bgrx`) → **VMX** → QUIC datagrams (**incoming** / broadcast listener; multi-subscriber fan-out like Generator).
+- **mDNS:** `_ngmt._udp` with TXT **`role=capture`**, **`proto`**, **`ver`**, optional **`vw`/`vh`/`vfps`** from encode resolution + target FPS; instance name via **`validate_mdns_instance_label`** (default `ngmt-capture`).
+- **Privacy:** “Privacy pause” substitutes **SMPTE** BGRX bars while keeping QUIC + capture session alive (operator slate).
+- **Permissions UX:** in-app **Check permission** (`SCShareableContent::get`) and **Open Screen Recording settings** (`x-apple.systempreferences:…`).
+- **Output scale:** operator sets encode **width × height** in the UI before starting (maps to SCK output size and VMX instance dimensions).
+- **Linux / Windows:** stub **`eframe`** binary so **`cargo check`** passes in CI (no capture APIs).
+
+**Deferred from v0.1:** HDR / cursor metadata / per-window picker / outgoing dial UI / WAN presets — see open questions below.
 
 ---
 

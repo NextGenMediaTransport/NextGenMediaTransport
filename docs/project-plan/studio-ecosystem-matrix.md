@@ -16,7 +16,7 @@ This matrix maps **NGMT first-party apps and integrations** to **roadmap phases*
 | **OBS output** | `ngmt-obs-plugin` → `src/output/` | 5 — **P1** default | NDI Output | libobs, VMX encode, QUIC send |
 | **Virtual camera** | TBD (Phase 5) | **5 — v1.0** | NDI Webcam | OS virtual cam APIs, decode path |
 | **Virtual audio** | TBD (Phase 5) | **5 — v1.0 (scoped)** | NDI audio device patterns | OS audio plumbing, wire audio |
-| **Desktop / window capture** | **`ngmt-capture`** (spec: [ngmt-capture-spec.md](./ngmt-capture-spec.md)) | 5+ | Screen Capture / HX | Capture APIs, VMX, QUIC, permissions |
+| **Desktop / window capture** | **`ngmt-capture`** ([repo](https://github.com/NextGenMediaTransport/ngmt-capture), [spec](./ngmt-capture-spec.md)) — **v0.1 MVP** (macOS SCK path) | 5+ | Screen Capture / HX | Capture APIs, VMX, QUIC, permissions, **`ngmt-common`** |
 | **Bridge / gateway** | TBD | post-v1 priority | Bridge | QUIC relay, TLS, ops docs |
 | **Recorder / ISO** | TBD | post-v1 priority | (various ISO tools) | File format choice, mux, clocking |
 | **Access / groups manager** | TBD | post-v1 + security pillar | Access Manager | TLS identity, policy UI |
