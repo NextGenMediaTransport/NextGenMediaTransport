@@ -28,6 +28,8 @@ This note captures how **ngmt-monitor** turns VMX datagrams into **egui** textur
 
 ## Operational tips
 
-- Run **Generator and Monitor** with the same **`--release`** profile when comparing FPS (Debug heavily skews VMX numbers).
+- Run **Generator and Monitor** with the same **`--release`** profile when comparing FPS. **`cargo run` without `--release` uses Debug**, where VMX and texture work are much slower — it is common to see **~15–22 fps** preview regardless of 720p vs 1080p while the same machine reaches **30–50+ fps** in Release.
+- **Generator “VMX quality”** changes encoder **bitrate / quality**, not Monitor **decode** speed. It will not raise **`fps_dec`** / **`fps_disp`** if the bottleneck is CPU decode or GPU upload.
+- After each decoded frame, the decode thread calls **`egui::Context::request_repaint()`** so the UI is not throttled waiting for the next scheduled repaint (important on macOS when repaints would otherwise batch).
 - Use **Generator → Output (VMX)** to pick **720p / 1080p / 4K** before **Start stream**; 4K is CPU-heavy.
 - If **Decode queue drops** rises under load, the decode + UI path is still slower than the arrival rate; reduce resolution, target FPS, or profile CPU.

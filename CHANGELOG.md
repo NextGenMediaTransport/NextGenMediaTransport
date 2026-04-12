@@ -14,7 +14,7 @@ where versioning applies.
 
 ### Changed
 
-- **Studio (`ngmt-studio` repo):** Generator **output resolution** (720p/1080p/4K) and **VMX quality** UI; Monitor **bounded decode queue**, **buffer reuse**, **no `ColorImage` clone** on texture upload, **decode queue drops** metric — see that repo’s CHANGELOG and [monitor-preview-decode.md](docs/testing/monitor-preview-decode.md).
+- **Studio (`ngmt-studio` repo):** Generator **output resolution** (720p/1080p/4K) and **VMX quality** UI; Monitor **bounded decode queue**, **buffer reuse**, **no `ColorImage` clone**, **decode queue drops**, decode-thread **`request_repaint`**; README **`cargo run --release`** for FPS tests — see that repo’s CHANGELOG and [monitor-preview-decode.md](docs/testing/monitor-preview-decode.md).
 - **Studio lab traces:** default Generator/Monitor **heartbeat** lines now include **send vs decode/display FPS** and **frame/object ids** on disk and stderr; **`NGMT_LOG_METRICS_INTERVAL_SECS`** still enables the heavier **`metrics |`** block (see `ngmt-studio` CHANGELOG and [lab-log-capture.md](docs/testing/lab-log-capture.md)).
 - **Meta CI:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) clones and CMake-builds [`ngmt-obs-plugin`](https://github.com/NextGenMediaTransport/ngmt-obs-plugin) (scaffold **info** target) alongside transport, studio, and core.
 
