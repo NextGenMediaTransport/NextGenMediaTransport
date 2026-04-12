@@ -38,11 +38,11 @@ Future enhancements (not v1.0 gates unless promoted):
 - **Audio meters** and embedded audio monitoring.
 - **Solo / fullscreen** polish (Monitor already has solo toggle).
 - **Timecode / metadata** overlays when the wire format exposes them.
-- **Multiview → dedicated display:** fullscreen or second window on a **user-selected monitor** showing the **same** composited wall as the main canvas (mirror-only; NDI Studio Monitor–class operator output).
+- **Multiview → dedicated display:** fullscreen or second window on a **user-selected monitor** showing the **same** composited wall as the main canvas (mirror-only; NDI Studio Monitor–class operator output). **Deferred in the current lab** — no reliable way to **test physical multi-monitor output** yet; pick up when hardware validation is possible ([studio-next-steps](./studio-next-steps.md) item 5).
 - **Multiview as NGMT source:** encode the **composited** wall (BGRX → VMX → QUIC) and advertise like other senders — heavier than mirror-only; product/perf TBD.
 - **Layout preset ghosts:** **Shipped in `ngmt-studio`:** templates materialize idle slots; empty cells show **hatched** placeholders with a **slot index** until a source is bound.
 
-**Implementation order (default):** mirror multiview to external display **before** publishing multiview as a network source — see [studio-next-steps.md](./studio-next-steps.md).
+**Implementation order (default):** when the mirror path is unblocked, mirror multiview to external display **before** publishing multiview as a network source — see [studio-next-steps.md](./studio-next-steps.md). **Until then,** engineering priority is **`ngmt-capture` MVP** over Monitor mirror work.
 
 ---
 

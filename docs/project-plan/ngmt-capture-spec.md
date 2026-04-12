@@ -10,6 +10,8 @@ This document specifies a **first-party screen and window capture** application 
 
 **Relationship to `ngmt-studio`:** [`ngmt-generator`](../../ngmt-studio/README.md) remains the **synthetic pattern / lab** sender. **`ngmt-capture`** is the **operator** tool for production-style sources (permissions, HDR/SDR, multi-monitor). Shared Rust crates may live in `ngmt-studio` workspace or a new workspace; **repo name target: `ngmt-capture`** (sibling checkout, same org pattern as `ngmt-studio`).
 
+**Program status (2026-04):** After Generator/Monitor lab polish (wire preview, discovery TXT, template ghosts, etc.), **capture is the next phase to figure out**: tighten this spec, choose per-OS capture APIs, and ship MVP publish semantics aligned with [media payload v1](../protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path). **Monitor “mirror the canvas to a second physical display”** is intentionally **later** — the meta planning docs defer it until **physical multi-monitor output can be tested** in-lab ([studio-next-steps](./studio-next-steps.md)).
+
 ---
 
 ## Goals
