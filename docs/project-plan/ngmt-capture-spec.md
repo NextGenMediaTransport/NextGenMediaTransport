@@ -46,9 +46,9 @@ This document specifies a **first-party screen and window capture** application 
 
 ## Discovery and naming
 
-- **DNS-SD:** Register **`_ngmt._udp`** consistent with Generator (see `ngmt-studio-common` and [wire format](../protocol/ngmt-wire-format.md)).
-- **Instance name:** Human-readable default (hostname + “Display 1” or window title); user override in UI.
-- **TXT records / metadata:** Follow whatever keys Studio standardizes for version and intent (align with transport registration helpers).
+- **DNS-SD:** Register **`_ngmt._udp`** consistent with Generator (see `ngmt-studio-common` and [wire format](../protocol/ngmt-wire-format.md) — especially [DNS-SD: instance name and TXT](../protocol/ngmt-wire-format.md#dns-sd)).
+- **Instance name:** Human-readable default (hostname + “Display 1” or window title); **user override in UI** (today **`ngmt-generator`** uses a fixed instance name until [studio-next-steps](./studio-next-steps.md) naming work lands). **`ngmt-monitor`** and **OBS** browse lists should treat **Generator**, **Capture**, and any future senders with the **same** naming and TXT rules once standardized.
+- **TXT records / metadata:** Follow whatever keys Studio standardizes for version and intent (align with transport registration helpers); document new keys in the wire format doc before relying on them in the field.
 
 ---
 
@@ -88,6 +88,7 @@ Mirror **Generator** (see [ngmt-studio README](../../ngmt-studio/README.md)):
 
 ## Related documents
 
+- [Studio next steps](./studio-next-steps.md)
 - [Studio ecosystem matrix](./studio-ecosystem-matrix.md)
 - [Phase 5 — Integrations](./05-Phase-5-Integrations-and-Ecosystem.md)
 - [Phase 4 — Developer UI](./04-Phase-4-Developer-UI-and-Visibility.md)

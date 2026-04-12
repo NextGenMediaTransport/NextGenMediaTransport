@@ -45,10 +45,10 @@ Be **transparent with stakeholders**: **Generator + Monitor** are **developer / 
 ## Implementation (repository and UI)
 
 - **Repository:** [`ngmt-studio`](../../ngmt-studio/README.md) is a **dedicated Git repository** (sibling to `ngmt-core`, `ngmt-codec`, `ngmt-transport` in the meta-workspace). It contains a Cargo workspace: **`ngmt-generator`**, **`ngmt-monitor`**, **`ngmt-studio-common`**.
-- **UI:** **egui** / **eframe** (0.29) for immediate-mode overlays and fast iteration. Transport uses the Rust API in [`ngmt-transport`](../../ngmt-transport/README.md) (`TransportRuntime::dial` / `accept_one`, `app_api` stats, datagram send/receive).
-- **Discovery:** **`_ngmt._udp`** via [`mdns-sd`](https://crates.io/crates/mdns-sd) in `ngmt-studio-common` (browse + register).
-- **Monitor preview:** QUIC datagrams carry a minimal `frame=N` text body (not raw pixels); the Monitor draws a **SMPTE-style bar pattern** locally to match the Generator preview once frames arrive. Solo/maximize is **manual** (⛶), not automatic on connect.
-- **Linking:** local dev uses `path = "../ngmt-transport"`; pin engines via submodule or versioned crates for releases (documented in `ngmt-studio` README).
+- **UI:** **egui** / **eframe** (**0.34** as of current `ngmt-studio`) for immediate-mode overlays and fast iteration. Transport uses the Rust API in [`ngmt-transport`](../../ngmt-transport/README.md) (`TransportRuntime::dial` / `accept_one`, `app_api` stats, datagram send/receive).
+- **Discovery:** **`_ngmt._udp`** via [`mdns-sd`](https://crates.io/crates/mdns-sd) in `ngmt-studio-common` (browse + register). See [DNS-SD](../protocol/ngmt-wire-format.md#dns-sd) in the wire format doc for instance name and TXT semantics.
+- **Primary media path:** QUIC **datagrams** carry **VMX** payloads per [media payload v1](../protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path) (NGMT object header + fragmented bitstream, `origination_timestamp_us`, width/height on fragment 0). **Generator** encodes test-pattern **BGRX** with **`VMX_EncodeBGRX`** / **`VMX_SaveTo`** and sends; **Monitor** reassembles, **`VMX_LoadFrom`** / **`VMX_DecodeBGRX`**, and uploads textures for preview. **Mock preview** in Monitor draws **local** SMPTE bars for UI-only layout testing when no feed is present. Solo/maximize is **manual** (⛶), not automatic on connect.
+- **Linking:** local dev uses `path = "../ngmt-transport"` and builds **`ngmt-codec`** via `ngmt-vmx-sys`; pin engines via submodule or versioned crates for releases (documented in `ngmt-studio` README).
 
 ## Definition of Done
 

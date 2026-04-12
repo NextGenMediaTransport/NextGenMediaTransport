@@ -50,6 +50,8 @@ Clone [NextGenMediaTransport/ngmt-studio](https://github.com/NextGenMediaTranspo
 
 **Scope:** Generator and Monitor are **developer lab tools**; the **Studio primary path** now runs **VMX** (`ngmt-codec`) **encode → QUIC → decode** with real bitstreams and OWD timestamps — see [ngmt-studio/README.md](ngmt-studio/README.md) and [media payload v1](docs/protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path). **v1.0** still requires the broader **Four Pillars** (e.g. OBS, TLS policy, impairment audit) — see [version-1-release-status.md](docs/project-plan/version-1-release-status.md).
 
+**Next implementation steps** for Studio tools, Monitor UX backlog, capture alignment, and branding: [docs/project-plan/studio-next-steps.md](docs/project-plan/studio-next-steps.md).
+
 ## License
 
 This meta-repository is licensed under the MIT License — see [LICENSE](LICENSE).

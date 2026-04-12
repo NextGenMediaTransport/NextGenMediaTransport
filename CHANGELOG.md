@@ -14,6 +14,7 @@ where versioning applies.
 
 ### Added
 
+- **Documentation:** [studio-next-steps.md](docs/project-plan/studio-next-steps.md) — ordered backlog for Studio, Monitor, Generator, and `ngmt-capture`; [app-icons.md](docs/branding/app-icons.md) — SVG masters + raster export policy; expanded [DNS-SD](docs/protocol/ngmt-wire-format.md#dns-sd) in wire format (instance name, TXT today/future). [studio-ecosystem-matrix.md](docs/project-plan/studio-ecosystem-matrix.md) — Monitor futures (MV mirror / MV-as-source, layout ghosts), Blender row; [version-1-release-status.md](docs/project-plan/version-1-release-status.md) — program emphasis (capture vs OBS); [05-Phase-5](docs/project-plan/05-Phase-5-Integrations-and-Ecosystem.md) — first-party capture vs integrations + Blender stretch; [04-Phase-4](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md) — VMX datagram implementation notes; [post-v1-ecosystem-priorities.md](docs/project-plan/post-v1-ecosystem-priorities.md) — capture note; [ngmt-capture-spec.md](docs/project-plan/ngmt-capture-spec.md) — naming cross-links. [ngmt-studio/README.md](ngmt-studio/README.md) — codec table, mDNS naming, Generator visibility/UX, Monitor planned UX.
 - **Studio Monitor:** safer **resize** pointer math (no inverted **`clamp`** when the slot nears the wall edge), **corner resize** hit targets drawn **after** slot chrome, **slot selection** + **size presets** (JSON next to the executable under **`logs/`**), and **View → Log** as a separate window; **egui 0.34** **`Panel::…::show_inside`** on the app root UI.
 
 ### Fixed

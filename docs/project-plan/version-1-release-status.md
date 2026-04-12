@@ -51,6 +51,12 @@ Supporting expectations that sit beside the Four Pillars:
 
 Until the Four Pillars and the items above are true, releases should stay **0.x** or use explicit **preview** naming.
 
+### Program emphasis (first-party capture vs integrations)
+
+The **Four Pillars** above are **unchanged**: **v1.0** still requires the **OBS Studio input (source) plugin (P0)** and the other pillars as written.
+
+**Product narrative:** **`ngmt-capture`** (first-party screen/window capture — see [ngmt-capture-spec.md](./ngmt-capture-spec.md)) is the **native NGMT operator source** for real pixels, permissions, and multi-monitor defaults. **`ngmt-obs-plugin`** is the **integration** into OBS for studios that already work in OBS; it is essential for the **Killer App** pillar but **not** the only “NGMT-branded” way to originate content. Roadmap and staffing should treat **capture spec completion + MVP `ngmt-capture`** as a **high-leverage track alongside** the codec → transport → OBS vertical slice, without relaxing the published v1.0 bar until the pillars are met.
+
 ---
 
 ## v1.0 realities
@@ -100,6 +106,7 @@ Use this quick checklist when validating **Generator ↔ Monitor** behavior for 
 
 - [README.md](../../README.md) (Studio scope + Four Pillars)
 - [Phase 4 plan](./04-Phase-4-Developer-UI-and-Visibility.md) (Generator / Monitor)
+- [Studio next steps](./studio-next-steps.md) (ordered Studio / capture backlog)
 - [ngmt-wire-format.md](../protocol/ngmt-wire-format.md) (media payload v1)
 - Meta [CHANGELOG.md](../../CHANGELOG.md)
 
@@ -112,7 +119,8 @@ Priority is the **vertical slice**: **codec (VMX/ngmt-codec) → transport (QUIC
 1. **Real Media Path:** **Studio** path is **VMX → QUIC → decode**; complete the **vertical slice** (e.g. **OBS**) and remaining pillar work for v1.0.
 2. **Parallel — Phase 3 blockers:** **TLS policy** (good-enough: pinning / user PEM); **C++ mDNS** or **Rust discovery → FFI**; append **2% / 5% / 10%** impairment rows (multi-platform where feasible).
 3. **Killer App:** **OBS Studio** **input/source** plugin (P0) on a stated OS set; **OBS output** as P1 unless promoted before tag; **virtual camera** as scoped for v1.0.
-4. **Tag 1.0.0** only when [Missing for Version 1.0](#missing-for-version-10-gap-list) rows required for the agreed release are closed; **Phase 5b** SDKs follow.
+4. **First-party capture:** advance **`ngmt-capture`** per [spec](./ngmt-capture-spec.md) and [studio-next-steps.md](./studio-next-steps.md) in parallel with OBS — see [program emphasis](#program-emphasis-first-party-capture-vs-integrations) (does not replace P0 OBS until pillars change).
+5. **Tag 1.0.0** only when [Missing for Version 1.0](#missing-for-version-10-gap-list) rows required for the agreed release are closed; **Phase 5b** SDKs follow.
 
 ---
 
@@ -123,4 +131,5 @@ Priority is the **vertical slice**: **codec (VMX/ngmt-codec) → transport (QUIC
 - [Phase 4 — Developer UI](./04-Phase-4-Developer-UI-and-Visibility.md)
 - [Phase 5 — Integrations](./05-Phase-5-Integrations-and-Ecosystem.md)
 - [Studio ecosystem matrix](./studio-ecosystem-matrix.md) (apps, phases, NDI-style parity)
+- [Studio next steps](./studio-next-steps.md) (ordered Studio / capture backlog)
 - [ngmt-wire-format](../protocol/ngmt-wire-format.md)

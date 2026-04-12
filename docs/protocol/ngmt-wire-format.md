@@ -88,7 +88,29 @@ If a fragment is missing, the receiver **must not** retain partial state **indef
 
 ## DNS-SD
 
-Service type: **`_ngmt._udp`** (TXT includes port and capabilities; subject to final registry naming).
+Service type: **`_ngmt._udp`** (subject to final registry naming). Peers browse/register this type to discover **QUIC** listeners advertising NGMT media.
+
+### Instance name (today)
+
+- DNS-SD **`instance_name`** is the human-visible label in browse UIs (e.g. Monitor’s source rack). It must obey **DNS-SD instance name** rules (length, UTF-8 subset, no misleading collisions on the same subnet — follow [`mdns-sd`](https://crates.io/crates/mdns-sd) / Bonjour conventions).
+- **Studio today (`ngmt-studio-common`):** registration passes an **`instance_name`** string and builds `ServiceInfo` for **`_ngmt._udp.local.`** with TXT keys **`proto=ngmt`**, **`ver=1`**. **`ngmt-generator`** currently uses a **fixed** instance name (`ngmt-generator`); operators cannot rename the advertised source without a code change.
+
+### TXT records (today and future)
+
+| Key (today) | Meaning |
+|-------------|---------|
+| `proto` | Literal `ngmt` — intent on the wire. |
+| `ver` | Version hint for discovery consumers (e.g. `1`). |
+
+**Future (document before implementing):**
+
+- **User-facing display name** may duplicate `instance_name` or move to a dedicated TXT key (e.g. `display=…`) if we need **DNS-safe** instance names distinct from marketing labels — **version** any new keys in this doc and in sender/receiver code.
+- **Capabilities** (e.g. alpha-capable sender, audio track present) may appear as additional TXT pairs or on a **reliable control stream** once the session layer is defined; receivers must treat unknown keys as **optional**.
+
+### Collision and migration
+
+- Multiple publishers on one host should use **distinct** `instance_name` values; behavior when names collide is **undefined at the UI level** — clients should show **host + port** for disambiguation until naming UX ships.
+- When TXT keys evolve, keep **`ver`** semantics documented here and in app release notes.
 
 ## WlanOptimization (FFI)
 

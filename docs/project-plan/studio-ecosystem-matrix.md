@@ -25,8 +25,9 @@ This matrix maps **NGMT first-party apps and integrations** to **roadmap phases*
 | **SDK wrappers** | `ngmt-bindings` etc. | **5b** | developer kits | Stable C ABI / docs |
 | **Unreal input + output** | TBD (e.g. `ngmt-unreal-plugin`) | **post–5b stretch** | NDI for Unreal–class | VMX, QUIC, TLS, UE RHI / plugin ABI |
 | **Unity input + output** | TBD (e.g. `ngmt-unity-package`) | **post–5b stretch** | NDI for Unity–class | VMX, QUIC, TLS, RP capture, IL2CPP |
+| **Blender input + output** | TBD (e.g. `ngmt-blender-addon`) | **post–5b stretch** | NDI-style viewport / compositor | VMX, QUIC, TLS, Python addon API, shared core with OBS |
 
-**Engine plugins** mirror **OBS**: **input** = NGMT → engine texture; **output** = render target / game view → NGMT. See [Phase 5 — Future and stretch](./05-Phase-5-Integrations-and-Ecosystem.md#game-engines--unreal-and-unity-input--output).
+**Engine plugins** mirror **OBS**: **input** = NGMT → engine texture; **output** = render target / game view → NGMT. See [Phase 5 — Future and stretch](./05-Phase-5-Integrations-and-Ecosystem.md#game-engines--unreal-and-unity-input--output) and [Blender addon (stretch)](./05-Phase-5-Integrations-and-Ecosystem.md#blender-addon-stretch).
 
 ---
 
@@ -37,19 +38,26 @@ Future enhancements (not v1.0 gates unless promoted):
 - **Audio meters** and embedded audio monitoring.
 - **Solo / fullscreen** polish (Monitor already has solo toggle).
 - **Timecode / metadata** overlays when the wire format exposes them.
+- **Multiview → dedicated display:** fullscreen or second window on a **user-selected monitor** showing the **same** composited wall as the main canvas (mirror-only; NDI Studio Monitor–class operator output).
+- **Multiview as NGMT source:** encode the **composited** wall (BGRX → VMX → QUIC) and advertise like other senders — heavier than mirror-only; product/perf TBD.
+- **Layout preset ghosts:** when a **template** (1×1, 2×2, 1+5, …) is active, **empty** slot cells show **muted gray / hatched** placeholders (optional slot index) until a source is bound so wall geometry is obvious before connect.
+
+**Implementation order (default):** mirror multiview to external display **before** publishing multiview as a network source — see [studio-next-steps.md](./studio-next-steps.md).
 
 ---
 
 ## Reading order for integrators
 
 1. [version-1-release-status.md](./version-1-release-status.md) — Four Pillars and gap list.
-2. [05-Phase-5-Integrations-and-Ecosystem.md](./05-Phase-5-Integrations-and-Ecosystem.md) — OBS input vs output policy.
-3. [ngmt-wire-format.md](../protocol/ngmt-wire-format.md) — payload and OWD fields.
-4. [`ngmt-obs-plugin` README](https://github.com/NextGenMediaTransport/ngmt-obs-plugin/blob/main/README.md) — OBS build notes and sibling layout.
+2. [studio-next-steps.md](./studio-next-steps.md) — ordered Studio / capture backlog for implementers.
+3. [05-Phase-5-Integrations-and-Ecosystem.md](./05-Phase-5-Integrations-and-Ecosystem.md) — OBS input vs output policy.
+4. [ngmt-wire-format.md](../protocol/ngmt-wire-format.md) — payload, OWD, and DNS-SD naming.
+5. [`ngmt-obs-plugin` README](https://github.com/NextGenMediaTransport/ngmt-obs-plugin/blob/main/README.md) — OBS build notes and sibling layout.
 
 ---
 
 ## Related documents
 
+- [studio-next-steps.md](./studio-next-steps.md) (ordered Studio / capture implementation queue)
 - [post-v1 ecosystem priorities](./post-v1-ecosystem-priorities.md) (bridge vs recording vs tally)
 - [intercom R&D note](./intercom-r-and-d.md) (far future; product boundary)

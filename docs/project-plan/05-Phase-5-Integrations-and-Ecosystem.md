@@ -17,6 +17,11 @@ A protocol succeeds when applications use it. Phase 5 delivers **first-party int
 
 **Stub / synthetic payloads:** Integrations must consume the **ngmt-codec** real media pipeline for the **primary** product path; lab **stub** payloads in Generator/Monitor are **not** sufficient for v1.0 claims — see [documentation touchpoints](./version-1-release-status.md#documentation-touchpoints--stubs-and-synthetic-payloads).
 
+### First-party capture vs integrations
+
+- **`ngmt-capture`** (see [ngmt-capture-spec.md](./ngmt-capture-spec.md)) is the planned **first-party NGMT** application for **desktop / window** pixels → VMX → QUIC, with OS permissions and operator-focused defaults. It shares connection semantics with [`ngmt-generator`](../../ngmt-studio/README.md) so **Monitor** and **OBS** can consume sources uniformly.
+- **`ngmt-obs-plugin`** brings NGMT **into** OBS (and eventually **out** of OBS as output); it satisfies the **Killer App** pillar for v1.0 but does not replace owning a **native** capture story for users who do not run OBS. Program emphasis is spelled out under [version-1-release-status — Program emphasis](./version-1-release-status.md#program-emphasis-first-party-capture-vs-integrations).
+
 ## OBS Studio integration
 
 ### OBS input (source) vs output (program)
@@ -69,12 +74,17 @@ A protocol succeeds when applications use it. Phase 5 delivers **first-party int
 
 **Phase placement:** Treat as **post–Phase 5b** stretch (or a future **Phase 5c / ecosystem** line item) until explicitly added to [version-1-release-status](./version-1-release-status.md); see [studio ecosystem matrix](./studio-ecosystem-matrix.md).
 
+### Blender addon (stretch)
+
+**Not v1.0.** A **Blender** addon could provide **input** (NGMT stream → viewport / compositor image) and **output** (render or viewport → VMX over QUIC) for 3D and motion workflows. Target repo name placeholder: **`ngmt-blender-addon`** (TBD). Depends on the same **portable core** (QUIC, TLS policy, VMX) as OBS and game-engine integrations; Python addon constraints and Blender’s release cadence apply. Tracked in [studio ecosystem matrix](./studio-ecosystem-matrix.md).
+
 ## Ecosystem index
 
 - **[Studio ecosystem matrix](./studio-ecosystem-matrix.md)** — all first-party apps / integrations, phases, and NDI-style analogues.
 - **[Desktop capture spec](./ngmt-capture-spec.md)** — `ngmt-capture` product draft.
 - **[Post–virtual-device priorities](./post-v1-ecosystem-priorities.md)** — bridge vs recorder vs access manager vs tally ordering.
 - **[Intercom R&D](./intercom-r-and-d.md)** — far-future audio product boundary (not v1.0 scope).
+- **[Studio next steps](./studio-next-steps.md)** — ordered backlog for Studio tools and capture.
 
 ## Definition of Done
 

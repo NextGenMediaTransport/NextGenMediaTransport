@@ -10,6 +10,8 @@ status: living
 
 ## Recommended order (default)
 
+**Note:** A shippable **`ngmt-capture`** MVP (see [ngmt-capture-spec.md](./ngmt-capture-spec.md) and [studio-next-steps.md](./studio-next-steps.md)) is **first-party product work**, not “post–virtual-device” infra; operator demos may prioritize capture **before** deep investment in items below — revisit per release planning.
+
 1. **Bridge / gateway (WAN ↔ LAN)** — Unlocks remote production and firewall-friendly paths where raw LAN discovery is insufficient. **QUIC** and the **security baseline** (TLS pinning / user PEM) are natural foundations; often a **headless** service rather than an egui app.
 2. **Recorder / ISO (incoming NGMT to disk)** — High value for **comms verification**, **incident replay**, and **sales demos** without relying on OBS. Depends on a **file/container decision** (mezzanine vs lightweight proxy) and **clocking** semantics.
 3. **Access / grouping manager** — Analogous to **NDI Access Manager**: **allowlists**, **named groups**, **WAN vs LAN profiles**. Becomes more important as bridges and remote sources multiply; can start as **config file + CLI** before a GUI.
@@ -30,5 +32,6 @@ status: living
 
 ## Related documents
 
+- [studio-next-steps.md](./studio-next-steps.md)
 - [studio-ecosystem-matrix.md](./studio-ecosystem-matrix.md)
 - [version-1-release-status.md](./version-1-release-status.md)
