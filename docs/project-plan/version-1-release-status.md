@@ -57,7 +57,7 @@ The **Four Pillars** above are **unchanged**: **v1.0** still requires the **OBS 
 
 **Product narrative:** **`ngmt-capture`** (first-party screen/window capture — see [ngmt-capture-spec.md](./ngmt-capture-spec.md)) is the **native NGMT operator source** for real pixels, permissions, and multi-monitor defaults. **`ngmt-obs-plugin`** is the **integration** into OBS for studios that already work in OBS; it is essential for the **Killer App** pillar but **not** the only “NGMT-branded” way to originate content. Roadmap and staffing should treat **capture spec completion + MVP `ngmt-capture`** as a **high-leverage track alongside** the codec → transport → OBS vertical slice, without relaxing the published v1.0 bar until the pillars are met.
 
-**Lab ordering (2026-04):** **`ngmt-capture`** (spec + MVP) is the **next engineering focus** after the shipped Studio Generator/Monitor polish. **Monitor multiview mirror to a physical display** is **deferred** until the lab can **validate multi-monitor output** on real hardware; see [studio-next-steps.md](./studio-next-steps.md).
+**Lab ordering (2026-04):** **`ngmt-capture`** macOS path is **in active iteration** (v0.2: display picker, multi-session, Studio-aligned UI — see [ngmt-capture-spec](./ngmt-capture-spec.md) and [studio-next-steps](./studio-next-steps.md)). **v1.0** work remains the **vertical slice** (OBS P0, TLS, impairment audit, C++ discovery) in parallel; capture does **not** replace the Four Pillars. **Monitor multiview mirror to a physical display** is **deferred** until the lab can **validate multi-monitor output** on real hardware.
 
 ---
 

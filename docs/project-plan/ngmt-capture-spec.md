@@ -10,7 +10,7 @@ This document specifies a **first-party screen and window capture** application 
 
 **Relationship to `ngmt-studio`:** [`ngmt-generator`](../../ngmt-studio/README.md) remains the **synthetic pattern / lab** sender. **`ngmt-capture`** is the **operator** tool for production-style sources (permissions, HDR/SDR, multi-monitor). Shared Rust helpers ship from **`ngmt-studio`** as **`ngmt-common`**; **`ngmt-capture`** is its **own repository** ([`NextGenMediaTransport/ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture)) with the same sibling-checkout pattern as `ngmt-studio`.
 
-**Program status (2026-04):** After Generator/Monitor lab polish (wire preview, discovery TXT, template ghosts, etc.), **capture is the next phase to figure out**: tighten this spec, choose per-OS capture APIs, and ship MVP publish semantics aligned with [media payload v1](../protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path). **Monitor “mirror the canvas to a second physical display”** is intentionally **later** — the meta planning docs defer it until **physical multi-monitor output can be tested** in-lab ([studio-next-steps](./studio-next-steps.md)).
+**Program status (2026-04):** **`ngmt-capture`** on macOS has **shipped** incoming QUIC + VMX + mDNS through **v0.2** (display picker, multi-session, Studio-style UI — see the **MVP** section below). **Still missing vs goals:** per-**window/region** capture, **outgoing dial** parity with Generator, non-macOS backends, HDR/cursor, and **audio** (Phase B — wire format first). **Monitor “mirror the canvas to a second physical display”** stays **deferred** until multi-display hardware validation ([studio-next-steps](./studio-next-steps.md)).
 
 ---
 

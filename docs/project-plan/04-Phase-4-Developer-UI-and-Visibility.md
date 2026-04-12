@@ -20,6 +20,8 @@ Be **transparent with stakeholders**: **Generator + Monitor** are **developer / 
 
 **v1.0** still requires the **Four Pillars** (including OBS, TLS, impairment audit) — see [version-1-release-status.md](./version-1-release-status.md) and [Phase 5](./05-Phase-5-Integrations-and-Ecosystem.md).
 
+**Related (not Phase 4 repo scope):** **[`ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture)** is the **first-party operator capture** app (macOS **ScreenCaptureKit** → VMX → QUIC, multi-session, Studio-aligned UI). It lives in a **separate repository**; track product gaps in [ngmt-capture-spec](./ngmt-capture-spec.md) and queue position in [studio-next-steps](./studio-next-steps.md).
+
 ## Goals
 
 ### Test pattern sender

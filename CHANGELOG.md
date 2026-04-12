@@ -34,6 +34,7 @@ where versioning applies.
 - **Studio lab traces:** default Generator/Monitor **heartbeat** lines now include **send vs decode/display FPS** and **frame/object ids** on disk and stderr; **`NGMT_LOG_METRICS_INTERVAL_SECS`** still enables the heavier **`metrics |`** block (see `ngmt-studio` CHANGELOG and [lab-log-capture.md](docs/testing/lab-log-capture.md)).
 - **Meta CI:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) clones and CMake-builds [`ngmt-obs-plugin`](https://github.com/NextGenMediaTransport/ngmt-obs-plugin) (scaffold **info** target) alongside transport, studio, and core.
 - **Meta:** [`.gitignore`](.gitignore) lists **`/ngmt-capture/`** (sibling clone, like **`ngmt-studio`**); stack smoke clones **`ngmt-codec`** and **`ngmt-capture`** before `cargo check` on capture.
+- **Planning handoff:** [studio-next-steps.md](docs/project-plan/studio-next-steps.md), [version-1-release-status.md](docs/project-plan/version-1-release-status.md), [studio-ecosystem-matrix.md](docs/project-plan/studio-ecosystem-matrix.md), [04-Phase-4-Developer-UI-and-Visibility.md](docs/project-plan/04-Phase-4-Developer-UI-and-Visibility.md), [ngmt-capture-spec.md](docs/project-plan/ngmt-capture-spec.md) — align **what shipped** (**`ngmt-capture` v0.2**: display picker, multi-session, Studio-style UI) vs **still missing** (outgoing dial, window/region, cross-platform, audio Phase B) and **where v1.0 work continues** (Four Pillars in parallel).
 
 ### Added
 
