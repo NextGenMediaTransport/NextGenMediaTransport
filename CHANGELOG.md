@@ -12,6 +12,14 @@ where versioning applies.
 
 ## [Unreleased]
 
+### Added
+
+- **Studio Monitor:** safer **resize** pointer math (no inverted **`clamp`** when the slot nears the wall edge), **corner resize** hit targets drawn **after** slot chrome, **slot selection** + **size presets** (JSON next to the executable under **`logs/`**), and **View → Log** as a separate window; **egui 0.34** **`Panel::…::show_inside`** on the app root UI.
+
+### Fixed
+
+- **Studio Monitor (`ngmt-studio`):** **corner resize** interactors register **every frame** (egui **prev-pass** hit testing); **VU / solo** meter column **layout split** so the solo control stays inside the slot frame. See `ngmt-studio/CHANGELOG.md` and [monitor-preview-decode.md](docs/testing/monitor-preview-decode.md).
+
 ### Changed
 
 - **Studio (`ngmt-studio` repo):** Generator **output resolution** (720p/1080p/4K) and **VMX quality** UI; Monitor **bounded decode queue**, **buffer reuse**, **no `ColorImage` clone**, **decode queue drops**, decode-thread **`request_repaint`**; README **`cargo run --release`** for FPS tests — see that repo’s CHANGELOG and [monitor-preview-decode.md](docs/testing/monitor-preview-decode.md).
