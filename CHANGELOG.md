@@ -12,6 +12,10 @@ where versioning applies.
 
 ## [Unreleased]
 
+### Changed
+
+- **Meta:** [README.md](README.md) **Continuous integration** bullet now matches [`.github/workflows/ci.yml`](.github/workflows/ci.yml) (transport release + tests, Studio/capture `cargo check`, core CMake + FFI smoke, OBS plugin info scaffold).
+
 ### Added
 
 - **Meta:** [CONTRIBUTING.md](CONTRIBUTING.md) — which repository to patch, SemVer / milestones, org links (Phase 2 adoption [meta#2](https://github.com/NextGenMediaTransport/NextGenMediaTransport/issues/2)).
