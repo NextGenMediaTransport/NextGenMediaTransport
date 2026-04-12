@@ -10,6 +10,8 @@ NextGenMediaTransport is a modernized fork of [Open Media Transport (OMT)](https
 
 See [docs/project-plan/00-Master-Roadmap.md](docs/project-plan/00-Master-Roadmap.md) for the six-phase roadmap; [**phase and Version 1 gap status**](docs/project-plan/version-1-release-status.md) summarizes shipped vs missing work. (foundation → build → core transport and simulation → developer UI → integrations → hardware) and [docs/project-plan/01-Phase-1-Foundation-and-Forking.md](docs/project-plan/01-Phase-1-Foundation-and-Forking.md) for Phase 1 (organization, forks, CI, licensing, docs automation).
 
+**Version 1.0 on GitHub:** Each org repo has milestones **`v1.0`** (close before tagging **1.0.0**) and **`v1.0-adoption`** (tooling and polish not gating the tag); see **Issues → Milestones** on each repository. Cross-repo program board: [NextGenMediaTransport#3](https://github.com/NextGenMediaTransport/NextGenMediaTransport/issues/3).
+
 ## This meta-repository
 
 This repo holds **project planning**, **cross-cutting documentation** (testing methodology, wire format, phase plans), **agent rules** under `.cursor/rules/`, and **coordination** (MIT `LICENSE`, contributor docs). **Implementation** lives in sibling repositories (`ngmt-core`, `ngmt-codec`, `ngmt-transport`, `ngmt-studio`, `ngmt-capture`, `ngmt-obs-plugin`), each with its own build and CI. **`ngmt-capture`** is a **first-party desktop capture** repo ([`NextGenMediaTransport/ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture)); clone it beside the engines per that README (path dependencies into **`ngmt-studio`** for **`ngmt-common`**, in-repo **`ngmt-vmx-sys`**, sibling **`ngmt-transport`** / **`ngmt-codec`**).

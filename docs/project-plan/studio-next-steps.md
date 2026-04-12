@@ -10,6 +10,8 @@ This file is the **handoff queue** for engineering agents: **ordered hints**, ac
 
 **Repos:** [`ngmt-studio`](../../ngmt-studio/README.md) (Generator, Monitor, `ngmt-common`) lives beside the meta-repo; protocol and roadmap docs live under **`docs/`** here.
 
+**GitHub tracking:** [v1.0 / Four Pillars program board (meta #3)](https://github.com/NextGenMediaTransport/NextGenMediaTransport/issues/3); **`ngmt-capture`** [forward epic #2](https://github.com/NextGenMediaTransport/ngmt-capture/issues/2) and [Native preset bug #1](https://github.com/NextGenMediaTransport/ngmt-capture/issues/1); **`ngmt-studio`** [multiview mirror #1](https://github.com/NextGenMediaTransport/ngmt-studio/issues/1), [wire snapshot HUD #2](https://github.com/NextGenMediaTransport/ngmt-studio/issues/2), [persisted mDNS instance #3](https://github.com/NextGenMediaTransport/ngmt-studio/issues/3).
+
 ### What's next (engineering ordering)
 
 - **Active phase — capture:** **Item 7 — shipped through v0.2 (macOS):** org repo [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngmt-capture): per-display picker, up to **four** parallel sessions (port + mDNS instance each), **Generator-style** UI (wire preview, log), encode presets, privacy slate, incoming QUIC + mDNS **`role=capture`**, Linux/Win stub **`cargo check`**. **Next:** [ngmt-capture-spec](./ngmt-capture-spec.md) — **outgoing dial** UI, **window/region** capture, perf (zero-copy), HDR/cursor/open questions, then **Windows/Linux** backends.
