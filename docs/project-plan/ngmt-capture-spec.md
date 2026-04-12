@@ -94,6 +94,8 @@ Implemented in the [`ngmt-capture`](https://github.com/NextGenMediaTransport/ngm
 
 **Display picker acceptance:** **Start** is disabled until permission is **OK**, the display list is non-empty, and no **running** peer session already uses the same **listen port** (refresh permissions after hot-plugging monitors).
 
+**Known bug (not fixed in-tree yet):** the **Native** encode preset control in the macOS UI is a **no-op** (does not apply the selected display’s pixel size to encode dimensions). Tracked as [`ngmt-capture` issue #1](https://github.com/NextGenMediaTransport/ngmt-capture/issues/1); app README **Known issues**.
+
 **Deferred from v0.1:** HDR / cursor metadata / per-window picker / outgoing dial UI / WAN presets — see open questions below.
 
 ---
