@@ -27,7 +27,7 @@ Adjust interface names (`wlan0`, `en0`, etc.) to match `ip link` / System Settin
 | Variable | Effect |
 |----------|--------|
 | **`NGMT_LOG_ID=1`** (or `true` / `yes`) | Prepends `[host=… pid=…]` to every trace **detail** (after the first `session` line) so merged logs stay attributable per process. |
-| **`NGMT_LOG_METRICS_INTERVAL_SECS=N`** | If `N > 0`, Monitor recv loop and Generator send loop emit periodic **`metrics`** lines (RTT, OWD EMA, FPS, cwnd, loss, … / encoded bytes, subscribers, …). Default is **off** (unset or `0`) to keep stderr quiet. |
+| **`NGMT_LOG_METRICS_INTERVAL_SECS=N`** | If `N > 0`, Monitor recv loop and Generator send loop emit periodic **`metrics`** lines (RTT, OWD EMA, FPS, cwnd, loss, … / encoded bytes, subscribers, …). Default is **off** (unset or `0`); default **`worker`** / **`slot_worker`** heartbeats still log compact FPS and frame ids (see [lab-log-capture.md](lab-log-capture.md)). |
 
 In **Generator** / **Monitor**, **Save log as…** and **Open log…** under **File trace** use an **in-app file browser** (still set **`NGMT_LOG_FILE`** if you prefer env-only capture).
 

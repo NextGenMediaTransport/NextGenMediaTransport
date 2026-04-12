@@ -14,6 +14,7 @@ where versioning applies.
 
 ### Changed
 
+- **Studio lab traces:** default Generator/Monitor **heartbeat** lines now include **send vs decode/display FPS** and **frame/object ids** on disk and stderr; **`NGMT_LOG_METRICS_INTERVAL_SECS`** still enables the heavier **`metrics |`** block (see `ngmt-studio` CHANGELOG and [lab-log-capture.md](docs/testing/lab-log-capture.md)).
 - **Meta CI:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) clones and CMake-builds [`ngmt-obs-plugin`](https://github.com/NextGenMediaTransport/ngmt-obs-plugin) (scaffold **info** target) alongside transport, studio, and core.
 
 ### Added

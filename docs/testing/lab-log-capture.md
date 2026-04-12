@@ -27,9 +27,12 @@ Optional (see [harness_setup.md](harness_setup.md) for the full table):
 ```bash
 # Per-process identity on every detail line (helps when merging two hosts’ logs)
 export NGMT_LOG_ID=1
-# Periodic compact metrics (seconds); omit or 0 to leave default heartbeats only
+# Periodic compact metrics (seconds); omit or 0 = no extra `metrics |` lines (RTT/cwnd/loss/jitter).
+# Default `worker` / `slot_worker` heartbeats still include send/decode/display FPS and frame ids.
 export NGMT_LOG_METRICS_INTERVAL_SECS=5
 ```
+
+**Default heartbeats (no env required):** Generator **`worker`** lines add **`target_fps`**, **`send_fps_ema`**, and **`last_object_id`** (correlate with Monitor’s **`last_frame_id`**). Monitor **`slot_worker`** lines add **`fps_dec`**, **`fps_disp`**, **`owd_ema_ms`**, and **`last_frame_id`**; **`datagrams=`** stays QUIC receive volume (labeled as not frame rate).
 
 ## Example: merged timeline (two hosts)
 
@@ -40,6 +43,8 @@ After a cross-host run, each file begins with a **`session`** line, then continu
 2026-04-10T12:00:01.240Z [ngmt-monitor] session | host=fedora-lab pid=4400 profile=release
 2026-04-10T12:00:06.100Z [ngmt-generator] worker | dial ok (4123 ms)
 2026-04-10T12:00:06.105Z [ngmt-monitor] slot_worker | slot 1 connect_to ok (4100 ms)
+2026-04-10T12:00:07.000Z [ngmt-generator] worker | heartbeat frame=50 target_fps=50 send_fps_ema=49.8 last_object_id=49
+2026-04-10T12:00:07.050Z [ngmt-monitor] slot_worker | slot 1 heartbeat datagrams=512 (QUIC rx; not frames) fps_dec=48.0 fps_disp=47.5 owd_ema_ms=12.3 last_frame_id=49
 2026-04-10T12:00:11.000Z [ngmt-monitor] metrics | slot=1 rtt_ms=2.10 owd_ema_ms=35.0 …
 ```
 
