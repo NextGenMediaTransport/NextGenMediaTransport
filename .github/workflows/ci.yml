@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 # Smoke-checks the workspace layout described in README.md: meta docs + sibling clones of
-# ngmt-transport, ngmt-studio, ngmt-core. Per-repository CI remains authoritative.
+# ngmt-transport, ngmt-studio, ngmt-core, ngmt-obs-plugin. Per-repository CI remains authoritative.
 
 jobs:
   stack-smoke:
@@ -21,6 +21,7 @@ jobs:
           git clone --depth 1 https://github.com/NextGenMediaTransport/ngmt-transport.git ngmt-transport
           git clone --depth 1 https://github.com/NextGenMediaTransport/ngmt-studio.git ngmt-studio
           git clone --depth 1 https://github.com/NextGenMediaTransport/ngmt-core.git ngmt-core
+          git clone --depth 1 https://github.com/NextGenMediaTransport/ngmt-obs-plugin.git ngmt-obs-plugin
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
@@ -51,3 +52,9 @@ jobs:
           cmake -B build-ffi -S . -DCMAKE_BUILD_TYPE=Release -DNGMT_ENABLE_TRANSPORT_FFI_SMOKE=ON
           cmake --build build-ffi --config Release
           ./build-ffi/ngmt_transport_ffi_smoke
+
+      - name: ngmt-obs-plugin — CMake scaffold (info target)
+        working-directory: ngmt-obs-plugin
+        run: |
+          cmake -S . -B build -DNGMT_WITH_OBS=OFF
+          cmake --build build --target ngmt-obs-plugin-info

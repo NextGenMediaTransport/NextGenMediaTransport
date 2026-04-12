@@ -12,6 +12,10 @@ where versioning applies.
 
 ## [Unreleased]
 
+### Changed
+
+- **Meta CI:** [`.github/workflows/ci.yml`](.github/workflows/ci.yml) clones and CMake-builds [`ngmt-obs-plugin`](https://github.com/NextGenMediaTransport/ngmt-obs-plugin) (scaffold **info** target) alongside transport, studio, and core.
+
 ### Added
 
 - **Ecosystem planning:** [studio-ecosystem-matrix.md](docs/project-plan/studio-ecosystem-matrix.md), [ngmt-capture-spec.md](docs/project-plan/ngmt-capture-spec.md), [post-v1-ecosystem-priorities.md](docs/project-plan/post-v1-ecosystem-priorities.md), [intercom-r-and-d.md](docs/project-plan/intercom-r-and-d.md); **OBS input vs output** policy in [Phase 5](docs/project-plan/05-Phase-5-Integrations-and-Ecosystem.md) and [version-1-release-status](docs/project-plan/version-1-release-status.md).
