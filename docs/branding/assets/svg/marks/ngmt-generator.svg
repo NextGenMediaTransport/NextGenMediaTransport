@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-label="NGMT Generator send mark">
+  <circle cx="10" cy="10" r="2" fill="#48484a"/>
+  <circle cx="22" cy="8" r="1.6" fill="#48484a"/>
+  <circle cx="24" cy="14" r="1.6" fill="#48484a"/>
+  <path d="M14 16L26 10" stroke="#0a84ff" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M18 14l8-4-2 8-3-3" stroke="#0a84ff" stroke-width="2" stroke-linejoin="round" fill="none"/>
+</svg>

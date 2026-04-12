@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" aria-label="NGMT SDK bindings mark">
+  <path d="M11 8c-3 0-4 2.5-4 8s1 8 4 8" stroke="#0a84ff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <path d="M21 8c3 0 4 2.5 4 8s-1 8-4 8" stroke="#0a84ff" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <path d="M14 12h4M14 16h4M14 20h4" stroke="#48484a" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

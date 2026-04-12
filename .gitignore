@@ -8,3 +8,6 @@
 /ngmt-capture/
 /ngmt-obs-plugin/
 /tmp/
+
+# Generated branding rasters (see docs/branding/scripts/export-rasters.sh)
+docs/branding/assets/export/
