@@ -28,13 +28,13 @@ A protocol succeeds when applications use it. Phase 5 delivers **first-party int
 
 **Rationale:** v1.0 must prove **decode + integration** in the dominant creative tool (**NDI-style source**). **Output** is high value for round-trip workflows but adds **encode-from-compositor** complexity and OBS API surface; it should not slip the **1.0.0** tag if input + virtual devices + pillars are otherwise ready.
 
-**Tracking:** Implementation milestones for input vs output live in the scaffold repo ([`ngmt-obs-plugin`](../../ngmt-obs-plugin/README.md)) under `TRACKING.md` and should be mirrored as separate issues when the GitHub repo exists.
+**Tracking:** Implementation milestones for input vs output live in [`ngmt-obs-plugin`](https://github.com/NextGenMediaTransport/ngmt-obs-plugin) ([`TRACKING.md`](https://github.com/NextGenMediaTransport/ngmt-obs-plugin/blob/main/TRACKING.md)); mirror bullets as GitHub Issues as work starts.
 
 ### Goals
 
 - Ship an **official, high-performance** OBS **input** plugin (**v1.0 P0**) and an **output** plugin on a **P1** cadence unless the release checklist promotes output to v1.0.
 - Align with OBS platform support (Windows, macOS, Linux) per project priorities; document build against supported OBS API versions.
-- Repository target: **`ngmt-obs-plugin`** (sibling checkout in the meta-workspace; future standalone org repo) as the maintained home for releases and issues — **one** repo, **two** plugin surfaces sharing a static or dynamic **core** library (QUIC via `ngmt-transport`, VMX via `ngmt-codec` / FFI as used elsewhere).
+- Repository: **[`NextGenMediaTransport/ngmt-obs-plugin`](https://github.com/NextGenMediaTransport/ngmt-obs-plugin)** (sibling checkout next to `ngmt-transport` / meta `docs/`) — **one** repo, **two** plugin surfaces sharing a static or dynamic **core** library (QUIC via `ngmt-transport`, VMX via `ngmt-codec` / FFI as used elsewhere).
 
 ## Virtual camera and virtual audio
 

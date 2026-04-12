@@ -1,0 +1,92 @@
+---
+title: "NGMT desktop capture — product specification (draft)"
+phase: 5
+status: draft
+---
+
+# Desktop / window capture (`ngmt-capture`) — draft specification
+
+This document specifies a **first-party screen and window capture** application analogous to **NDI Screen Capture**: real pixels → **VMX** (`ngmt-codec`) → **QUIC** (`ngmt-transport`) with **mDNS** discovery (`_ngmt._udp`), aligned with [media payload v1](../protocol/ngmt-wire-format.md#media-payload-v1-vmx-video--studio-primary-path).
+
+**Relationship to `ngmt-studio`:** [`ngmt-generator`](../../ngmt-studio/README.md) remains the **synthetic pattern / lab** sender. **`ngmt-capture`** is the **operator** tool for production-style sources (permissions, HDR/SDR, multi-monitor). Shared Rust crates may live in `ngmt-studio` workspace or a new workspace; **repo name target: `ngmt-capture`** (sibling checkout, same org pattern as `ngmt-studio`).
+
+---
+
+## Goals
+
+- Capture **full desktop**, **region**, or **single application window** and publish as an NGMT source discoverable on the LAN.
+- Match **Generator** connection semantics (incoming vs outgoing QUIC) so **Monitor** and **OBS input** can consume the stream without special cases.
+- Document **OS permissions**, **performance**, and **known limitations** (protected content, Wayland).
+
+## Non-goals (initial release)
+
+- **Mobile** capture (separate product / phase).
+- **Audio loopback** from the system (optional later; coordinate with Phase 5 virtual audio and wire-format audio).
+- **Cloud relay** without an explicit bridge (see [post-v1 ecosystem priorities](./post-v1-ecosystem-priorities.md)).
+
+---
+
+## Platforms and capture APIs
+
+| OS | API direction (research / implementation) | Notes |
+| -- | ------------------------------------------- | ----- |
+| **macOS** | **ScreenCaptureKit** (preferred on supported releases); document **Screen Recording** privacy toggle. | Retina scaling: document logical vs physical resolution sent on the wire. |
+| **Windows** | **Windows.Graphics.Capture** / DXGI **Desktop Duplication** (choose per Windows version matrix). | Multi-GPU and **protected content** paths: explicit “black frame” or failure mode. |
+| **Linux** | **X11** vs **Wayland**: PipeWire / portal where required; document **which compositors** are tested. | CI may remain **headless**; manual matrix in release notes. |
+
+---
+
+## Permissions and UX
+
+- **macOS:** Prompt for **Screen Recording**; link to System Settings; tray/menu-bar presence for status (sending / idle / error).
+- **Windows:** If elevated or UAC edge cases exist for certain capture modes, document them.
+- **Linux:** Document `xdg-desktop-portal` / Flatpak gaps if distributing as sandboxed bundle.
+
+---
+
+## Discovery and naming
+
+- **DNS-SD:** Register **`_ngmt._udp`** consistent with Generator (see `ngmt-studio-common` and [wire format](../protocol/ngmt-wire-format.md)).
+- **Instance name:** Human-readable default (hostname + “Display 1” or window title); user override in UI.
+- **TXT records / metadata:** Follow whatever keys Studio standardizes for version and intent (align with transport registration helpers).
+
+---
+
+## Encode presets
+
+- **Codec:** **VMX** only on the primary path until another profile is standardized.
+- **Presets (suggested defaults):**
+
+  | Preset | Typical use | Resolution / FPS |
+  | ------ | ----------- | ---------------- |
+  | **Balanced** | General desktop | 1080p or native capped to 1080p, ≤60 FPS |
+  | **Low latency** | Cursor / UI heavy | 720p, ≤60 FPS, favor low buffer |
+  | **High detail** | Text / spreadsheets | 1440p cap if GPU allows, document CPU cost |
+
+- **Bitrate / QP:** Delegate to VMX encoder settings exposed by `ngmt-codec`; document “auto” vs manual.
+
+---
+
+## QUIC connection modes
+
+Mirror **Generator** (see [ngmt-studio README](../../ngmt-studio/README.md)):
+
+- **Incoming:** listen for Monitors / OBS; advertise on mDNS when enabled.
+- **Outgoing:** dial a fixed host:port (e.g. Monitor waiting in incoming mode).
+
+---
+
+## Open questions (track before implementation)
+
+1. **HDR** capture and tone mapping when peers expect SDR VMX profile.
+2. **Cursor** inclusion toggle and metadata for receivers.
+3. **Per-monitor** vs **virtual combined desktop** on Windows/macOS.
+4. **Installer** strategy (signed PKG/MSI) vs zip — out of scope for first technical milestone but affects permissions docs.
+
+---
+
+## Related documents
+
+- [Studio ecosystem matrix](./studio-ecosystem-matrix.md)
+- [Phase 5 — Integrations](./05-Phase-5-Integrations-and-Ecosystem.md)
+- [Phase 4 — Developer UI](./04-Phase-4-Developer-UI-and-Visibility.md)

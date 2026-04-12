@@ -37,6 +37,16 @@ gh repo clone NextGenMediaTransport/ngmt-studio
 
 Build expects **`ngmt-transport`** as a sibling directory (`ngmt-studio` workspace uses `path = "../ngmt-transport"`). See [ngmt-studio/README.md](../../ngmt-studio/README.md) when present in your tree.
 
+## Phase 5 OBS integration (`ngmt-obs-plugin`)
+
+**`ngmt-obs-plugin`** is the first-party **OBS Studio** plugin repo (**input** source for v1.0, **output** P1). Clone beside the engines and the meta `docs/` tree:
+
+```bash
+gh repo clone NextGenMediaTransport/ngmt-obs-plugin
+```
+
+Build and design notes: [`ngmt-obs-plugin` README](https://github.com/NextGenMediaTransport/ngmt-obs-plugin/blob/main/README.md). Depends on **`ngmt-transport`** (and **`ngmt-codec`** for VMX) as siblings, same as `ngmt-studio`.
+
 ## Local layout (inside this workspace)
 
 Clone the org repos **into the root of this meta repository** (alongside `docs/`, `.github/`, etc.):
@@ -49,6 +59,7 @@ NextGenMediaTransport/       # meta: docs, CI, roadmap (this tree)
   ngmt-codec/                # fork — origin → org, upstream → openmediatransport/libvmx
   ngmt-transport/            # first-party QUIC/WAN
   ngmt-studio/               # first-party Phase 4 apps (Generator, Monitor) — optional
+  ngmt-obs-plugin/           # first-party Phase 5 OBS plugins — optional
 ```
 
 Clone from the meta repo root:
@@ -59,6 +70,7 @@ gh repo clone NextGenMediaTransport/ngmt-core
 gh repo clone NextGenMediaTransport/ngmt-codec
 gh repo clone NextGenMediaTransport/ngmt-transport
 gh repo clone NextGenMediaTransport/ngmt-studio
+gh repo clone NextGenMediaTransport/ngmt-obs-plugin
 ```
 
 Forks created with `gh repo fork … --clone` run from that same directory place the new folder next to `docs/`. `gh repo clone` checks out `origin` (the org fork) and, for forks, configures **`upstream`** to the Open Media Transport repository for pulls.
